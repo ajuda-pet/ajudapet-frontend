@@ -111,7 +111,10 @@ function Register() {
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder='********'
                         />
-                        <button className="register-button" type="submit">Registrar</button>
+                        <div className="buttons">
+                            <a href='/login' className="register-a">Voltar</a>
+                            <button className="register-button" type="submit">Registrar</button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -1,33 +1,45 @@
-.body{
-    background: linear-gradient(to right, #5dbeebc7, #07a0e7ab);   
-     border-radius: 8px;
+.body {
+    background: linear-gradient(to right, #5dbeebc7, #07a0e7ab);
+    border-radius: 8px;
     height: 100vh;
     width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
 }
+
 .backgroundImage {
-    background-image: url('../../../public/images/patas.jpg'); /* Defina a imagem de fundo usando a URL da imagem */
+    background-image: url('../../../public/images/patas.jpg');
+    /* Defina a imagem de fundo usando a URL da imagem */
     background-size: cover;
     background-position: center;
-    background-repeat: repeat; /* Se desejar que a imagem se repita */
-   
+    background-repeat: repeat;
+    /* Se desejar que a imagem se repita */
+
     position: absolute;
     z-index: -1;
-    width: 100%; /* Garanta que a imagem de fundo cubra toda a tela */
-    height: 100%; /* Garanta que a imagem de fundo cubra toda a tela */
+    width: 100%;
+    /* Garanta que a imagem de fundo cubra toda a tela */
+    height: 100%;
+    /* Garanta que a imagem de fundo cubra toda a tela */
 }
+
 .backgroundDogs {
-    background-image: url('../../../public/images/dogs.jpeg'); /* Defina a imagem de fundo usando a URL da imagem */
+    background-image: url('../../../public/images/dogs.jpeg');
+    /* Defina a imagem de fundo usando a URL da imagem */
     background-size: cover;
     background-position: center;
     position: absolute;
     z-index: -1;
-    width: 100%; /* Garanta que a imagem de fundo cubra toda a tela */
-    height: 100%; /* Garanta que a imagem de fundo cubra toda a tela */
+    width: 100%;
+    /* Garanta que a imagem de fundo cubra toda a tela */
+    height: 100%;
+    /* Garanta que a imagem de fundo cubra toda a tela */
 }
+
 .register-container {
     z-index: 1;
     width: 410px;
-        padding: 20px;
+    padding: 20px;
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 0.5em;
@@ -36,13 +48,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 label {
-    display: block; 
+    display: block;
     margin-top: 10px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; /* Escolha a fonte desejada */
+    /* Escolha a fonte desejada */
     font-size: 18px;
-    color: #0e005f; 
+    color: #0e005f;
 }
+
 h1 {
     text-align: center;
     margin-bottom: 20px;
@@ -50,19 +64,24 @@ h1 {
 }
 
 .input-field {
-    width: 30em;
+    width: 25em;
     padding: 10px;
-    margin-top:10px;
+    margin-top: 10px;
+    font-size: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    /* Escolha a fonte desejada */
+
 }
-.form-inputs{
+
+.form-inputs {
     flex: 1;
     flex-direction: column;
     display: flex;
 }
+
 .register-button {
-    width: 30%;
+    width: 7em;
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -70,9 +89,37 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 10px;
-    margin-left: 35%;
+    margin-left: 7em;
+}
+
+.register-a {
+    width: 5em;
+    padding: 10px;
+    text-align: center;
+    background-color: #bb2020;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 3em;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #9b1d1d;
+
 }
 
 .register-button:hover {
     background-color: #0056b3;
+}
+
+.buttons {
+    display: flex;
+    flex: 1;
+
 }
