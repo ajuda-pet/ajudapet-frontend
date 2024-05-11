@@ -1,12 +1,12 @@
 export const formatCPF = (cpfNumber) => {
+    // Remove todos os caracteres não numéricos
     const cleaned = cpfNumber.replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})$/);
-    if (match) {
-        return `${match[1]}.${match[2]}.${match[3]}-${match[4]}`;
-    }
-    return cleaned;
+    // Adiciona pontos e traço conforme necessário
+    let formattedCPF = cleaned.replace(/(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})/, '$1.$2.$3-$4');
+    // Remove pontos e traço extras no final
+    formattedCPF = formattedCPF.replace(/[.-]+$/, '');
+    return formattedCPF;
 }
-
 export const validateCPF = (cpfNumber) => {
     // Remove todos os caracteres não numéricos
     const cleaned = cpfNumber.replace(/\D/g, '');

@@ -43,6 +43,7 @@ function Register() {
         <div className="body">
 
             <div className="backgroundImage"></div>
+            <div className="backgroundDogs"></div>
 
             <div className="register-container">
                 <h1>Cadastro</h1>
@@ -80,7 +81,7 @@ function Register() {
                                 type="tel"
                                 value={phone}
                                 onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
-                                placeholder='53999999999'
+                                placeholder='(53)99999-9999'
                                 maxLength={15}
 
                             />
@@ -94,6 +95,7 @@ function Register() {
                             className="input-field"
                             type="text"
                             value={cpf}
+                            maxLength={14}
                             onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
                             placeholder='000.000.000-00'
                         />
