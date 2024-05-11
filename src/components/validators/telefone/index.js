@@ -4,3 +4,7 @@ export const formatPhoneNumber = (phoneNumber) => {
     formattedPhoneNumber = formattedPhoneNumber.replace(/[()-\s]+$/, '');
     return formattedPhoneNumber;
 }
+export const validatePhoneNumber = (phoneNumber) => {
+    const cleaned = phoneNumber.replace(/\D/g, '');
+    return cleaned.length === 11;
+}

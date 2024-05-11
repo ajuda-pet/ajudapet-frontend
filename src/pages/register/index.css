@@ -124,3 +124,9 @@ a:hover {
     flex: 1;
 
 }
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}

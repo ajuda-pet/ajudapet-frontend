@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import { formatCPF, validateCPF } from '../../components/validators/cpf/index.js';
-import { formatPhoneNumber } from '../../components/validators/telefone/index.js';
+import { formatPhoneNumber, validatePhoneNumber } from '../../components/validators/telefone/index.js';
+import { validateEmail } from '../../components/validators/email/index.js';
+import { registerUser } from '../../controllers/register.js';
 
 function Register() {
     const [fullName, setFullName] = useState('');
@@ -9,9 +11,14 @@ function Register() {
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
 
+    // Função para lidar com a mudança de email
 
-
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    }
 
     // Função para lidar com a mudança do número de telefone
     const handlePhoneChange = (e) => {
@@ -28,17 +35,54 @@ function Register() {
 
     // Função para lidar com o envio do formulário
 
-    const handleSubmit = (e) => {
-        console.log('Dados do formulário:', { fullName, email, phone, cpf, password });
+    const handleSubmit = async (e) => {
+        let cpfValidated = validateCPF(cpf);
+        let emailValidated = validateEmail(email);
+        let phoneValidated = validatePhoneNumber(phone);
 
-        e.preventDefault();
-        if (validateCPF(cpf)) {
-            console.log('CPF válido:', cpf);
-        } else {
-            console.log('CPF inválido:', cpf);
+        if (password === confirmPassword && cpfValidated && emailValidated && phoneValidated) {
+            e.preventDefault();
+            setError('');
+
+
+            try {
+                const userData = { fullName, email, phone, cpf, password };
+                const response = await registerUser(userData);
+
+                // Lógica para lidar com a resposta da API, se necessário
+                console.log('Resposta da API:', response);
+            } catch (error) {
+                // Tratar erros da solicitação, se houver
+                console.error('Erro ao fazer a solicitação:', error);
+                setError('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+            }
+        }
+        else {
+            e.preventDefault();
+            if (!cpfValidated) {
+                setError('CPF inválido!');
+            }
+            if (!emailValidated) {
+                setError('Email inválido!');
+            }
+            if (password !== confirmPassword) {
+                setError('As senhas não são iguais!');
+            }
+            if (!phoneValidated) {
+                setError('Telefone inválido!');
+            }
+            console.log('Cadastro não realizado, verifique os dados inseridos!');
         }
     }
 
+
+    useEffect(() => {
+        document.title = 'Cadastro';
+        setTimeout(() => {
+            setError('');
+        }
+            , 5000);
+    }, []);
     return (
         <div className="body">
 
@@ -47,13 +91,17 @@ function Register() {
 
             <div className="register-container">
                 <h1>Cadastro</h1>
-                <form onSubmit={handleSubmit}>
+
+                <p className="error">{error}</p>
+
+                <form onSubmit={handleSubmit} action='/register-user' method='post'>
                     <div className="form-inputs">
                         <label for='fullName'>
                             Nome Completo:
                         </label>
 
                         <input
+                            required
                             name='fullName'
                             className="input-field"
                             type="text"
@@ -66,22 +114,24 @@ function Register() {
                         </label>
 
                         <input
+                            required
                             name='email'
                             className="input-field"
                             type="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => [setEmail(e.target.value), handleEmailChange(e)]}
                             placeholder='example@gmail.com'
                         />
                         <label for='telefone'>
                             Telefone:
                             <input
+                                required
                                 name='telefone'
                                 className="input-field"
                                 type="tel"
                                 value={phone}
                                 onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
-                                placeholder='(53)99999-9999'
+                                placeholder='(53) 99999-9999'
                                 maxLength={15}
 
                             />
@@ -91,6 +141,7 @@ function Register() {
                         </label>
 
                         <input
+                            required
                             name='cpf'
                             className="input-field"
                             type="text"
@@ -104,11 +155,24 @@ function Register() {
                         </label>
 
                         <input
+                            required
                             name='password'
                             className="input-field"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            placeholder='********'
+                        />
+                        <label for='confirm-password'>
+                            Confirmar senha:
+                        </label>
+                        <input
+                            required
+                            name='confirm-password'
+                            className="input-field"
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder='********'
                         />
                         <div className="buttons">
