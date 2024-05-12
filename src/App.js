@@ -10,6 +10,7 @@ import RegistrarVoluntario from './pages/registrarVoluntario/index.jsx';
 import GerenciarEstoque from './pages/gerenciarEstoque/index.jsx';
 function App() {
      const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+     //buscar a validação pela api e autorizar o acesso
     // React.useEffect(() => {
     //     let jwtToken = localStorage.getItem("validationToken");
     //     if (jwtToken) {

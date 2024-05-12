@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,17 @@ import './index.css';
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [validated, setValidated] = useState(false);
+
+
+    useEffect(() => {
+        let valid = localStorage.getItem('valid');
+        if (valid) {
+            setValidated(true);
+        }
+    }
+        , [validated]);
+
     const navigate = useNavigate();
 
     const toggleSidebar = () => {
@@ -32,12 +43,13 @@ const Sidebar = () => {
                         onClick={toggleSidebar}
                         style={{ right: '30', top: '20', cursor: 'pointer', position: 'absolute', color: 'rgb(180, 90, 79)' }}
                     />
-
-                    <ul>
-                        <li><button onClick={() => ongPage('cadastrarVoluntario')}>Cadastrar voluntários</button></li>
-                        <li><button onClick={() => ongPage('gerenciarEstoque')}>Gerenciar estoque</button></li>
-                        <li><button onClick={() => ongPage('cadastrarOng')}>Cadastrar ONG's</button></li>
-                    </ul>
+                    {validated && (
+                        <ul>
+                            <li><button onClick={() => ongPage('cadastrarVoluntario')}>Cadastrar voluntários</button></li>
+                            <li><button onClick={() => ongPage('gerenciarEstoque')}>Gerenciar estoque</button></li>
+                            <li><button onClick={() => ongPage('cadastrarOng')}>Cadastrar ONG's</button></li>
+                        </ul>
+                    )}
                     <button
                         onClick={() => navigate('/login')}
 

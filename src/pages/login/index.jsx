@@ -29,6 +29,7 @@ function Login() {
       const token = await loginUser(userData);
       console.log(token)
       if (token) {
+        localStorage.setItem('valid', true);
         navigate('/')
       } else {
         setError('Erro ao autenticar usuário. Verifique suas credenciais.');
