@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Importe os ícones desejados
-import './index.css'; // Arquivo de estilos para o menu lateral
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'; // Importe os ícones desejados
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import './index.css';
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,11 +34,30 @@ const Sidebar = () => {
                     />
 
                     <ul>
-                        <li><button onClick={ongPage('cadastrarVoluntario')}>Cadastrar voluntários</button></li>
-                        <li><button onClick={ongPage('gerenciarEstoque')}>Gerenciar estoque</button></li>
-
-                        <li><button onClick={ongPage('cadastrarOng')}>Cadastrar ONG's</button></li>
+                        <li><button onClick={() => ongPage('cadastrarVoluntario')}>Cadastrar voluntários</button></li>
+                        <li><button onClick={() => ongPage('gerenciarEstoque')}>Gerenciar estoque</button></li>
+                        <li><button onClick={() => ongPage('cadastrarOng')}>Cadastrar ONG's</button></li>
                     </ul>
+                    <button
+                        onClick={() => navigate('/login')}
+
+                        style={{
+                            padding: '10px 128px',
+                            backgroundColor: '#30465c',
+                            color: '#fff',
+                            marginTop: '13em',
+                            bottom: '10px',
+                            border: 'none',
+                            borderRadius: '1px',
+                            cursor: 'pointer',
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            boxShadow: '0px 2px 4px rgba(12, 107, 250, 0.3)',
+                            transition: 'background-color 0.3s ease-in-out',
+                        }}
+                    >
+                        Login
+                    </button>
                 </>
             ) : (
 
