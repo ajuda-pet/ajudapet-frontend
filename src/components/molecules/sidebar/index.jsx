@@ -24,7 +24,7 @@ const Sidebar = () => {
 
             {isOpen ? (
                 <>
-                    <h1>Menu</h1>
+                    <h1>Bem vindo!</h1>
 
                     <FontAwesomeIcon
                         icon={faTimes}
@@ -45,7 +45,7 @@ const Sidebar = () => {
                             padding: '10px 128px',
                             backgroundColor: '#30465c',
                             color: '#fff',
-                            marginTop: '13em',
+                            marginTop: '20em',
                             bottom: '10px',
                             border: 'none',
                             borderRadius: '1px',
