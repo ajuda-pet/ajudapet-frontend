@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'; // Importe os ícones desejados
+import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Importe os ícones desejados
 import './index.css'; // Arquivo de estilos para o menu lateral
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'; // Importe os ícones desejados
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'; // Importe os ícones desejados
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
     };
 
+    const ongPage = (link) => {
+        if (link === 'cadastrarVoluntario') navigate('/registrarVoluntario');
+        if (link === 'gerenciarEstoque') navigate('/gerenciarEstoque');
+        if (link === 'cadastrarOng') navigate('/registrarOng');
+    }
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+
+
             {isOpen ? (
                 <>
                     <h1>Menu</h1>
@@ -25,10 +34,10 @@ const Sidebar = () => {
                     />
 
                     <ul>
-                        <li><button >Cadastrar voluntários</button></li>
-                        <li><button >Gerenciar estoque</button></li>
+                        <li><button onClick={ongPage('cadastrarVoluntario')}>Cadastrar voluntários</button></li>
+                        <li><button onClick={ongPage('gerenciarEstoque')}>Gerenciar estoque</button></li>
 
-                        <li><button>Cadastrar ONG's</button></li>
+                        <li><button onClick={ongPage('cadastrarOng')}>Cadastrar ONG's</button></li>
                     </ul>
                 </>
             ) : (

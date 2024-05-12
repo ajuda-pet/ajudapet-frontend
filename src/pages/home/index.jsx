@@ -24,12 +24,6 @@ function Home() {
     }
   }, [navigate, validated]);
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
 
   return (
     <div className="Home">
