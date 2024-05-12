@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../components/validators/email';
 import { loginUser } from '../../controllers/login';
-
+import './index.css';
 
 
 
@@ -95,7 +95,7 @@ function Login() {
         </div>
 
       </form>
-      <button onClick={() => navigate('/register')} className="register-button">Registrar</button>
+      <button onClick={() => navigate('/register')} className="register-b">Registrar</button>
     </div>
 
   );
