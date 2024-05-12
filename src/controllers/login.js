@@ -11,6 +11,7 @@ export const loginUser = async (userData) => {
                 'Content-Type': 'application/json'
             }
         });
+        console.log(response)
         if(response.data.success===true){
             return response.data.info;
         }else{
