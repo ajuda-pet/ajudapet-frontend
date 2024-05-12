@@ -13,7 +13,7 @@ function Home() {
     document.title = 'Mapa';
     let jwtToken = localStorage.getItem("authenticated");
     if (!jwtToken) {
-      let msg = 'Usuário não autenticado. Faça login para acessar a página.';
+      // let msg = 'Usuário não autenticado. Faça login para acessar a página.';
 
 
     } else {

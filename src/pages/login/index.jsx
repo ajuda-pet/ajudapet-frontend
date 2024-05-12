@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UNSAFE_LocationContext, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../components/validators/email';
 import { loginUser } from '../../controllers/login';
 
