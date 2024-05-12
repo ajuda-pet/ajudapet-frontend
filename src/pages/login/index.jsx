@@ -29,7 +29,7 @@ function Login() {
       const token = await loginUser(userData);
       console.log(token)
       if (token) {
-        navigate('/home')
+        navigate('/')
       } else {
         setError('Erro ao autenticar usuário. Verifique suas credenciais.');
       }

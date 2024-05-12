@@ -54,7 +54,7 @@ function Register() {
                 const userData = { firstName, lastName, email, phone, cpf, password };
                 const response = await registerUser(userData);
                 if (response.token) {
-                    navigate('/home');
+                    navigate('/');
                 } else {
                     setError('Erro ao registrar usuário. ' + response)
                 }
