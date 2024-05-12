@@ -4,9 +4,14 @@ import { formatCPF, validateCPF } from '../../components/validators/cpf/index.js
 import { formatPhoneNumber, validatePhoneNumber } from '../../components/validators/telefone/index.js';
 import { validateEmail } from '../../components/validators/email/index.js';
 import { registerUser } from '../../controllers/register.js';
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Register() {
-    const [fullName, setFullName] = useState('');
+    const location = useLocation();
+
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
@@ -32,6 +37,7 @@ function Register() {
         setCpf(formattedCPF);
     }
 
+    const navigate = useNavigate();
 
     // Função para lidar com o envio do formulário
 
@@ -44,13 +50,14 @@ function Register() {
             e.preventDefault();
             setError('');
 
-
             try {
-                const userData = { fullName, email, phone, cpf, password };
+                const userData = { firstName, lastName, email, phone, cpf, password };
                 const response = await registerUser(userData);
-
-                // Lógica para lidar com a resposta da API, se necessário
-                console.log('Resposta da API:', response);
+                if (response.token) {
+                    navigate('/home');
+                } else {
+                    setError('Erro ao registrar usuário. ' + response)
+                }
             } catch (error) {
                 // Tratar erros da solicitação, se houver
                 console.error('Erro ao fazer a solicitação:', error);
@@ -78,11 +85,14 @@ function Register() {
 
     useEffect(() => {
         document.title = 'Cadastro';
+        if (localStorage.getItem("authenticated")) {
+            localStorage.removeItem("authenticated");
+        }
         setTimeout(() => {
             setError('');
         }
             , 5000);
-    }, []);
+    }, [location.state?.msg]);
     return (
         <div className="body">
 
@@ -94,20 +104,33 @@ function Register() {
 
                 <p className="error">{error}</p>
 
-                <form onSubmit={handleSubmit} action='/register-user' method='post'>
+                <form onSubmit={handleSubmit} method='post'>
                     <div className="form-inputs">
-                        <label for='fullName'>
-                            Nome Completo:
+                        <label for='firstName'>
+                            Primeiro nome:
                         </label>
 
                         <input
                             required
-                            name='fullName'
+                            name='firstName'
                             className="input-field"
                             type="text"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            placeholder='João da Silva'
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            placeholder='João'
+                        />
+                        <label for='lastName'>
+                            Último nome:
+                        </label>
+
+                        <input
+                            required
+                            name='lastName'
+                            className="input-field"
+                            type="text"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            placeholder='da Silva'
                         />
                         <label for='email'>
                             Email:
