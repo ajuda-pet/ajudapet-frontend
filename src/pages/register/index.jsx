@@ -106,19 +106,24 @@ function Register() {
 
                 <form onSubmit={handleSubmit} method='post'>
                     <div className="form-inputs">
-                        <label for='firstName'>
-                            Primeiro nome:
-                        </label>
 
-                        <input
-                            required
-                            name='firstName'
-                            className="input-field"
-                            type="text"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            placeholder='João'
-                        />
+                        <div className="input-form">
+                            <label for='firstName'>
+                                Primeiro nome:
+                            </label>
+
+                            <input
+                                required
+                                name='firstName'
+                                className="input-field"
+                                type="text"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                placeholder='João'
+                            />
+                        </div>
+
+                        <div className="input-form">
                         <label for='lastName'>
                             Último nome:
                         </label>
@@ -132,6 +137,8 @@ function Register() {
                             onChange={(e) => setLastName(e.target.value)}
                             placeholder='da Silva'
                         />
+                        </div>
+                        <div className="input-form">
                         <label for='email'>
                             Email:
                         </label>
@@ -145,7 +152,9 @@ function Register() {
                             onChange={(e) => [setEmail(e.target.value), handleEmailChange(e)]}
                             placeholder='example@gmail.com'
                         />
-                        <label for='telefone'>
+                        </div>
+                        <div className="input-form">
+                        <label for='telefone'></label>
                             Telefone:
                             <input
                                 required
@@ -156,13 +165,14 @@ function Register() {
                                 onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
                                 placeholder='(53) 99999-9999'
                                 maxLength={15}
-
                             />
-                        </label>
+                        
+                        </div>
+
+                        <div className="input-form">
                         <label for='cpf'>
                             CPF:
                         </label>
-
                         <input
                             required
                             name='cpf'
@@ -173,6 +183,8 @@ function Register() {
                             onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
                             placeholder='000.000.000-00'
                         />
+                        </div>
+                        <div className="input-form">
                         <label for='password'>
                             Senha:
                         </label>
@@ -186,6 +198,8 @@ function Register() {
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder='********'
                         />
+                        </div>
+                        <div className="input-form">
                         <label for='confirm-password'>
                             Confirmar senha:
                         </label>
@@ -198,10 +212,12 @@ function Register() {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder='********'
                         />
-                        <div className="buttons">
-                            <a href='/login' className="register-a">Voltar</a>
-                            <button className="register-button" type="submit">Registrar</button>
                         </div>
+                        <div className="buttons">
+                                <a href='/login' className="register-a">Voltar</a>
+                                <button className="register-button" type="submit">Registrar</button>
+                        </div>
+                        
                     </div>
                 </form>
             </div>
