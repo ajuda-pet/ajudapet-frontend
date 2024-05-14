@@ -45,22 +45,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    max-height: 850px;
-    height: 95%;
+    max-height: 600px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.register-container::-webkit-scrollbar {
-    width: 4px;
-    background-color: #486e977b;
-}
-
-.register-container::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
 }
 
 h1 {
@@ -161,71 +150,11 @@ a:hover {
     .register-container{
         padding: 0;
         max-width: 350px;
-        max-height: 750px;
+        
     }
-
     .form-inputs {
-        padding: 0;
-        min-width: 80%;
-    }
+        min-width: 300px;
 
-    .input-form{
-       
-        padding: 0;
-    }
-
-    label {
-        margin-top: 5px;
-        font-size: 16px;
-        font-weight: 400px;
-    }
-
-    h1 {
-        margin-bottom: 15px;     
-    }
-    
-    .input-field { 
-        margin-bottom: 5px;
-        width: 90%;
-    }
-
-    
-    .register-button {
-        width: 7em;
-        padding: 10px;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-        margin-left: 7em;
-    }
-
-    .register-a {
-        padding: 10px 0;
-        text-align: center;
-        margin-top: 10px;
-        margin-left: 0;
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-    a:hover {
-        background-color: #9b1d1d;
-
-    }
-
-    .register-button:hover {
-        background-color: #0056b3;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: space-evenly;
-        flex: 1;
-        padding-bottom: 15px;
     }
 
     
@@ -234,69 +163,7 @@ a:hover {
 /* Estilos específicos para telas maiores que 600px e menores que 1024px de largura */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
     .register-container{
-        max-width: 350px;
-        max-height: 750px;
         padding: 5px;
     }
 
-    .form-inputs {
-        padding: 0;
-        min-width: 80%;
-        
-        flex: 1;
-        display: flex;
-        justify-content: center;
-    }
-
-    .input-form{
-       
-        padding: 0;
-    }
-
-    label {
-        margin-top: 5px;
-        font-size: 16px;
-        font-weight: 400px;
-    }
-
-    h1 {
-        margin-bottom: 15px;     
-    }
-    
-    .input-field { 
-        margin-bottom: 5px;
-        width: 90%;
-    }
-
-    
-    .register-button {
-        width: 7em;
-        padding: 10px;
-        margin-top: 10px;
-        margin-left: 7em;
-    }
-
-    .register-a {
-        padding: 10px 0;
-        margin-top: 10px;
-        margin-left: 0;
-    }
-
-
-    .register-button:hover {
-        background-color: #0056b3;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: space-evenly;
-        flex: 1;
-        padding-bottom: 15px;
-    }
-}
-
-@media screen and (max-height: 900px) {
-    .register-container {
-        overflow-y: scroll;
-    }
 }

@@ -18,6 +18,18 @@ function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [step, setStep] = useState(false)
+
+    //  Função para mudar de step
+
+    const handleStep = () =>{
+        if (firstName== '' || lastName== '' || cpf== '' || phone == '')  {setError('Complete todos os campos!')}
+        // if (false)  {}
+        else{ 
+            setError('')
+            setStep(true)
+        }
+    }
 
     // Função para lidar com a mudança de email
 
@@ -94,6 +106,7 @@ function Register() {
             , 5000);
     }, [location.state?.msg]);
     return (
+
         <div className="body">
 
             <div className="backgroundImage"></div>
@@ -105,13 +118,12 @@ function Register() {
                 <p className="error">{error}</p>
 
                 <form onSubmit={handleSubmit} method='post'>
+                    
                     <div className="form-inputs">
-
-                        <div className="input-form">
-                            <label for='firstName'>
-                                Primeiro nome:
-                            </label>
-
+                    {!step ? 
+                        <>
+                            <div className="input-form">
+                            <label for='firstName'>Primeiro nome:</label>
                             <input
                                 required
                                 name='firstName'
@@ -121,23 +133,62 @@ function Register() {
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder='João'
                             />
-                        </div>
+                            </div>
 
-                        <div className="input-form">
-                        <label for='lastName'>
-                            Último nome:
-                        </label>
+                            <div className="input-form">
+                            <label for='lastName'>Último nome:</label>
 
-                        <input
-                            required
-                            name='lastName'
-                            className="input-field"
-                            type="text"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            placeholder='da Silva'
-                        />
-                        </div>
+                            <input
+                                required
+                                name='lastName'
+                                className="input-field"
+                                type="text"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                placeholder='da Silva'
+                            />
+                            </div>
+
+                            <div className="input-form">
+                            <label for='telefone'>Telefone:</label>
+                            <input
+                                    required
+                                    name='telefone'
+                                    className="input-field"
+                                    type="tel"
+                                    value={phone}
+                                    onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
+                                    placeholder='(53) 99999-9999'
+                                    maxLength={15}
+                                />
+                            </div>
+
+                            <div className="input-form">
+                            <label for='cpf'>
+                                CPF:
+                            </label>
+                            <input
+                                required
+                                name='cpf'
+                                className="input-field"
+                                type="text"
+                                value={cpf}
+                                maxLength={14}
+                                onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
+                                placeholder='000.000.000-00'
+                            />
+                            </div>
+
+                            <div className="buttons">
+                                <a href='/login' className="register-a">Voltar</a>
+                                <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
+                            </div>
+
+                        </>
+                    
+                    
+                    : (
+                        <>
                         <div className="input-form">
                         <label for='email'>
                             Email:
@@ -153,37 +204,7 @@ function Register() {
                             placeholder='example@gmail.com'
                         />
                         </div>
-                        <div className="input-form">
-                        <label for='telefone'></label>
-                            Telefone:
-                            <input
-                                required
-                                name='telefone'
-                                className="input-field"
-                                type="tel"
-                                value={phone}
-                                onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
-                                placeholder='(53) 99999-9999'
-                                maxLength={15}
-                            />
                         
-                        </div>
-
-                        <div className="input-form">
-                        <label for='cpf'>
-                            CPF:
-                        </label>
-                        <input
-                            required
-                            name='cpf'
-                            className="input-field"
-                            type="text"
-                            value={cpf}
-                            maxLength={14}
-                            onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
-                            placeholder='000.000.000-00'
-                        />
-                        </div>
                         <div className="input-form">
                         <label for='password'>
                             Senha:
@@ -199,6 +220,7 @@ function Register() {
                             placeholder='********'
                         />
                         </div>
+
                         <div className="input-form">
                         <label for='confirm-password'>
                             Confirmar senha:
@@ -214,10 +236,12 @@ function Register() {
                         />
                         </div>
                         <div className="buttons">
-                                <a href='/login' className="register-a">Voltar</a>
+                                <a  className="register-a" onClick={()=>setStep(false)}>Voltar</a>
                                 <button className="register-button" type="submit">Registrar</button>
                         </div>
-                        
+
+                        </>
+                    )}
                     </div>
                 </form>
             </div>
