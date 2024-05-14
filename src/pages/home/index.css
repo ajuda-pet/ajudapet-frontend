@@ -1,3 +1,28 @@
-body {
+.bodyHome {
     background-image: url('../../../public//images/ajudaPetBCK.jpeg');
+
+}
+
+.card {
+    width: calc(33.33% - 20px);
+    /* Define a largura de cada card como um terço da largura da div, subtraindo a margem */
+    margin: 10px;
+    /* Margem entre os cards */
+}
+
+.container-pets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    /* ou qualquer outra porcentagem desejada */
+    height: 80vh;
+    /* 50% da altura da viewport */
+    margin-left: 10em;
+    margin-top: 3em;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    /* Para que os cards quebrem para a próxima linha quando não houver espaço suficiente */
+    background-color: rgba(150, 150, 150, 0.3);
 }
