@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <>
             <div class="header">
-                <a href="#default" class="logo">Logo dos pets</a>
+                <div href="#default" class="logo"></div>
                 <div class="header-right">
                     <a href="#about">icone Sobre</a>
                     <a href="#about">icone config</a>
