@@ -10,8 +10,8 @@ function Register() {
     const location = useLocation();
 
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [name, setName] = useState('');
+    // const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
@@ -23,8 +23,8 @@ function Register() {
     //  Função para mudar de step
 
     const handleStep = () =>{
-        if (firstName== '' || lastName== '' || cpf== '' || phone == '')  {setError('Complete todos os campos!')}
-        // if (false)  {}
+        //if (name === '' || cpf === '' || phone === '')  {setError('Complete todos os campos!')}
+        if (false)  {}
         else{ 
             setError('')
             setStep(true)
@@ -63,7 +63,7 @@ function Register() {
             setError('');
 
             try {
-                const userData = { firstName, lastName, email, phone, cpf, password };
+                const userData = { name, email, phone, cpf, password };
                 const response = await registerUser(userData);
                 if (response.token) {
                     navigate('/home');
@@ -109,48 +109,48 @@ function Register() {
 
         <div className="body">
 
-            <div className="backgroundImage"></div>
-            <div className="backgroundDogs"></div>
+            {/* Decoracao telas */}
+            <img src="./images/green.png" id='green' alt='mancha verde'/>
+            <img src="./images/yellow.png" id='yellow' alt='mancha amarela'/>
+            <img src="./images/pink.png" id='pink' alt='mancha rosa'/>
+            <img src="./images/black.png" id='black' alt='mancha preta'/>
+            
+            
 
             <div className="register-container">
-                <h1>Cadastro</h1>
-
-                <p className="error">{error}</p>
+                
+                <div className="logo">
+                    <a href="/">
+                        <img src="./images/logo.png" alt="logo" />
+                    </a>
+                </div>
+                
 
                 <form onSubmit={handleSubmit} method='post'>
                     
+
                     <div className="form-inputs">
+                    <h1>Cadastre seu Grupo</h1>
+                    <p className="error">{error}</p>
+
                     {!step ? 
                         <>
                             <div className="input-form">
-                            <label for='firstName'>Primeiro nome:</label>
+                            
                             <input
                                 required
-                                name='firstName'
+                                name='name'
                                 className="input-field"
                                 type="text"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                                placeholder='João'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder='Razão Social'
                             />
                             </div>
 
-                            <div className="input-form">
-                            <label for='lastName'>Último nome:</label>
-
-                            <input
-                                required
-                                name='lastName'
-                                className="input-field"
-                                type="text"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                                placeholder='da Silva'
-                            />
-                            </div>
 
                             <div className="input-form">
-                            <label for='telefone'>Telefone:</label>
+                            
                             <input
                                     required
                                     name='telefone'
@@ -158,15 +158,13 @@ function Register() {
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
-                                    placeholder='(53) 99999-9999'
+                                    placeholder='Telefone'
                                     maxLength={15}
                                 />
                             </div>
 
                             <div className="input-form">
-                            <label for='cpf'>
-                                CPF:
-                            </label>
+                            
                             <input
                                 required
                                 name='cpf'
@@ -175,12 +173,11 @@ function Register() {
                                 value={cpf}
                                 maxLength={14}
                                 onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
-                                placeholder='000.000.000-00'
+                                placeholder='CPF'
                             />
                             </div>
 
                             <div className="buttons">
-                                <a href='/login' className="register-a">Voltar</a>
                                 <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
                             </div>
 
@@ -190,10 +187,6 @@ function Register() {
                     : (
                         <>
                         <div className="input-form">
-                        <label for='email'>
-                            Email:
-                        </label>
-
                         <input
                             required
                             name='email'
@@ -201,15 +194,11 @@ function Register() {
                             type="email"
                             value={email}
                             onChange={(e) => [setEmail(e.target.value), handleEmailChange(e)]}
-                            placeholder='example@gmail.com'
+                            placeholder='E-mail'
                         />
                         </div>
                         
                         <div className="input-form">
-                        <label for='password'>
-                            Senha:
-                        </label>
-
                         <input
                             required
                             name='password'
@@ -217,14 +206,11 @@ function Register() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder='********'
+                            placeholder='Senha'
                         />
                         </div>
 
                         <div className="input-form">
-                        <label for='confirm-password'>
-                            Confirmar senha:
-                        </label>
                         <input
                             required
                             name='confirm-password'
@@ -232,11 +218,11 @@ function Register() {
                             type="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder='********'
+                            placeholder='Confirma senha'
                         />
                         </div>
                         <div className="buttons">
-                                <a  className="register-a" onClick={()=>setStep(false)}>Voltar</a>
+                                <button  className="register-volta" onClick={()=>setStep(false)}>Voltar</button>
                                 <button className="register-button" type="submit">Registrar</button>
                         </div>
 
