@@ -38,17 +38,15 @@
 
 
 .register-container {
+    margin: 0;
+    padding: 0;
     z-index: 1;
     width: 410px;
     background-color: #ffffff00;
     
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 10vh auto 0;
 
-    max-height: 600px;
-    padding: 10px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,25 +56,43 @@
     padding-bottom: 4vh;
 }
 
-h1 {
+.form-inputs {
+    height: 400px;
+    min-width: 380px;
+
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.118);
+    border: 1px solid black;
+    border-radius: 3em;
+    
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+
+.header-register{
+    height: 20%;
+}
+
+.header-register h1 {
+    padding: 0;
+    margin: 5px 0 0;
     text-align: center;
-    margin-bottom: 15px;
     color: #333;
     font-size: 2em;
 }
 
+.header-register .error {
+    text-align: center;
+    color: red;
+    font-size: 16px;
 
-.form-inputs {
-    height: 400px;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.118);
-    border: 1px solid black;
-    border-radius: 3em;
-    min-width: 380px;
-    flex: 1;
-    flex-direction: column;
-    display: flex;
+}
+
+.main-register {
+
+    height: 60%;
 }
 
 .input-form{
@@ -95,20 +111,41 @@ h1 {
 
 }
 
+#text-description:placeholder-shown{
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#text-description {
+    resize: none;
+    width: 90%;
+    min-height: 100px;
+    padding: 10px;
+    margin-top: 30px;
+    font-size: 1em;
+    border: 0.3em solid #ccc;
+    border-radius: 0px;
+
+}
+
+
 .register-button {
     font-weight: bolder;
     font-size: 16px; 
-    padding: 22px 85px;
+    margin-top: 0;
+    padding: 20px 85px;
     text-align: center;
     background-color: #394c60;
     color: #fff;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    margin-top: 10px;
+    
 }
 
 .register-volta {
+    margin-top: 10px;
     align-self: center;
     width: 5em;
     padding: 0px;
@@ -120,7 +157,6 @@ h1 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
     
 }
 
@@ -134,19 +170,14 @@ a {
 }
 
 .buttons {
+    max-height: 20%;
     display: flex;
     flex-direction: column-reverse;
-    justify-content: space-evenly;
+    justify-content: start;
     flex: 1;
-    padding-bottom: 15px;
 }
 
-.error {
-    text-align: center;
-    color: red;
-    font-size: 16px;
-    margin-top: 5px;
-}
+
 
 /* Responsive  */ 
 

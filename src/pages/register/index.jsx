@@ -11,26 +11,35 @@ function Register() {
 
 
     const [name, setName] = useState('');
-    // const [lastName, setLastName] = useState('');
+    const [description, setDescription] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [step, setStep] = useState(false)
+    const [step, setStep] = useState(1)
 
     //  Função para mudar de step
 
     const handleStep = () =>{
-        //if (name === '' || cpf === '' || phone === '')  {setError('Complete todos os campos!')}
-        if (false)  {}
+        if ((name === '' || cpf === '' || phone === '') && step === 1)  {setError('Complete todos os campos!')}
+        // if (true)  {
+        //     setStep(step+1)
+        // }
+        else if (description === '' && step === 2) {setError('Complete todos os campos!')}
         else{ 
             setError('')
-            setStep(true)
+            setStep(step+1)
         }
     }
 
+    // Função para mudar texto
+
+    const handleText = (e) =>{
+        if(e.target.value.length < 255) setDescription(e.target.value)
+        
+    }   
     // Função para lidar com a mudança de email
 
     const handleEmailChange = (e) => {
@@ -63,7 +72,7 @@ function Register() {
             setError('');
 
             try {
-                const userData = { name, email, phone, cpf, password };
+                const userData = { name, description, email, phone, cpf, password };
                 const response = await registerUser(userData);
                 if (response.token) {
                     navigate('/home');
@@ -130,21 +139,23 @@ function Register() {
                     
 
                     <div className="form-inputs">
-                    <h1>Cadastre seu Grupo</h1>
-                    <p className="error">{error}</p>
-
-                    {!step ? 
-                        <>
+                        <div className="header-register">
+                            <h1>Cadastre seu Grupo</h1>
+                            <p className="error">{error}</p>
+                        </div>
+                    {step === 1 ? 
+                    <>
+                        <div className='main-register'>
                             <div className="input-form">
                             
                             <input
                                 required
-                                name='name'
+                                name='nome'
                                 className="input-field"
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder='Razão Social'
+                                placeholder='Nome'
                             />
                             </div>
 
@@ -173,61 +184,85 @@ function Register() {
                                 value={cpf}
                                 maxLength={14}
                                 onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
-                                placeholder='CPF'
+                                placeholder='CPF/CNPJ'
                             />
                             </div>
-
+                            </div>
                             <div className="buttons">
+                                
                                 <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
                             </div>
+                            </>
+                    
+                    : <></>}
 
-                        </>
-                    
-                    
-                    : (
-                        <>
-                        <div className="input-form">
-                        <input
-                            required
-                            name='email'
-                            className="input-field"
-                            type="email"
-                            value={email}
-                            onChange={(e) => [setEmail(e.target.value), handleEmailChange(e)]}
-                            placeholder='E-mail'
-                        />
-                        </div>
+                    {step === 2 ? 
+                    <>
                         
-                        <div className="input-form">
-                        <input
-                            required
-                            name='password'
-                            className="input-field"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder='Senha'
-                        />
+                        <div className='main-register'>
+                            <div className="input-form">
+                            <textarea 
+                                name="description" 
+                                id="text-description" 
+                                value={description} 
+                                placeholder='Razão Social'
+                                onChange={(e)=>{handleText(e)}}></textarea>
+                            </div>
                         </div>
 
-                        <div className="input-form">
-                        <input
-                            required
-                            name='confirm-password'
-                            className="input-field"
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder='Confirma senha'
-                        />
-                        </div>
                         <div className="buttons">
-                                <button  className="register-volta" onClick={()=>setStep(false)}>Voltar</button>
-                                <button className="register-button" type="submit">Registrar</button>
+                            <button  className="register-volta" onClick={()=>setStep(step-1)}>Voltar</button>
+                            <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
                         </div>
+                    </> :  <></>}
 
-                        </>
-                    )}
+                    {step === 3 ? 
+                     <>
+                    <div className='main-register'>
+                     <div className="input-form">
+                     <input
+                         required
+                         name='email'
+                         className="input-field"
+                         type="email"
+                         value={email}
+                         onChange={(e) => [setEmail(e.target.value), handleEmailChange(e)]}
+                         placeholder='E-mail'
+                     />
+                     </div>
+                     
+                     <div className="input-form">
+                     <input
+                         required
+                         name='password'
+                         className="input-field"
+                         type="password"
+                         value={password}
+                         onChange={(e) => setPassword(e.target.value)}
+                         placeholder='Senha'
+                     />
+                     </div>
+
+                     <div className="input-form">
+                     <input
+                         required
+                         name='confirm-password'
+                         className="input-field"
+                         type="password"
+                         value={confirmPassword}
+                         onChange={(e) => setConfirmPassword(e.target.value)}
+                         placeholder='Confirma senha'
+                     />
+                     </div>
+                     </div>
+                     <div className="buttons">
+                             <button  className="register-volta" onClick={()=>setStep(step-1)}>Voltar</button>
+                             <button className="register-button" type="submit">Registrar</button>
+                     </div>
+
+                     </>:  <></>}
+                   
+
                     </div>
                 </form>
             </div>
