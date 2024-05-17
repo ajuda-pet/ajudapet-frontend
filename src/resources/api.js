@@ -1,1 +1,1 @@
-export const baseApi = 'http://localhost:4000';
+export const baseApi = 'https://staging-ajudapet-backend.onrender.com';

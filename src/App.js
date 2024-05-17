@@ -7,6 +7,7 @@ import Register from './pages/register/index.jsx';
 import Map from './pages/map/index.jsx';
 import Home from './pages/home/index.jsx';
 import NotFoundPage from './pages/notFoundPage/index.jsx';
+import AddPet from './pages/addPet/index.jsx';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/map" element={<Map />} />
                 <Route path="/" element={<Home />} />
+                <Route path="/addPet" element={<AddPet />} />
                 <Route path="*" element={<NotFoundPage />} />
 
             </Routes>
