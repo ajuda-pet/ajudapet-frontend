@@ -7,37 +7,33 @@ import Card from '../../components/molecules/cards';
 
 
 function Home() {
-  const navigate = useNavigate();
-  const [validated, setValidated] = React.useState(false);
-  useEffect(() => {
-    document.title = 'Mapa';
-    let jwtToken = localStorage.getItem("authenticated");
-    if (!jwtToken) {
-      // let msg = 'Usuário não autenticado. Faça login para acessar a página.';
-
-
-    } else {
-      if (!validated) {
-        // validateJwt(jwtToken);
-        setValidated(true);
-      }
-    }
-  }, [navigate, validated]);
-
 
   return (
-    <div className="Home">
-      <MapContainer center={[-32.0372, -52.0986]} zoom={13} style={{ height: '100vh', width: '100%' }}
-        worldCopyJump={true}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <>
 
-        <Sidebar />
-      </MapContainer>
-    </div>
+      <Header />
+
+      <div className='container'>
+        <img src="./images/green.png" id='green' alt='mancha verde' />
+        <img src="./images/yellow.png" id='yellow' alt='mancha amarela' />
+        <img src="./images/pink.png" id='pink' alt='mancha rosa' />
+        <img src="./images/black.png" id='black' alt='mancha preta' />
+        {/* Header */}
+
+        {/* Sidebar */}
+        <SideBarHome />
+        {/* Container dos pets */}
+        <div className='container-pets'>
+          <div className="card-group">
+
+            {/* aqui será automatizada a listagem de pets */}
+            <Card />
+
+          </div>
+        </div>
+      </div>
+    </>
+
   );
 }
 
