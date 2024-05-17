@@ -6,6 +6,11 @@ import { validateEmail } from '../../components/validators/email/index.js';
 import { registerUser } from '../../controllers/register.js';
 import { useNavigate, useLocation } from "react-router-dom";
 
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject, progress } from 'firebase/storage';
+import { storage } from '../../controllers/resgisterImg.js';
+import { gerarNomeImagem } from '../../components/validators/arquivo/index.js';
+
+
 function Register() {
     const location = useLocation();
 
@@ -18,8 +23,12 @@ function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    
     const [step, setStep] = useState(1)
+    const [imageUrl, setImageUrl] = useState(''); //mostrar na tela
 
+    const [imgUrl, setImgUrl] = useState('') //enviar pro database
+    const [progress, setProgress] = useState([0])
     //  Função para mudar de step
 
     const handleStep = () =>{
@@ -27,13 +36,57 @@ function Register() {
         // if (true)  {
         //     setStep(step+1)
         // }
-        else if (description === '' && step === 2) {setError('Complete todos os campos!')}
+        else if (description === '' && step === 3) {setError('Complete todos os campos!')}
         else{ 
             setError('')
             setStep(step+1)
         }
     }
 
+    // Função para enviar imagem
+    const handleUpload = (e) => {
+        setImgUrl('Carregando')
+        const file = e.target.files[0];
+        const fileUrl = URL.createObjectURL(file); // Cria uma URL para o arquivo selecionado
+        setImageUrl(fileUrl); 
+
+        let nomeImg = gerarNomeImagem()
+        console.log('enviou img')
+        const storageRef = ref(storage, `images/${nomeImg}`)
+        const uploadTask = uploadBytesResumable(storageRef, file)
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progrees = (snapshot.bytesTransferred/snapshot.totalBytes)*100
+                setProgress(progrees)
+            },
+            error => {
+                setError(error)
+            },
+            ()=>{
+                getDownloadURL(uploadTask.snapshot.ref).then(url => {
+                    setImgUrl(url)
+                    
+                })
+            }
+        )
+
+    };
+
+    const deleteImg = () => {
+
+        if (!imgUrl) return;
+        console.log('deletei')
+        try {
+          const imageRef = ref(storage, imgUrl);
+      
+          deleteObject(imageRef);
+      
+        } catch (error) {
+          console.error('Erro ao deletar a imagem:', error);
+        }
+      };
+ 
     // Função para mudar texto
 
     const handleText = (e) =>{
@@ -67,11 +120,15 @@ function Register() {
         let emailValidated = validateEmail(email);
         let phoneValidated = validatePhoneNumber(phone);
 
+
+
+
         if (password === confirmPassword && cpfValidated && emailValidated && phoneValidated) {
             e.preventDefault();
             setError('');
-
+            
             try {
+
                 const userData = { name, description, email, phone, cpf, password };
                 const response = await registerUser(userData);
                 if (response.token) {
@@ -81,8 +138,10 @@ function Register() {
                 }
             } catch (error) {
                 // Tratar erros da solicitação, se houver
+                
                 console.error('Erro ao fazer a solicitação:', error);
                 setError('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+                deleteImg()
             }
         }
         else {
@@ -195,8 +254,38 @@ function Register() {
                             </>
                     
                     : <></>}
-
+                    
                     {step === 2 ? 
+                        <>
+                        <div className='main-register'>
+                            <div className="input-form">
+                            <label name="imagem" className="custom-file-button"><span>Escolher imagem</span></label>
+                            <p className='p-info'>OBS:imagem do grupo ajuda a ter mais credibilidade!</p>
+                            <input 
+                                name="imagem" 
+                                id="img-register" 
+                                type='file'
+                                content='aaaa'
+                                onChange={(e) => {handleUpload(e)}}
+                            />  
+                            </div>
+                            {imageUrl && <img className='imagem-register' src={imageUrl} alt='img' />}
+                        </div>
+
+                        <div className="buttons">
+                            <button  className="register-volta" onClick={()=>setStep(step-1)}>Voltar</button>
+                            {imgUrl === 'Carregando'? <><div className='loading'><progress value={progress}  max={100}/></div>
+                            
+                            
+                            </>:
+                                <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
+                            }
+                            
+                        </div>
+                        </>
+                        : <></>}
+
+                    {step === 3 ? 
                     <>
                         
                         <div className='main-register'>
@@ -216,7 +305,7 @@ function Register() {
                         </div>
                     </> :  <></>}
 
-                    {step === 3 ? 
+                    {step === 4 ? 
                      <>
                     <div className='main-register'>
                      <div className="input-form">

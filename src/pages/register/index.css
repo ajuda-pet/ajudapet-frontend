@@ -91,7 +91,6 @@
 }
 
 .main-register {
-
     height: 60%;
 }
 
@@ -129,6 +128,57 @@
 
 }
 
+.custom-file-button {
+    display: flex;
+    width: 150px;
+    background-color: #394c60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+.custom-file-button:hover{
+    background-color: #394c60cc;
+} 
+.custom-file-button span{
+    margin: 0 auto;
+}
+
+  /* Esconder o input de arquivo */
+#img-register {
+    padding: 10px;
+    opacity: 0;
+    width: 170px;
+    z-index: 5;
+    position: relative;
+    top: -60px;
+    left: 25%;
+    cursor: pointer;
+}
+.loading{
+    text-align: center;
+}
+#img-register::-webkit-file-upload-button{
+    cursor: pointer;
+}
+.p-info{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    text-align: center;
+    color: #bbb;
+}
+.imagem-register{
+
+    height: 95px;
+    display: flex;
+    padding: 0;
+    margin: 0 auto;
+}
+
 
 .register-button {
     font-weight: bolder;
@@ -141,7 +191,6 @@
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    
 }
 
 .register-volta {
