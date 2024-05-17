@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './index.css';
 import { formatCPF, validateCPF } from '../../components/validators/cpf/index.js';
 import { formatPhoneNumber, validatePhoneNumber } from '../../components/validators/telefone/index.js';
@@ -6,7 +6,7 @@ import { validateEmail } from '../../components/validators/email/index.js';
 import { registerUser } from '../../controllers/register.js';
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { ref, uploadBytesResumable, getDownloadURL, deleteObject, progress } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 import { storage } from '../../controllers/resgisterImg.js';
 import { gerarNomeImagem } from '../../components/validators/arquivo/index.js';
 
@@ -24,18 +24,18 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     
-    const [step, setStep] = useState(1)
-    const [imageUrl, setImageUrl] = useState(''); //mostrar na tela
+    const [step, setStep] = useState(1) 
 
-    const [imgUrl, setImgUrl] = useState('') //enviar pro database
-    const [progress, setProgress] = useState([0])
+    const [imageUrl, setImageUrl] = useState(''); //mostrar imagem na tela
+
+    const [imgUrl, setImgUrl] = useState('') //enviar pro firebase
+    const [file, setFile] = useState('')//file
+
+    // const [progress, setProgress] = useState([0]) 
+
     //  Função para mudar de step
-
     const handleStep = () =>{
         if ((name === '' || cpf === '' || phone === '') && step === 1)  {setError('Complete todos os campos!')}
-        // if (true)  {
-        //     setStep(step+1)
-        // }
         else if (description === '' && step === 3) {setError('Complete todos os campos!')}
         else{ 
             setError('')
@@ -43,22 +43,31 @@ function Register() {
         }
     }
 
-    // Função para enviar imagem
+    // Função para quarda imagem
     const handleUpload = (e) => {
-        setImgUrl('Carregando')
         const file = e.target.files[0];
+        setFile(file)
         const fileUrl = URL.createObjectURL(file); // Cria uma URL para o arquivo selecionado
         setImageUrl(fileUrl); 
+    };
 
-        let nomeImg = gerarNomeImagem()
+    //Função feita para submit da imagem pro firebase
+    const fistSubmit = (e) =>{
+        e.preventDefault();
+
+        // Caso não envie imagem
+        if (!file) return (handleSubmit())
+
+        // Gerar nome aleatorio pra arquivo
+        let nomeImg = gerarNomeImagem() 
         console.log('enviou img')
         const storageRef = ref(storage, `images/${nomeImg}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
         uploadTask.on(
             "state_changed",
             snapshot => {
-                const progrees = (snapshot.bytesTransferred/snapshot.totalBytes)*100
-                setProgress(progrees)
+                //const progrees = (snapshot.bytesTransferred/snapshot.totalBytes)*100 // upload da imagem
+                
             },
             error => {
                 setError(error)
@@ -70,10 +79,10 @@ function Register() {
                 })
             }
         )
+    }
 
-    };
-
-    const deleteImg = () => {
+    // Função focada em remover imagem do firebase em caso de não registrar
+    const deleteImg = useCallback(() => {
 
         if (!imgUrl) return;
         console.log('deletei')
@@ -81,11 +90,12 @@ function Register() {
           const imageRef = ref(storage, imgUrl);
       
           deleteObject(imageRef);
+          setImgUrl('')
       
         } catch (error) {
           console.error('Erro ao deletar a imagem:', error);
         }
-      };
+      },[imgUrl])
  
     // Função para mudar texto
 
@@ -113,18 +123,18 @@ function Register() {
 
     const navigate = useNavigate();
 
+    
+    
     // Função para lidar com o envio do formulário
-
-    const handleSubmit = async (e) => {
+    
+    const handleSubmit = useCallback(async () => {
         let cpfValidated = validateCPF(cpf);
         let emailValidated = validateEmail(email);
         let phoneValidated = validatePhoneNumber(phone);
 
 
-
-
         if (password === confirmPassword && cpfValidated && emailValidated && phoneValidated) {
-            e.preventDefault();
+            
             setError('');
             
             try {
@@ -145,7 +155,6 @@ function Register() {
             }
         }
         else {
-            e.preventDefault();
             if (!cpfValidated) {
                 setError('CPF inválido!');
             }
@@ -158,10 +167,18 @@ function Register() {
             if (!phoneValidated) {
                 setError('Telefone inválido!');
             }
+            deleteImg()
             console.log('Cadastro não realizado, verifique os dados inseridos!');
         }
-    }
+    }, [name, description, email, phone, cpf, password, confirmPassword, deleteImg, navigate ]
+)
 
+useEffect(()=>{
+    console.log('tentou enviar database')
+    if (imgUrl === '') return;
+    handleSubmit()
+}, 
+[imgUrl, handleSubmit])
 
     useEffect(() => {
         document.title = 'Cadastro';
@@ -173,6 +190,7 @@ function Register() {
         }
             , 5000);
     }, [location.state?.msg]);
+
     return (
 
         <div className="body">
@@ -194,7 +212,7 @@ function Register() {
                 </div>
                 
 
-                <form onSubmit={handleSubmit} method='post'>
+                <form onSubmit={fistSubmit} method='post'>
                     
 
                     <div className="form-inputs">
@@ -274,12 +292,8 @@ function Register() {
 
                         <div className="buttons">
                             <button  className="register-volta" onClick={()=>setStep(step-1)}>Voltar</button>
-                            {imgUrl === 'Carregando'? <><div className='loading'><progress value={progress}  max={100}/></div>
-                            
-                            
-                            </>:
-                                <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
-                            }
+                            <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
+
                             
                         </div>
                         </>

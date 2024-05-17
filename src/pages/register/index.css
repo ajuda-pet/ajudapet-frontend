@@ -146,7 +146,7 @@
     margin: 0 auto;
 }
 
-  /* Esconder o input de arquivo */
+  /* Esconder o input file  */
 #img-register {
     padding: 10px;
     opacity: 0;
@@ -157,12 +157,11 @@
     left: 25%;
     cursor: pointer;
 }
-.loading{
-    text-align: center;
-}
+
 #img-register::-webkit-file-upload-button{
     cursor: pointer;
 }
+
 .p-info{
     position: relative;
     padding: 0;
