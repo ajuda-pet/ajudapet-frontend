@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
-import { useNavigate } from "react-router-dom";
-import Sidebar from '../../components/molecules/sidebar';
-
-import 'leaflet/dist/leaflet.css';
+//import { useLocation, useNavigate } from 'react-router-dom';
 import './index.css';
+import Header from '../../components/molecules/header';
+import SideBarHome from '../../components/molecules/sideBarHome';
+import Card from '../../components/molecules/cards';
+
 
 function Home() {
   const navigate = useNavigate();
