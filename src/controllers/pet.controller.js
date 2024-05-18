@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { baseApi } from '../resources/api.js'
 
-const noAuthEndpoint = `${baseApi}/noauth`
-const authEndpoint = `${baseApi}/auth`
+const noAuthEndpoint = `${baseApi}/noauth/pets`
+const authEndpoint = `${baseApi}/auth/pets`
 
 const petController = {
     get: async () => {
@@ -13,7 +13,7 @@ const petController = {
                 return response.data.message
             }
 
-            return response.data
+            return response.data.info.pets
         }
 
         catch (error) {
