@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { baseApi } from '../resources/api.js'
+import { baseApi } from '../resouces/api.js'
 
-const noAuthEndpoint = `${baseApi}/noauth`
-const authEndpoint = `${baseApi}/auth`
+const noAuthEndpoint = `${baseApi}/noauth/adoption-points`
+const authEndpoint = `${baseApi}/auth/adoption-points`
 
-const petController = {
+const pointsController = {
     get: async () => {
         try {
             const response = await axios.get(noAuthEndpoint)
@@ -21,15 +21,15 @@ const petController = {
         }
     },
 
-    getById: async (petId) => {
+    getById: async (pointId) => {
         try {
-            const response = await axios.get(`${noAuthEndpoint}/${petId}`)
-            
-            if (!response.data.succes) {
+            const response = await axios.getById(`${noAuthEndpoint}/${pointId}`)
+
+            if (!response.data.success) {
                 return response.data.message
             }
 
-            return response.data    
+            return response.data
         }
 
         catch (error) {
@@ -37,9 +37,9 @@ const petController = {
         }
     },
 
-    create: async(payload) => {
+    create: async (payload) => {
         try {
-            const response = await axios.post(authEndpoint, payload, {
+            const response = await axios.post(`${authEndpoint}`, payload, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': window.localStorage.getItem('token')
@@ -56,15 +56,14 @@ const petController = {
         catch (error) {
             console.error(error)
         }
-
     },
 
-    updated: async(petId, payload) => {
+    upated: async (pointId, payload) => {
         try {
-            const response = await axios.put(`${authEndpoint}/${petId}`, payload, {
+            const response = await axios.put(`${authEndpoint}`, payload, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem('token')
+                    'Authorixation': window.localStorage.getItem('token')
                 }
             })
 
@@ -79,4 +78,4 @@ const petController = {
     }
 }
 
-export default petController
+export default pointsController
