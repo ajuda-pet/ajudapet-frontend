@@ -156,6 +156,12 @@ const PetForm = () => {
 
     return (
         <div className="form-container">
+            <div style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+
+
+                <h2>Cadastro de Pet</h2>
+
+            </div>
             <FormProvider {...methods}>
                 {step === 1 && (
                     <SelectPointAdoption register={methods.register} errors={methods.formState.errors} setSelectedPoint={setSelectedPoint} />

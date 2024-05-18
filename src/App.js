@@ -11,6 +11,7 @@ import RegistrarVoluntario from './pages/registrarVoluntario/index.jsx';
 import GerenciarEstoque from './pages/gerenciarEstoque/index.jsx';
 import NotFoundPage from './pages/notFoundPage/index.jsx';
 import AddPet from './pages/addPet/index.jsx';
+import AddAdoptPoint from './pages/addAdoptPoint/index.jsx';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/addPet" element={<AddPet />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/map" element={<Map />} />
+                <Route path="/addAdoptPoint" element={<AddAdoptPoint />} />
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFoundPage />} />
 

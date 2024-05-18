@@ -20,6 +20,7 @@ function Login() {
 
   // Função para lidar com o envio do formulario
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     setError('');
     setMsg('');
@@ -27,9 +28,10 @@ function Login() {
     if (validateEmail && password.length > 0) {
       const userData = { email, password };
       const token = await loginUser(userData);
-      console.log(token)
+
       if (token) {
         localStorage.setItem('valid', true);
+
         navigate('/')
       } else {
         setError('Erro ao autenticar usuário. Verifique suas credenciais.');
