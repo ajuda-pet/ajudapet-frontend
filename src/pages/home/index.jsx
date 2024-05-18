@@ -7,6 +7,12 @@ import Card from '../../components/molecules/cards';
 
 
 function Home() {
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    // fetchPets();
+  }, []);
 
   return (
     <>
@@ -26,8 +32,11 @@ function Home() {
         <div className='container-pets'>
           <div className="card-group">
 
+            {pets.map((pet) => (
+              <Card key={pet.id} name={pet.name} age={pet.age} image={pet.image} />
+            ))}
             {/* aqui será automatizada a listagem de pets */}
-            <Card />
+
 
           </div>
         </div>
