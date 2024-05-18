@@ -13,10 +13,7 @@ export const loginUser = async (userData) => {
         });
         console.log(response)
         if (response.data.success === true) {
-            var expirationDate = new Date();
-            expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 60 * 1000)); // 1 hora em milissegundos
-
-            document.cookie = `token=${response.data.info.token}; expires=${expirationDate.toUTCString()}; path=/`;
+            localStorage.setItem('token', response.data.info);
             return response.data.info;
         } else {
             return false;
