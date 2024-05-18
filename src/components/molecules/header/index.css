@@ -8,14 +8,30 @@ body {
 }
 
 .header {
-    overflow: hidden;
-    background-color: rgb(33, 47, 63);
-    padding: 5px 5px;
-    width: 100%;
-    flex-direction: column;
     display: flex;
-    align-items: end;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(33, 47, 63);
+    padding: 5px;
+    width: 100%;
+    max-height: 60px;
+}
 
+.logo {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons img {
+    margin-left: 10px;
+    /* Espaçamento entre os ícones */
 }
 
 .header a {

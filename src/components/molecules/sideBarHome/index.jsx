@@ -1,20 +1,15 @@
 import React from 'react';
 import './index.css';
-import { useNavigate } from 'react-router-dom';
 
 const SideBarHome = () => {
 
-    const navigate = useNavigate()
-    const handleClick = () => {
-        navigate('/addPet')
-    }
     return (
         <>
             <div class="sidebar">
-                <a href="/"><div className='circle home'></div>logo</a>
-                <button onClick={handleClick}><div className='circle'></div><p>Adicionar Pet</p></button>
-                <a href="/addAdoptPoint"><div className='circle'></div>Pontos de Adoção</a>
-                <a href="/"><div className='circle'></div>Contact</a>
+                <a href="/"><div className='circle home'>Home</div></a>
+                <a href="/addPet"> <div className='circle'>+Pet</div></a>
+                <a href="/addAdoptPoint"><div className='circle'>+Point</div></a>
+                <a href="/"><div className='circle'></div></a>
             </div>
 
         </>

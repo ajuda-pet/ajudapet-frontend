@@ -44,9 +44,6 @@
     cursor: pointer;
 }
 
-.sidebar ul li button:hover {
-    background-color: #0056b3;
-}
 
 .open-btn {
     position: fixed;
