@@ -28,7 +28,7 @@ function Register() {
 
     const [imageUrl, setImageUrl] = useState(''); //mostrar imagem na tela
 
-    const [imgUrl, setImgUrl] = useState('') //enviar pro firebase
+    const [picture, setPicture] = useState('') //enviar pro firebase
     const [file, setFile] = useState('')//file
 
     // const [progress, setProgress] = useState([0]) 
@@ -74,7 +74,7 @@ function Register() {
             },
             ()=>{
                 getDownloadURL(uploadTask.snapshot.ref).then(url => {
-                    setImgUrl(url)
+                    setPicture(url)
                     
                 })
             }
@@ -84,18 +84,18 @@ function Register() {
     // Função focada em remover imagem do firebase em caso de não registrar
     const deleteImg = useCallback(() => {
 
-        if (!imgUrl) return;
+        if (!picture) return;
         console.log('deletei')
         try {
-          const imageRef = ref(storage, imgUrl);
+          const imageRef = ref(storage, picture);
       
           deleteObject(imageRef);
-          setImgUrl('')
+          setPicture('')
       
         } catch (error) {
           console.error('Erro ao deletar a imagem:', error);
         }
-      },[imgUrl])
+      },[picture])
  
     // Função para mudar texto
 
@@ -139,7 +139,7 @@ function Register() {
             
             try {
 
-                const userData = { name, description, email, phone, cpf, password };
+                const userData = { name, description, email, phone, cpf, password, picture};
                 const response = await registerUser(userData);
                 if (response.token) {
                     navigate('/home');
@@ -175,10 +175,10 @@ function Register() {
 
 useEffect(()=>{
     console.log('tentou enviar database')
-    if (imgUrl === '') return;
+    if (picture === '') return;
     handleSubmit()
 }, 
-[imgUrl, handleSubmit])
+[picture, handleSubmit])
 
     useEffect(() => {
         document.title = 'Cadastro';
