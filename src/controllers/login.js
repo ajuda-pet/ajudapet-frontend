@@ -13,7 +13,9 @@ export const loginUser = async (userData) => {
         });
         console.log(response)
         if (response.data.success === true) {
-            localStorage.setItem('token', response.data.info);
+            localStorage.setItem('token', response.data.info.token);
+            localStorage.setItem('groupId', response.data.info.group.id);
+
             return response.data.info;
         } else {
             return false;

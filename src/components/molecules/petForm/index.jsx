@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import './form.css'; // Importação do arquivo CSS
+import pointsController from '../../../controllers/points.contorller.js';
 
 
 const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
@@ -11,21 +12,20 @@ const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     //         .then(response => response.json())
     //         .then(data => setPoints(data));
     // }, []);
-    useEffect(() => {
-        Promise.resolve([
-            { id: 1, name: 'Ponto de Adoção 1' },
-            { id: 2, name: 'Ponto de Adoção 2' },
-            { id: 3, name: 'Ponto de Adoção 3' },
-        ])
-            .then(data => setPoints(data));
-    }, []);
+    pointsController.get().then((response) => {
+        if (response.info.length > 0) {
+            setPoints(response.info)
+            console.log('points: ' + points)
+        }
+    });
+
 
     return (
         <div className="form-group">
             <label htmlFor="select">Ponto de Adoção</label>
             <select id="adoption_point_id" {...register('adoption_point_id', { required: 'Este campo é obrigatório' })} onChange={(e) => setSelectedPoint(e.target.value)}>
                 <option value="">Selecione o Ponto de Adoção</option>
-                {points.map((point) => (
+                {points && points.map((point) => (
                     <option key={point.id} value={point.id}>{point.name}</option>
                 ))}
             </select>

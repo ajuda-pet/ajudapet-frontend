@@ -4,15 +4,17 @@ import './index.css';
 import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
 import Card from '../../components/molecules/cards';
+import petController from '../../controllers/pet.controller';
 
 
 function Home() {
   const [pets, setPets] = useState([]);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    // fetchPets();
-  }, []);
+  petController.get().then((response) => {
+    setPets(response);
+  });
+
+
 
   return (
     <>
@@ -33,7 +35,7 @@ function Home() {
           <div className="card-group">
 
             {pets.map((pet) => (
-              <Card key={pet.id} name={pet.name} age={pet.age} image={pet.image} />
+              <Card key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
             ))}
             {/* aqui será automatizada a listagem de pets */}
 
