@@ -54,38 +54,59 @@ function Register() {
     //Função feita para submit da imagem pro firebase
     const fistSubmit = (e) =>{
         e.preventDefault();
+        let cpfValidated = validateCPF(cpf);
+        let emailValidated = validateEmail(email);
+        let phoneValidated = validatePhoneNumber(phone);
 
+        if (password === confirmPassword && cpfValidated && emailValidated && phoneValidated) {
+            setError('')
+            if (!file) return (handleSubmit())
+            let nomeImg = gerarNomeImagem() 
+            const storageRef = ref(storage, `images/${nomeImg}`)
+            const uploadTask = uploadBytesResumable(storageRef, file)
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    //const progrees = (snapshot.bytesTransferred/snapshot.totalBytes)*100 // upload da imagem
+                    
+                },
+                error => {
+                    setError(error)
+                },
+                ()=>{
+                    getDownloadURL(uploadTask.snapshot.ref).then(url => {
+                        setPicture(url)
+                        
+                    })
+                }
+            )
+        }
+        else{
+            if (!cpfValidated) {
+                setError('CPF inválido!');
+            }
+            if (!emailValidated) {
+                setError('Email inválido!');
+            }
+            if (password !== confirmPassword) {
+                setError('As senhas não são iguais!');
+            }
+            if (!phoneValidated) {
+                setError('Telefone inválido!');
+            }
+            console.log('Cadastro não realizado, verifique os dados inseridos!');
+        }
         // Caso não envie imagem
-        if (!file) return (handleSubmit())
+        
 
         // Gerar nome aleatorio pra arquivo
-        let nomeImg = gerarNomeImagem() 
-        console.log('enviou img')
-        const storageRef = ref(storage, `images/${nomeImg}`)
-        const uploadTask = uploadBytesResumable(storageRef, file)
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                //const progrees = (snapshot.bytesTransferred/snapshot.totalBytes)*100 // upload da imagem
-                
-            },
-            error => {
-                setError(error)
-            },
-            ()=>{
-                getDownloadURL(uploadTask.snapshot.ref).then(url => {
-                    setPicture(url)
-                    
-                })
-            }
-        )
+        
     }
 
     // Função focada em remover imagem do firebase em caso de não registrar
     const deleteImg = useCallback(() => {
 
         if (!picture) return;
-        console.log('deletei')
         try {
           const imageRef = ref(storage, picture);
       
@@ -128,53 +149,27 @@ function Register() {
     // Função para lidar com o envio do formulário
     
     const handleSubmit = useCallback(async () => {
-        let cpfValidated = validateCPF(cpf);
-        let emailValidated = validateEmail(email);
-        let phoneValidated = validatePhoneNumber(phone);
 
-
-        if (password === confirmPassword && cpfValidated && emailValidated && phoneValidated) {
+        try {
+            const userData = { name, description, email, phone, cpf, password, picture};
+            const response = await registerUser(userData);
+            if (response.token) {
+                navigate('/home');
+            } else {
+                setError('Erro ao registrar usuário. ' + response)
+            }
+        } catch (error) {
+            // Tratar erros da solicitação, se houver
             
-            setError('');
-            
-            try {
-
-                const userData = { name, description, email, phone, cpf, password, picture};
-                const response = await registerUser(userData);
-                if (response.token) {
-                    navigate('/home');
-                } else {
-                    setError('Erro ao registrar usuário. ' + response)
-                }
-            } catch (error) {
-                // Tratar erros da solicitação, se houver
-                
-                console.error('Erro ao fazer a solicitação:', error);
-                setError('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
-                deleteImg()
-            }
-        }
-        else {
-            if (!cpfValidated) {
-                setError('CPF inválido!');
-            }
-            if (!emailValidated) {
-                setError('Email inválido!');
-            }
-            if (password !== confirmPassword) {
-                setError('As senhas não são iguais!');
-            }
-            if (!phoneValidated) {
-                setError('Telefone inválido!');
-            }
+            console.error('Erro ao fazer a solicitação:', error);
+            setError('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
             deleteImg()
-            console.log('Cadastro não realizado, verifique os dados inseridos!');
         }
-    }, [name, description, email, phone, cpf, password, confirmPassword, deleteImg, navigate ]
+
+    }, [name, description, email, phone, cpf, password,picture, deleteImg, navigate ]
 )
 
 useEffect(()=>{
-    console.log('tentou enviar database')
     if (picture === '') return;
     handleSubmit()
 }, 
@@ -275,8 +270,8 @@ useEffect(()=>{
                     
                     {step === 2 ? 
                         <>
-                        <div className='main-register'>
-                            <div className="input-form">
+                        <div className='main-register-img'>
+                            <div className="input-form-img">
                             <label name="imagem" className="custom-file-button"><span>Escolher imagem</span></label>
                             <p className='p-info'>OBS:imagem do grupo ajuda a ter mais credibilidade!</p>
                             <input 
