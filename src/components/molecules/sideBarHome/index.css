@@ -1,0 +1,64 @@
+.sidebar {
+    width: 100px;
+    position: fixed;
+    margin-top: 65px;
+    left: 0;
+    height: 93%;
+    background-color: #ffffff;
+    padding-top: 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    /* Alinha os itens à esquerda */
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.circle.home {
+    background-color: rgb(33, 47, 63);
+    color: white;
+}
+
+.buttonDiv {
+    cursor: pointer;
+}
+
+.sidebar a,
+.sidebar .item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    /* Remove o sublinhado padrão dos links */
+    color: inherit;
+    /* Herda a cor do texto */
+    margin-bottom: 15px;
+    /* Espaçamento entre os itens */
+}
+
+.circle {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #d1d1d1;
+    /* Ajuste a cor conforme necessário */
+    margin-right: 10px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    /* Espaço entre o círculo e o texto */
+}
+
+.sidebar .item {
+    cursor: pointer;
+    /* Indica que o item é clicável */
+}

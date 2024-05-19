@@ -1,146 +1,231 @@
 .body {
-    background: linear-gradient(to right, #5dbeebc7, #07a0e7ab);
     height: 100vh;
     width: 100%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    overflow: hidden;
+    position: relative;
 }
 
-.backgroundImage {
-    background-image: url('../../../public/images/patas.jpg');
-    /* Defina a imagem de fundo usando a URL da imagem */
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    /* Se desejar que a imagem se repita */
 
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    /* Garanta que a imagem de fundo cubra toda a tela */
-    height: 100%;
-    /* Garanta que a imagem de fundo cubra toda a tela */
+/* Destalhes das paginas */
+#green {
+    position: absolute; 
+    top: 10%; 
+    left: 100%; 
+    transform: translate(-50%, -50%); 
+}
+#pink {
+    width: 15vw;
+    position: absolute; 
+    top: 98%; 
+    left: 96%; 
+    transform: translate(-50%, -50%); 
 }
 
-.backgroundDogs {
-    background-image: url('../../../public/images/dogs.jpeg');
-    /* Defina a imagem de fundo usando a URL da imagem */
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    /* Garanta que a imagem de fundo cubra toda a tela */
-    height: 100%;
-    /* Garanta que a imagem de fundo cubra toda a tela */
+#yellow {
+    position: absolute; 
+    top: 5%; 
+    left: 0%; 
+    transform: translate(-50%, -50%); 
 }
+#black {
+    position: absolute; 
+    top: 105%; 
+    left: 0%; 
+    transform: translate(-50%, -50%); 
+}
+
+
 
 .register-container {
+    margin: 0;
+    padding: 0;
     z-index: 1;
     width: 410px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    border-radius: 0.5em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    background-color: #ffffff00;
+    
+    margin: 10vh auto 0;
 
-    max-height: 600px;
-    padding: 10px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-h1 {
+.logo{
+    padding-bottom: 4vh;
+}
+
+.form-inputs {
+    height: 400px;
+    min-width: 380px;
+
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.118);
+    border: 1px solid black;
+    border-radius: 3em;
+    
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+
+.header-register{
+    height: 20%;
+}
+
+.header-register h1 {
+    padding: 0;
+    margin: 5px 0 0;
     text-align: center;
-    margin-bottom: 15px;
     color: #333;
     font-size: 2em;
 }
 
+.header-register .error {
+    text-align: center;
+    color: red;
+    font-size: 16px;
 
-.form-inputs {
-    min-width: 380px;
-    padding: 0;
-    flex: 1;
-    flex-direction: column;
-    display: flex;
+}
+
+.main-register {
+    height: 60%;
 }
 
 .input-form{
     padding: 0;
 }
 
+
 .input-field {
+    text-align: center;
     width: 90%;
     padding: 10px;
     margin-top: 10px;
     font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 0.2em solid #ccc;
+    border-radius: 0px;
+
 }
 
-label {
-    display: block;
-    margin-top: 5px;
-    font-weight: 400px;
-    /* Escolha a fonte desejada */
-    font-size: 1.1em;
-    color: #0e005f;
+#text-description:placeholder-shown{
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
 }
 
+#text-description {
+    resize: none;
+    width: 90%;
+    min-height: 100px;
+    padding: 10px;
+    margin-top: 30px;
+    font-size: 1em;
+    border: 0.3em solid #ccc;
+    border-radius: 0px;
+
+}
+
+.custom-file-button {
+    display: flex;
+    width: 150px;
+    background-color: #394c60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+.custom-file-button:hover{
+    background-color: #394c60cc;
+} 
+.custom-file-button span{
+    margin: 0 auto;
+}
+
+  /* Esconder o input file  */
+#img-register {
+    padding: 10px;
+    opacity: 0;
+    width: 170px;
+    z-index: 5;
+    position: relative;
+    top: -60px;
+    left: 25%;
+    cursor: pointer;
+}
+
+#img-register::-webkit-file-upload-button{
+    cursor: pointer;
+}
+
+.p-info{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    text-align: center;
+    color: #bbb;
+}
+.imagem-register{
+
+    height: 95px;
+    display: flex;
+    padding: 0;
+    margin: 0 auto;
+}
 
 
 .register-button {
-    width: 7em;
-    padding: 10px;
-    background-color: #007bff;
+    font-weight: bolder;
+    font-size: 16px; 
+    margin-top: 0;
+    padding: 20px 85px;
+    text-align: center;
+    background-color: #394c60;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
-    margin-top: 10px;
-    margin-left: 7em;
 }
 
-.register-a {
+.register-volta {
+    margin-top: 10px;
+    align-self: center;
     width: 5em;
-    padding: 10px;
+    padding: 0px;
     text-align: center;
-    background-color: #bb2020;
-    color: #fff;
+    background-color: #bb202000;
+    text-decoration: underline;
+    font-size: 16px;
+    color: #c91a1a;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
+    
 }
 
 a {
     text-decoration: none;
 }
 
-a:hover {
-    background-color: #9b1d1d;
-
-}
 
 .register-button:hover {
     background-color: #0056b3;
 }
 
 .buttons {
+    max-height: 20%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column-reverse;
+    justify-content: start;
     flex: 1;
-    padding-bottom: 15px;
 }
 
-.error {
-    color: red;
-    font-size: 16px;
-    margin-top: 5px;
-}
+
 
 /* Responsive  */ 
 
@@ -162,8 +247,55 @@ a:hover {
 
 /* Estilos específicos para telas maiores que 600px e menores que 1024px de largura */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
-    .register-container{
-        padding: 5px;
+    
+    #green {
+        max-width: 50vw;
+    }
+    
+    #yellow {
+        max-width: 70vw;
+    }
+    #black {
+        max-width: 60vh;
+    }
+.logo{
+    padding-bottom: 2vh;
+}
+
+h1 {
+    font-size: 1.8em;
+}
+
+
+.form-inputs {
+    min-width: 350px;
+}
+
+
+}
+
+
+@media only screen and (max-height: 700px) {
+    #green {
+        width: 80vh;
+    }
+    #pink {
+        width: 40vh;
+    }
+    
+    #yellow {
+        width: 80vh;
+    }
+    #black {
+        width: 80vh;
+    }
+    .register-container {
+        top: 45%;
+    }
+    
+    .logo img{
+        max-width: 140px;
     }
 
+    
 }
