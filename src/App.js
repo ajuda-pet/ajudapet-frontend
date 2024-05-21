@@ -12,6 +12,8 @@ import GerenciarEstoque from './pages/gerenciarEstoque/index.jsx';
 import NotFoundPage from './pages/notFoundPage/index.jsx';
 import AddPet from './pages/addPet/index.jsx';
 import AddAdoptPoint from './pages/addAdoptPoint/index.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
