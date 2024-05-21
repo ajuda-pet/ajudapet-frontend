@@ -22,7 +22,8 @@ const SideBarHome = () => {
 
                 <Col className={`sub-sidebar d-flex justify-content-center ${showSidebar ? '' : 'left-0'}`} onClick={toggleSidebar}>
                     <span className={`${showSidebar ? 'zoom1' : 'zoom2'} material-symbols-outlined ${showSidebar ? 'rotate' : ''}`} style={{ fontSize: '40px', marginLeft: '35px', backgroundColor: '#e0dddd', borderRadius: 100 }}>
-                        <img src='./images/arrow.png' width='35' />
+                        <img src='./images/arrow.png' width='35' style={{ marginBottom: '10px' }} />
+
                     </span>
                 </Col>
             </Row>
