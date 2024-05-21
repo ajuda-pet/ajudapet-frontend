@@ -1,16 +1,41 @@
 .sidebar {
-    width: 100px;
+    width: 80px !important;
     position: fixed;
-    margin-top: 65px;
+    top: 22vh !important;
     left: 0;
-    height: 93%;
-    background-color: #ffffff;
-    padding-top: 60px;
+    height: 70vh;
+    background-color: #f8f6f6;
+    padding-top: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    /* Alinha os itens à esquerda */
+    align-items: center;
+    border-radius: 40px !important;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+
+.sub-sidebar {
+    width: 35px !important;
+    position: absolute;
+    top: 30vh;
+    left: 65px;
+    height: 55vh;
+    background-color: #e0dddd;
+    padding-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px !important;
+}
+
+.left-0 {
+    position: absolute;
+    left: -15px !important;
 }
 
 .sidebar a {
@@ -22,8 +47,24 @@
 }
 
 .circle.home {
-    background-color: rgb(33, 47, 63);
+    background-color: #212f3f;
     color: white;
+}
+
+.circle:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+}
+
+
+.zoom1:hover {
+    transform: scale(1.1) rotate(180deg);
+    cursor: pointer;
+}
+
+.zoom2:hover {
+    transform: scale(1.1);
+    cursor: pointer
 }
 
 .buttonDiv {
@@ -47,18 +88,24 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #d1d1d1;
-    /* Ajuste a cor conforme necessário */
+    background-color: #8cb7f0;
+    padding:10px;
     margin-right: 10px;
     padding: 0;
     margin: 0;
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    /* Espaço entre o círculo e o texto */
 }
 
 .sidebar .item {
     cursor: pointer;
-    /* Indica que o item é clicável */
+}
+
+.mb-10 {
+    margin-bottom: 50px !important;
+}
+
+.hidden {
+    display: none;
 }
