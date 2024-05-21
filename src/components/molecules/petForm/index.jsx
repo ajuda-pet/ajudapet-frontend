@@ -13,9 +13,8 @@ const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     //         .then(data => setPoints(data));
     // }, []);
     pointsController.get().then((response) => {
-        if (response.info.length > 0) {
-            setPoints(response.info)
-            console.log('points: ' + points)
+        if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
+            setPoints(response.info.adoptionPoints)
         }
     });
 
@@ -23,7 +22,7 @@ const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     return (
         <div className="form-group">
             <label htmlFor="select">Ponto de Adoção</label>
-            <select id="adoption_point_id" {...register('adoption_point_id', { required: 'Este campo é obrigatório' })} onChange={(e) => setSelectedPoint(e.target.value)}>
+            <select id="adoptionPointId" {...register('adoptionPointId', { required: 'Este campo é obrigatório' })} onChange={(e) => setSelectedPoint(e.target.value)}>
                 <option value="">Selecione o Ponto de Adoção</option>
                 {points && points.map((point) => (
                     <option key={point.id} value={point.id}>{point.name}</option>
@@ -51,14 +50,14 @@ const Step1 = ({ register, errors }) => (
 
 
         <div className="form-group">
-            <label htmlFor="size_group">Tamanho</label>
-            <select id="size_group" {...register('size_group', { required: 'Este campo é obrigatório' })}>
+            <label htmlFor="sizeGroup">Tamanho</label>
+            <select id="sizeGroup" {...register('sizeGroup', { required: 'Este campo é obrigatório' })}>
                 <option value="">Selecione o Tamanho</option>
                 <option value="SMALL">PEQUENO</option>
                 <option value="MEDIUM">MÉDIO</option>
                 <option value="LARGE">GRANDE</option>
             </select>
-            {errors.size_group && <p className="error-message">{errors.size_group.message}</p>}
+            {errors.sizeGroup && <p className="error-message">{errors.sizeGroup.message}</p>}
         </div>
 
         <div className="form-group">
@@ -84,14 +83,14 @@ const Step2 = ({ register, errors }) => {
     return (
         <div>
             <div className="form-group">
-                <label htmlFor="age_group">Faixa Etária</label>
-                <select id="age_group" {...register('age_group', { required: 'Este campo é obrigatório' })}>
+                <label htmlFor="ageGroup">Faixa Etária</label>
+                <select id="ageGroup" {...register('ageGroup', { required: 'Este campo é obrigatório' })}>
                     <option value="">Selecione a Faixa Etária</option>
                     <option value="BABY">BEBÊ</option>
                     <option value="ADULT">ADULTO</option>
                     <option value="OLD">IDOSO</option>
                 </select>
-                {errors.age_group && <p className="error-message">{errors.age_group.message}</p>}
+                {errors.ageGroup && <p className="error-message">{errors.ageGroup.message}</p>}
             </div>
 
 
@@ -163,10 +162,11 @@ const PetForm = () => {
 
             </div>
             <FormProvider {...methods}>
-                {step === 1 && (
-                    <SelectPointAdoption register={methods.register} errors={methods.formState.errors} setSelectedPoint={setSelectedPoint} />
-                )}
+
                 <form onSubmit={methods.handleSubmit(onSubmit)} onChange={checkAllFieldsFilled}>
+                    {step === 1 && (
+                        <SelectPointAdoption register={methods.register} errors={methods.formState.errors} setSelectedPoint={setSelectedPoint} />
+                    )}
                     {step === 1 && <Step1 register={methods.register} errors={methods.formState.errors} />}
                     {step === 2 && <Step2 register={methods.register} errors={methods.formState.errors} />}
 

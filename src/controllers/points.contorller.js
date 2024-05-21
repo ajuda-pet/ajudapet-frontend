@@ -23,7 +23,7 @@ const pointsController = {
 
     getById: async (pointId) => {
         try {
-            const response = await axios.getById(`${noAuthEndpoint}/${pointId}`)
+            const response = await axios.get(`${noAuthEndpoint}/${pointId}`)
 
             if (!response.data.success) {
                 return response.data.message

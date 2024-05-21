@@ -66,16 +66,7 @@ const Step2 = ({ register, errors }) => {
         <>
             <div>
 
-                {groupId && (
-                    <input
-                        placeholder="123"
-                        id="group_id"
-                        type="hidden"
-                        value={groupId}
-                        {...register('group_id')}
 
-                    />
-                )}
                 <div className="form-group">
                     <label htmlFor="addressState">Estado</label>
                     <select id="addressState" {...register('addressState', { required: 'Este campo é obrigatório' })}>
