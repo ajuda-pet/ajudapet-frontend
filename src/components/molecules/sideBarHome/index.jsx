@@ -1,18 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react';
 import './index.css'
 
+
+import { Col, Row } from 'react-bootstrap'
+
 const SideBarHome = () => {
+    const [showSidebar, setShowSidebar] = useState(true)
+
+    const toggleSidebar = () => {
+        setShowSidebar(!showSidebar)
+    }
 
     return (
         <>
-            <div className='sidebar'>
-                <a className='mb-10'><img src='./images/logo-sidebar.png' width='150'/></a>
-                <a className='circle home' href='/'><img src='./images/home.png' width='40'></img></a>
-                <a className='circle' href='/addPet'><img src='./images/pet-icon-sidebar.png' width='40'/></a>
-                <a className='circle' href='/addAdoptPoint'><img src='./images/location-icon-sidebar.png' width='40'/></a>
-            </div>
+            <Row className='align-items-center'>
+                <Col className={`sidebar ${showSidebar ? '' : 'hidden'}`}>
+                    <a className='circle home' href='/'><img src='./images/home.png' width='40' alt='Ícone de home' /></a>
+                    <a className='circle' href='/addPet'><img src='./images/pet-icon-sidebar.png' width='40' alt='Ícone de animal de estimação' /></a>
+                    <a className='circle' href='/addAdoptPoint'><img src='./images/location-icon-sidebar.png' width='40' alt='Ícone de ponto de adoção' /></a>
+                </Col>
+
+                <Col className={`sub-sidebar d-flex justify-content-center ${showSidebar ? '': 'left-0'}`}  onClick={toggleSidebar}>
+                    <span className={`${showSidebar ? 'zoom1' : 'zoom2'} material-symbols-outlined ${showSidebar ? 'rotate' : ''}`} style={{ fontSize: '40px', marginLeft: '35px', backgroundColor: '#e0dddd', borderRadius: 40 }}>
+                        <img src='./images/arrow.png' width='45'/>
+                    </span>
+                </Col>
+            </Row>
         </>
     )
 }
 
-export default SideBarHome;
+export default SideBarHome
