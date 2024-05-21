@@ -7,16 +7,15 @@ import pointsController from '../../../controllers/points.contorller.js';
 const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     const [points, setPoints] = useState([]);
 
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/adoption-points')
-    //         .then(response => response.json())
-    //         .then(data => setPoints(data));
-    // }, []);
-    pointsController.get().then((response) => {
-        if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
-            setPoints(response.info.adoptionPoints)
-        }
-    });
+    useEffect(() => {
+        pointsController.get().then((response) => {
+            if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
+                setPoints(response.info.adoptionPoints)
+            }
+        });
+
+    }, []);
+
 
 
     return (
