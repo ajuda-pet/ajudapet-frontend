@@ -1,16 +1,20 @@
 .sidebar {
     width: 100px;
     position: fixed;
-    margin-top: 65px;
+    margin-top: 150px;
     left: 0;
-    height: 93%;
-    background-color: #ffffff;
-    padding-top: 60px;
+    height: 80%;
+    background-color: #f8f6f6;
+    padding-top: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    /* Alinha os itens à esquerda */
+    align-items: center;
+    border-radius: 40px !important;
+}
+
+.sub-sidebar {
+    width: 200px;
 }
 
 .sidebar a {
@@ -24,6 +28,11 @@
 .circle.home {
     background-color: rgb(33, 47, 63);
     color: white;
+}
+
+.circle:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
 }
 
 .buttonDiv {
@@ -44,21 +53,23 @@
 
 .circle {
     display: flex;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    background-color: #d1d1d1;
-    /* Ajuste a cor conforme necessário */
+    background-color: #8cb7f0;
+    padding:10px;
     margin-right: 10px;
     padding: 0;
     margin: 0;
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    /* Espaço entre o círculo e o texto */
 }
 
 .sidebar .item {
     cursor: pointer;
-    /* Indica que o item é clicável */
+}
+
+.mb-10 {
+    margin-bottom: 50px !important;
 }

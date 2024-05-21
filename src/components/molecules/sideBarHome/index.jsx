@@ -1,17 +1,16 @@
-import React from 'react';
-import './index.css';
+import React from 'react'
+import './index.css'
 
 const SideBarHome = () => {
 
     return (
         <>
-            <div class="sidebar">
-                <a href="/"><div className='circle home'>Home</div></a>
-                <a href="/addPet"> <div className='circle'>+Pet</div></a>
-                <a href="/addAdoptPoint"><div className='circle'>+Point</div></a>
-                <a href="/"><div className='circle'></div></a>
+            <div className='sidebar'>
+                <a className='mb-10'><img src='./images/logo-sidebar.png' width='150'/></a>
+                <a className='circle home' href='/'><img src='./images/home.png' width='40'></img></a>
+                <a className='circle' href='/addPet'><img src='./images/pet-icon-sidebar.png' width='40'/></a>
+                <a className='circle' href='/addAdoptPoint'><img src='./images/location-icon-sidebar.png' width='40'/></a>
             </div>
-
         </>
     )
 }
