@@ -2,16 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import './form.css'; // Importação do arquivo CSS
 import pointsController from '../../../controllers/points.contorller.js';
+import petController from '../../../controllers/pet.controller.js';
 
 
 const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     const [points, setPoints] = useState([]);
-
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/adoption-points')
-    //         .then(response => response.json())
-    //         .then(data => setPoints(data));
-    // }, []);
     pointsController.get().then((response) => {
         if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
             setPoints(response.info.adoptionPoints)
@@ -38,6 +33,16 @@ const Step1 = ({ register, errors }) => (
     <div>
 
         <div className="form-group">
+            <label htmlFor="species">Espécie</label>
+            <select id="species" {...register('species', { required: 'Este campo é obrigatório' })}>
+                <option value="">Selecione espécie</option>
+                <option value="DOG">Cachorro</option>
+                <option value="CAT">Gato</option>
+            </select>
+            {errors.species && <p className="error-message">{errors.species.message}</p>}
+        </div>
+
+        <div className="form-group">
             <label htmlFor="name">Nome</label>
             <input
                 placeholder='Ex: Rex, Bob, etc...'
@@ -51,7 +56,7 @@ const Step1 = ({ register, errors }) => (
 
         <div className="form-group">
             <label htmlFor="sizeGroup">Tamanho</label>
-            <select id="sizeGroup" {...register('sizeGroup', { required: 'Este campo é obrigatório' })}>
+            <select id="sizeGroup" {...register('size', { required: 'Este campo é obrigatório' })}>
                 <option value="">Selecione o Tamanho</option>
                 <option value="SMALL">PEQUENO</option>
                 <option value="MEDIUM">MÉDIO</option>
@@ -84,7 +89,7 @@ const Step2 = ({ register, errors }) => {
         <div>
             <div className="form-group">
                 <label htmlFor="ageGroup">Faixa Etária</label>
-                <select id="ageGroup" {...register('ageGroup', { required: 'Este campo é obrigatório' })}>
+                <select id="ageGroup" {...register('age', { required: 'Este campo é obrigatório' })}>
                     <option value="">Selecione a Faixa Etária</option>
                     <option value="BABY">BEBÊ</option>
                     <option value="ADULT">ADULTO</option>
@@ -93,17 +98,6 @@ const Step2 = ({ register, errors }) => {
                 {errors.ageGroup && <p className="error-message">{errors.ageGroup.message}</p>}
             </div>
 
-
-            <div className="form-group">
-                <label htmlFor="species">Espécie</label>
-                <input
-                    placeholder='Ex: Cachorro, Gato, etc...'
-                    id="species"
-                    type="text"
-                    {...register('species', { required: 'Este campo é obrigatório' })}
-                />
-                {errors.species && <p className="error-message">{errors.species.message}</p>}
-            </div>
             <div className="form-group">
                 <label htmlFor="description">Descrição</label>
                 <textarea
@@ -140,8 +134,16 @@ const PetForm = () => {
 
     // aqui é a função que vai ser chamada quando o formulario for enviado
 
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async data => {
+        
+        const payload = {
+            ...data,
+            adoptionPointId: parseInt(data.adoptionPointId),
+            picture: data.picture[0]['name']
+        }
+
+        const pet = await petController.create(payload)
+
     };
 
     const [allFieldsFilled, setAllFieldsFilled] = useState(false);
