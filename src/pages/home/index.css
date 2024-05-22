@@ -17,33 +17,17 @@ body {
     flex: 1;
     flex-direction: column;
     /* Para que os cards quebrem para a próxima linha quando não houver espaço suficiente */
-    background-color: rgb(255, 255, 255);
+    background-color: #F6F3F3;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
 }
-
-
 
 .card-group {
     margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
-    /* Permite que os cards sejam dispostos em múltiplas linhas */
-    /* Espaçamento igual entre os cards */
-    max-width: calc(100% - 20px);
-    /* Ajusta a largura máxima do container */
-    overflow: hidden;
 
-}
+    overflow-x: hidden;
 
-
-
-
-.img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 180px;
-    height: 160px;
 }
 
 #green {

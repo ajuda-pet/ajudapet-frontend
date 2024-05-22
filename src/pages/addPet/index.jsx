@@ -5,13 +5,9 @@ import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
 import Card from '../../components/molecules/cards';
 import PetForm from '../../components/molecules/petForm';
-import pointsController from '../../controllers/points.contorller';
+
 
 function AddPet() {
-    pointsController.get().then((response) => {
-        console.log(response.info);
-    }
-    )
     return (
         <>
 

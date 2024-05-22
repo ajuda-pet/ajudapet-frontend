@@ -9,7 +9,8 @@ const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     const [points, setPoints] = useState([]);
 
     useEffect(() => {
-        pointsController.get().then((response) => {
+        const groupId = localStorage.getItem('groupId');
+        pointsController.getByGroup(groupId).then((response) => {
             if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
                 setPoints(response.info.adoptionPoints)
             }
@@ -140,7 +141,7 @@ const PetForm = () => {
     // aqui é a função que vai ser chamada quando o formulario for enviado
 
     const onSubmit = async data => {
-        
+
         const payload = {
             ...data,
             adoptionPointId: parseInt(data.adoptionPointId),

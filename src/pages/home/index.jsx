@@ -10,12 +10,18 @@ import petController from '../../controllers/pet.controller';
 function Home() {
   const [pets, setPets] = useState([]);
 
-
+  const dict = {
+    'BABY': ' Bebê 🎈',
+    'ADULT': 'Adulto 🎈',
+    'OLD': 'Idoso 🎈',
+  }
   useEffect(() => {
     petController.get().then((response) => {
       setPets(response);
+      console.log(response)
     });
   }, []);
+
 
   return (
     <>
@@ -36,7 +42,7 @@ function Home() {
           <div className='Filter'>
 
 
-            <h1 style={{ marginLeft: '5em' }}>Filtros</h1>
+            <h1 style={{ marginLeft: '3.3em' }}>Filtros</h1>
 
             <div className='filter-group'>
 
@@ -69,12 +75,14 @@ function Home() {
             </div>
           </div>
           <hr style={{ width: ' 100%' }} />
-          <hr />
+
           <div className="card-group">
 
             {pets && pets.map((pet) => (
               <>
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
+                <CardComponent key={pet.id} name={pet.name} age={
+                  dict[pet.age]
+                } image={pet.picture} />
               </>
             ))}
             {/* aqui será automatizada a listagem de pets */}
