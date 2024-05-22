@@ -151,251 +151,224 @@ function Register() {
     const handleSubmit = useCallback(async () => {
 
         try {
-            const userData = { name, description, email, phone, cpf, password, picture };
+
+            const userData = { name, description, email, phone, cpf, password };
+
             const response = await registerUser(userData);
             if (response.token) {
-                navigate('/home');
+                navigate('/');
             } else {
                 setError('Erro ao registrar usuário. ' + response)
             }
         } catch (error) {
             // Tratar erros da solicitação, se houver
 
+            console.error('Erro ao fazer a solicitação:', error);
+            setError('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+            deleteImg()
+        }
+
+
+    }, [name, description, email, phone, cpf, password, deleteImg, navigate]
+    )
+
+    useEffect(() => {
+        if (picture === '') return;
+        handleSubmit()
+    },
+        [picture, handleSubmit])
+
+    useEffect(() => {
+        document.title = 'Cadastro';
+        if (localStorage.getItem("authenticated")) {
+            localStorage.removeItem("authenticated");
+        }
+        setTimeout(() => {
             setError('');
-
-            try {
-
-                const userData = { name, description, email, phone, cpf, password };
-                const response = await registerUser(userData);
-                if (response.token) {
-                    navigate('/');
-                } else {
-                    setError('Erro ao registrar usuário. ' + response)
-                }
-            } catch (error) {
-                // Tratar erros da solicitação, se houver
-
-                console.error('Erro ao fazer a solicitação:', error);
-                setError('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
-                deleteImg()
-            }
         }
-        else {
-        if (!cpfValidated) {
-            setError('CPF inválido!');
-        }
-        if (!emailValidated) {
-            setError('Email inválido!');
-        }
-        if (password !== confirmPassword) {
-            setError('As senhas não são iguais!');
-        }
-        if (!phoneValidated) {
-            setError('Telefone inválido!');
-        }
-        deleteImg()
-    }
+            , 5000);
+    }, [location.state?.msg]);
 
-}, [name, description, email, phone, cpf, password, picture, deleteImg, navigate]
-)
+    return (
 
-useEffect(() => {
-    if (picture === '') return;
-    handleSubmit()
-},
-    [picture, handleSubmit])
+        <div className="body">
 
-useEffect(() => {
-    document.title = 'Cadastro';
-    if (localStorage.getItem("authenticated")) {
-        localStorage.removeItem("authenticated");
-    }
-    setTimeout(() => {
-        setError('');
-    }
-        , 5000);
-}, [location.state?.msg]);
-
-return (
-
-    <div className="body">
-
-        {/* Decoracao telas */}
-        <img src="./images/green.png" id='green' alt='mancha verde' />
-        <img src="./images/yellow.png" id='yellow' alt='mancha amarela' />
-        <img src="./images/pink.png" id='pink' alt='mancha rosa' />
-        <img src="./images/black.png" id='black' alt='mancha preta' />
+            {/* Decoracao telas */}
+            <img src="./images/green.png" id='green' alt='mancha verde' />
+            <img src="./images/yellow.png" id='yellow' alt='mancha amarela' />
+            <img src="./images/pink.png" id='pink' alt='mancha rosa' />
+            <img src="./images/black.png" id='black' alt='mancha preta' />
 
 
 
-        <div className="register-container">
+            <div className="register-container">
 
-            <div className="logo">
-                <a href="/">
-                    <img src="./images/logo.png" alt="logo" />
-                </a>
-            </div>
-
-
-            <form onSubmit={fistSubmit} method='post'>
-
-
-                <div className="form-inputs">
-                    <div className="header-register">
-                        <h1>Cadastre seu Grupo</h1>
-                        <p className="error">{error}</p>
-                    </div>
-                    {step === 1 ?
-                        <>
-                            <div className='main-register'>
-                                <div className="input-form">
-
-                                    <input
-                                        required
-                                        name='nome'
-                                        className="input-field"
-                                        type="text"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        placeholder='Nome'
-                                    />
-                                </div>
-
-
-                                <div className="input-form">
-
-                                    <input
-                                        required
-                                        name='telefone'
-                                        className="input-field"
-                                        type="tel"
-                                        value={phone}
-                                        onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
-                                        placeholder='Telefone'
-                                        maxLength={15}
-                                    />
-                                </div>
-
-                                <div className="input-form">
-
-                                    <input
-                                        required
-                                        name='cpf'
-                                        className="input-field"
-                                        type="text"
-                                        value={cpf}
-                                        maxLength={14}
-                                        onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
-                                        placeholder='CPF/CNPJ'
-                                    />
-                                </div>
-                            </div>
-                            <div className="buttons">
-
-                                <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
-                            </div>
-                        </>
-
-                        : <></>}
-
-                    {step === 2 ?
-                        <>
-                            <div className='main-register-img'>
-                                <div className="input-form-img">
-                                    <label name="imagem" className="custom-file-button"><span>Escolher imagem</span></label>
-                                    <p className='p-info'>OBS:imagem do grupo ajuda a ter mais credibilidade!</p>
-                                    <input
-                                        name="imagem"
-                                        id="img-register"
-                                        type='file'
-                                        content='aaaa'
-                                        onChange={(e) => { handleUpload(e) }}
-                                    />
-                                </div>
-                                {imageUrl && <img className='imagem-register' src={imageUrl} alt='img' />}
-                            </div>
-
-                            <div className="buttons">
-                                <button className="register-volta" onClick={() => setStep(step - 1)}>Voltar</button>
-                                <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
-
-
-                            </div>
-                        </>
-                        : <></>}
-
-                    {step === 3 ?
-                        <>
-
-                            <div className='main-register'>
-                                <div className="input-form">
-                                    <textarea
-                                        name="description"
-                                        id="text-description"
-                                        value={description}
-                                        placeholder='Razão Social'
-                                        onChange={(e) => { handleText(e) }}></textarea>
-                                </div>
-                            </div>
-
-                            <div className="buttons">
-                                <button className="register-volta" onClick={() => setStep(step - 1)}>Voltar</button>
-                                <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
-                            </div>
-                        </> : <></>}
-
-                    {step === 4 ?
-                        <>
-                            <div className='main-register'>
-                                <div className="input-form">
-                                    <input
-                                        required
-                                        name='email'
-                                        className="input-field"
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => [setEmail(e.target.value), handleEmailChange(e)]}
-                                        placeholder='E-mail'
-                                    />
-                                </div>
-
-                                <div className="input-form">
-                                    <input
-                                        required
-                                        name='password'
-                                        className="input-field"
-                                        type="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        placeholder='Senha'
-                                    />
-                                </div>
-
-                                <div className="input-form">
-                                    <input
-                                        required
-                                        name='confirm-password'
-                                        className="input-field"
-                                        type="password"
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        placeholder='Confirma senha'
-                                    />
-                                </div>
-                            </div>
-                            <div className="buttons">
-                                <button className="register-volta" onClick={() => setStep(step - 1)}>Voltar</button>
-                                <button className="register-button" type="submit">Registrar</button>
-                            </div>
-
-                        </> : <></>}
-
-
+                <div className="logo">
+                    <a href="/">
+                        <img src="./images/logo.png" alt="logo" />
+                    </a>
                 </div>
-            </form>
+
+
+                <form onSubmit={fistSubmit} method='post'>
+
+
+                    <div className="form-inputs">
+                        <div className="header-register">
+                            <h1>Cadastre seu Grupo</h1>
+                            <p className="error">{error}</p>
+                        </div>
+                        {step === 1 ?
+                            <>
+                                <div className='main-register'>
+                                    <div className="input-form">
+
+                                        <input
+                                            required
+                                            name='nome'
+                                            className="input-field"
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            placeholder='Nome'
+                                        />
+                                    </div>
+
+
+                                    <div className="input-form">
+
+                                        <input
+                                            required
+                                            name='telefone'
+                                            className="input-field"
+                                            type="tel"
+                                            value={phone}
+                                            onChange={(e) => [setPhone(e.target.value), handlePhoneChange(e)]}
+                                            placeholder='Telefone'
+                                            maxLength={15}
+                                        />
+                                    </div>
+
+                                    <div className="input-form">
+
+                                        <input
+                                            required
+                                            name='cpf'
+                                            className="input-field"
+                                            type="text"
+                                            value={cpf}
+                                            maxLength={14}
+                                            onChange={(e) => [setCpf(e.target.value), handleCPFChange(e)]}
+                                            placeholder='CPF/CNPJ'
+                                        />
+                                    </div>
+                                </div>
+                                <div className="buttons">
+
+                                    <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
+                                </div>
+                            </>
+
+                            : <></>}
+
+                        {step === 2 ?
+                            <>
+                                <div className='main-register-img'>
+                                    <div className="input-form-img">
+                                        <label name="imagem" className="custom-file-button"><span>Escolher imagem</span></label>
+                                        <p className='p-info'>OBS:imagem do grupo ajuda a ter mais credibilidade!</p>
+                                        <input
+                                            name="imagem"
+                                            id="img-register"
+                                            type='file'
+                                            content='aaaa'
+                                            onChange={(e) => { handleUpload(e) }}
+                                        />
+                                    </div>
+                                    {imageUrl && <img className='imagem-register' src={imageUrl} alt='img' />}
+                                </div>
+
+                                <div className="buttons">
+                                    <button className="register-volta" onClick={() => setStep(step - 1)}>Voltar</button>
+                                    <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
+
+
+                                </div>
+                            </>
+                            : <></>}
+
+                        {step === 3 ?
+                            <>
+
+                                <div className='main-register'>
+                                    <div className="input-form">
+                                        <textarea
+                                            name="description"
+                                            id="text-description"
+                                            value={description}
+                                            placeholder='Razão Social'
+                                            onChange={(e) => { handleText(e) }}></textarea>
+                                    </div>
+                                </div>
+
+                                <div className="buttons">
+                                    <button className="register-volta" onClick={() => setStep(step - 1)}>Voltar</button>
+                                    <button type='button' className="register-button" onClick={handleStep}>Próximo</button>
+                                </div>
+                            </> : <></>}
+
+                        {step === 4 ?
+                            <>
+                                <div className='main-register'>
+                                    <div className="input-form">
+                                        <input
+                                            required
+                                            name='email'
+                                            className="input-field"
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => [setEmail(e.target.value), handleEmailChange(e)]}
+                                            placeholder='E-mail'
+                                        />
+                                    </div>
+
+                                    <div className="input-form">
+                                        <input
+                                            required
+                                            name='password'
+                                            className="input-field"
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            placeholder='Senha'
+                                        />
+                                    </div>
+
+                                    <div className="input-form">
+                                        <input
+                                            required
+                                            name='confirm-password'
+                                            className="input-field"
+                                            type="password"
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            placeholder='Confirma senha'
+                                        />
+                                    </div>
+                                </div>
+                                <div className="buttons">
+                                    <button className="register-volta" onClick={() => setStep(step - 1)}>Voltar</button>
+                                    <button className="register-button" type="submit">Registrar</button>
+                                </div>
+
+                            </> : <></>}
+
+
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-);
+    );
 }
 
 export default Register;
