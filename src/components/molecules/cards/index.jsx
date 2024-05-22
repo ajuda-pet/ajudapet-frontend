@@ -1,22 +1,19 @@
 import React from 'react';
 import './index.css';
+import Card from 'react-bootstrap/Card';
 
-const Card = (age, image, name) => {
+const CardComponent = (petData) => {
     return (
-        <div className="card">
-            <div className='card-border'>
-
-                <img className='img' src={image} alt={name} />
-                <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">{age}</h5>
-                </div>
-            </div>
-
-        </div>
+        <Card style={{ height: '16rem', marginLeft: '60px', marginBottom: '30px' }}>
+            <Card.Img variant="top" width={'180px'} height={'170px'} style={{ border: '1px solid' }} alt='imagem do pet' src={'images/black.png'} />
+            <Card.Body>
+                <b><Card.Title style={{ marginTop: '5px' }}>{petData.name}</Card.Title></b>
+                <Card.Text>
+                    {petData.age}
+                </Card.Text>
+            </Card.Body>
+        </Card>
     );
 };
 
-export default Card;
+export default CardComponent;

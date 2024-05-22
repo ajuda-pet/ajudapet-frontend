@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import './form.css'; // Importação do arquivo CSS
-
-
+import pointsController from '../../../controllers/points.contorller';
 const Step1 = ({ register, errors }) => {
 
     return (
@@ -30,14 +29,25 @@ const Step1 = ({ register, errors }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="postal_code">Código Postal</label>
+                <label htmlFor="postalCode">Código Postal</label>
                 <input
                     placeholder="12345-678"
-                    id="postal_code"
+                    id="postalCode"
                     type="text"
-                    {...register('postal_code', { required: 'Este campo é obrigatório' })}
+                    {...register('postalCode', { required: 'Este campo é obrigatório' })}
                 />
-                {errors.postal_code && <p className="error-message">{errors.postal_code.message}</p>}
+                {errors.postalCode && <p className="error-message">{errors.postalCode.message}</p>}
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="addressNeighborhood">Bairro</label>
+                <input
+                    placeholder="Cidade Nova"
+                    id="addressNeighborhood"
+                    type="text"
+                    {...register('addressNeighborhood')}
+                ></input>
+                {errors.addressNeighborhood && <p className="error-message">{errors.addressNeighborhood.message}</p>}
             </div>
         </div>
     )
@@ -46,25 +56,20 @@ const Step1 = ({ register, errors }) => {
 const Step2 = ({ register, errors }) => {
     const [groupId, setGroupId] = useState(null);
     //local storage pegando groupId
-
+    useEffect(() => {
+        if (groupId === null) {
+            setGroupId(localStorage.getItem('groupId'));
+        }
+    }, []);
 
     return (
         <>
             <div>
 
 
-                <input
-                    placeholder="123"
-                    id="group_id"
-                    type="hidden"
-                    value={groupId}
-                    {...register('group_id')}
-
-                />
-
                 <div className="form-group">
-                    <label htmlFor="address_state">Estado</label>
-                    <select id="address_state" {...register('address_state', { required: 'Este campo é obrigatório' })}>
+                    <label htmlFor="addressState">Estado</label>
+                    <select id="addressState" {...register('addressState', { required: 'Este campo é obrigatório' })}>
                         <option value="AC">AC</option>
                         <option value="AL">AL</option>
                         <option value="AP">AP</option>
@@ -93,40 +98,40 @@ const Step2 = ({ register, errors }) => {
                         <option value="SP">SP</option>
                         <option value="TO">TO</option>
                     </select>
-                    {errors.address_state && <p className="error-message">{errors.address_state.message}</p>}
+                    {errors.addressState && <p className="error-message">{errors.addressState.message}</p>}
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="address_city">Cidade</label>
+                    <label htmlFor="addressCity">Cidade</label>
                     <input
                         placeholder="São Paulo"
-                        id="address_city"
+                        id="addressCity"
                         type="text"
-                        {...register('address_city', { required: 'Este campo é obrigatório' })}
+                        {...register('addressCity', { required: 'Este campo é obrigatório' })}
                     />
-                    {errors.address_city && <p className="error-message">{errors.address_city.message}</p>}
+                    {errors.addressCity && <p className="error-message">{errors.addressCity.message}</p>}
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="address_number">Número do Endereço</label>
+                    <label htmlFor="addressNumber">Número do Endereço</label>
                     <input
                         placeholder="123"
-                        id="address_number"
+                        id="addressNumber"
                         type="number"
-                        {...register('address_number', { required: 'Este campo é obrigatório' })}
+                        {...register('addressNumber', { required: 'Este campo é obrigatório' })}
                     />
-                    {errors.address_number && <p className="error-message">{errors.address_number.message}</p>}
+                    {errors.addressNumber && <p className="error-message">{errors.addressNumber.message}</p>}
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="address_country">País</label>
+                    <label htmlFor="addressCountry">País</label>
                     <input
                         placeholder="Brasil"
-                        id="address_country"
+                        id="addressCountry"
                         type="text"
-                        {...register('address_country', { required: 'Este campo é obrigatório' })}
+                        {...register('addressCountry', { required: 'Este campo é obrigatório' })}
                     />
-                    {errors.address_country && <p className="error-message">{errors.address_country.message}</p>}
+                    {errors.addressCountry && <p className="error-message">{errors.addressCountry.message}</p>}
                 </div>
 
                 <div className="form-group">
@@ -154,6 +159,7 @@ const PointForm = () => {
     const prevStep = () => setStep(step - 1);
 
     const onSubmit = data => {
+        pointsController.create(data);
         console.log(data);
     };
 

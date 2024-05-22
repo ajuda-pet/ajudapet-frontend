@@ -3,15 +3,18 @@ import React, { useEffect, useState } from 'react';
 import './index.css';
 import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
-import Card from '../../components/molecules/cards';
+import CardComponent from '../../components/molecules/cards';
+import petController from '../../controllers/pet.controller';
 
 
 function Home() {
   const [pets, setPets] = useState([]);
 
+
   useEffect(() => {
-    // eslint-disable-next-line no-undef
-    // fetchPets();
+    petController.get().then((response) => {
+      setPets(response);
+    });
   }, []);
 
   return (
@@ -30,17 +33,56 @@ function Home() {
         <SideBarHome />
         {/* Container dos pets */}
         <div className='container-pets'>
+          <div className='Filter'>
+
+
+            <h1 style={{ marginLeft: '5em' }}>Filtros</h1>
+
+            <div className='filter-group'>
+
+
+
+              <select name='age' id='age' style={{ marginRight: '2em' }}>
+
+                <option value='0' >Idade</option>
+
+                <option value='1'>Filhote</option>
+
+                <option value='2'>Adulto</option>
+
+                <option value='3'>Idoso</option>
+
+              </select>
+
+              <select name='size' id='size' >
+
+                <option value='0'>Porte</option>
+
+                <option value='1'>Pequeno</option>
+
+                <option value='2'>Médio</option>
+
+                <option value='3'>Grande</option>
+
+              </select>
+
+            </div>
+          </div>
+          <hr style={{ width: ' 100%' }} />
+          <hr />
           <div className="card-group">
 
-            {pets.map((pet) => (
-              <Card key={pet.id} name={pet.name} age={pet.age} image={pet.image} />
+            {pets && pets.map((pet) => (
+              <>
+                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
+              </>
             ))}
             {/* aqui será automatizada a listagem de pets */}
 
 
           </div>
         </div>
-      </div>
+      </div >
     </>
 
   );

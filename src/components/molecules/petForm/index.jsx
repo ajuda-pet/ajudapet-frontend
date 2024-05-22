@@ -1,31 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import './form.css'; // Importação do arquivo CSS
+import pointsController from '../../../controllers/points.contorller.js';
+import petController from '../../../controllers/pet.controller.js';
 
 
 const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     const [points, setPoints] = useState([]);
 
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/adoption-points')
-    //         .then(response => response.json())
-    //         .then(data => setPoints(data));
-    // }, []);
     useEffect(() => {
-        Promise.resolve([
-            { id: 1, name: 'Ponto de Adoção 1' },
-            { id: 2, name: 'Ponto de Adoção 2' },
-            { id: 3, name: 'Ponto de Adoção 3' },
-        ])
-            .then(data => setPoints(data));
+        pointsController.get().then((response) => {
+            if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
+                setPoints(response.info.adoptionPoints)
+            }
+        });
+
     }, []);
+
+
 
     return (
         <div className="form-group">
             <label htmlFor="select">Ponto de Adoção</label>
-            <select id="adoption_point_id" {...register('adoption_point_id', { required: 'Este campo é obrigatório' })} onChange={(e) => setSelectedPoint(e.target.value)}>
+            <select id="adoptionPointId" {...register('adoptionPointId', { required: 'Este campo é obrigatório' })} onChange={(e) => setSelectedPoint(e.target.value)}>
                 <option value="">Selecione o Ponto de Adoção</option>
-                {points.map((point) => (
+                {points && points.map((point) => (
                     <option key={point.id} value={point.id}>{point.name}</option>
                 ))}
             </select>
@@ -37,6 +36,16 @@ const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
 const Step1 = ({ register, errors }) => (
 
     <div>
+
+        <div className="form-group">
+            <label htmlFor="species">Espécie</label>
+            <select id="species" {...register('species', { required: 'Este campo é obrigatório' })}>
+                <option value="">Selecione espécie</option>
+                <option value="DOG">Cachorro</option>
+                <option value="CAT">Gato</option>
+            </select>
+            {errors.species && <p className="error-message">{errors.species.message}</p>}
+        </div>
 
         <div className="form-group">
             <label htmlFor="name">Nome</label>
@@ -51,14 +60,14 @@ const Step1 = ({ register, errors }) => (
 
 
         <div className="form-group">
-            <label htmlFor="size_group">Tamanho</label>
-            <select id="size_group" {...register('size_group', { required: 'Este campo é obrigatório' })}>
+            <label htmlFor="sizeGroup">Tamanho</label>
+            <select id="sizeGroup" {...register('size', { required: 'Este campo é obrigatório' })}>
                 <option value="">Selecione o Tamanho</option>
                 <option value="SMALL">PEQUENO</option>
                 <option value="MEDIUM">MÉDIO</option>
                 <option value="LARGE">GRANDE</option>
             </select>
-            {errors.size_group && <p className="error-message">{errors.size_group.message}</p>}
+            {errors.sizeGroup && <p className="error-message">{errors.sizeGroup.message}</p>}
         </div>
 
         <div className="form-group">
@@ -84,27 +93,16 @@ const Step2 = ({ register, errors }) => {
     return (
         <div>
             <div className="form-group">
-                <label htmlFor="age_group">Faixa Etária</label>
-                <select id="age_group" {...register('age_group', { required: 'Este campo é obrigatório' })}>
+                <label htmlFor="ageGroup">Faixa Etária</label>
+                <select id="ageGroup" {...register('age', { required: 'Este campo é obrigatório' })}>
                     <option value="">Selecione a Faixa Etária</option>
                     <option value="BABY">BEBÊ</option>
                     <option value="ADULT">ADULTO</option>
                     <option value="OLD">IDOSO</option>
                 </select>
-                {errors.age_group && <p className="error-message">{errors.age_group.message}</p>}
+                {errors.ageGroup && <p className="error-message">{errors.ageGroup.message}</p>}
             </div>
 
-
-            <div className="form-group">
-                <label htmlFor="species">Espécie</label>
-                <input
-                    placeholder='Ex: Cachorro, Gato, etc...'
-                    id="species"
-                    type="text"
-                    {...register('species', { required: 'Este campo é obrigatório' })}
-                />
-                {errors.species && <p className="error-message">{errors.species.message}</p>}
-            </div>
             <div className="form-group">
                 <label htmlFor="description">Descrição</label>
                 <textarea
@@ -141,8 +139,16 @@ const PetForm = () => {
 
     // aqui é a função que vai ser chamada quando o formulario for enviado
 
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async data => {
+        
+        const payload = {
+            ...data,
+            adoptionPointId: parseInt(data.adoptionPointId),
+            picture: data.picture[0]['name']
+        }
+
+        const pet = await petController.create(payload)
+
     };
 
     const [allFieldsFilled, setAllFieldsFilled] = useState(false);
@@ -163,10 +169,11 @@ const PetForm = () => {
 
             </div>
             <FormProvider {...methods}>
-                {step === 1 && (
-                    <SelectPointAdoption register={methods.register} errors={methods.formState.errors} setSelectedPoint={setSelectedPoint} />
-                )}
+
                 <form onSubmit={methods.handleSubmit(onSubmit)} onChange={checkAllFieldsFilled}>
+                    {step === 1 && (
+                        <SelectPointAdoption register={methods.register} errors={methods.formState.errors} setSelectedPoint={setSelectedPoint} />
+                    )}
                     {step === 1 && <Step1 register={methods.register} errors={methods.formState.errors} />}
                     {step === 2 && <Step2 register={methods.register} errors={methods.formState.errors} />}
 

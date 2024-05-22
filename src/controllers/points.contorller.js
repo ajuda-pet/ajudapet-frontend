@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { baseApi } from '../resouces/api.js'
+import { baseApi } from '../resources/api.js'
 
 const noAuthEndpoint = `${baseApi}/noauth/adoption-points`
 const authEndpoint = `${baseApi}/auth/adoption-points`
