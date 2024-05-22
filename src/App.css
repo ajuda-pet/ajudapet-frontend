@@ -1,23 +1,9 @@
-.App {
-  text-align: center;
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../public/fonts/Montserrat/static/Montserrat-Regular.ttf') format('woff');
 }
 
-
-
-
-/* Não apagar, pretendo usar em algo */
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../public/fonts/Open_Sans/static/OpenSans-Regular.ttf') format('woff2');
 }

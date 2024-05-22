@@ -7,11 +7,16 @@ import petController from '../../../controllers/pet.controller.js';
 
 const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     const [points, setPoints] = useState([]);
-    pointsController.get().then((response) => {
-        if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
-            setPoints(response.info.adoptionPoints)
-        }
-    });
+
+    useEffect(() => {
+        pointsController.get().then((response) => {
+            if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
+                setPoints(response.info.adoptionPoints)
+            }
+        });
+
+    }, []);
+
 
 
     return (
