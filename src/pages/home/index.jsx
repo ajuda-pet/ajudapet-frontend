@@ -75,14 +75,6 @@ function Home() {
             {pets && pets.map((pet) => (
               <>
                 <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} /> <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
-                <CardComponent key={pet.id} name={pet.name} age={pet.age} image={pet.picture} />
               </>
             ))}
             {/* aqui será automatizada a listagem de pets */}
