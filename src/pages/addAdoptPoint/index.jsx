@@ -2,13 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import { useForm, FormProvider } from 'react-hook-form';
-
+ 
 import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
 import PointForm from '../../components/molecules/pointForm';
+
 function AddAdoptPoint() {
-
-
     return (
         <>
             <Header />

@@ -10,8 +10,6 @@ import PetForm from '../../components/molecules/petForm';
 function AddPet() {
     return (
         <>
-
-
             <Header />
             <img src="./images/green.png" id='green' alt='mancha verde' />
             <img src="./images/yellow.png" id='yellow' alt='mancha amarela' />
