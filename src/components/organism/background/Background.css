@@ -1,12 +1,12 @@
 /* Destalhes das paginas */
-#green {
+#green1 {
     position: absolute; 
     top: 10%; 
     left: 100%; 
     transform: translate(-50%, -50%); 
     z-index: -1;
 }
-#pink {
+#pink1 {
     width: 15vw;
     position: absolute; 
     top: 98%; 
@@ -15,14 +15,14 @@
     z-index: -1;
 }
 
-#yellow {
+#yellow1 {
     position: absolute; 
     top: 5%; 
     left: 0%; 
     transform: translate(-50%, -50%); 
     z-index: -1;
 }
-#black {
+#black1 {
     position: absolute; 
     top: 105%; 
     left: 0%; 
@@ -39,24 +39,24 @@
 /* Estilos específicos para telas menores que 600px de largura(mobile)*/
 @media only screen and (max-width: 600px) {
 
-    #green {
+    #green1 {
         width: 75%;
         top: 100%; 
         left: 20%;     
     }
 
-    #pink {
+    #pink1 {
         width: 200px;
         top: 200px; 
         left: -20px; 
     }
     
-    #yellow {
+    #yellow1 {
         width: 50%;
         top: 80%; 
         left: 100%; 
     }
-    #black {
+    #black1 {
         top: 0; 
         left: 80%; 
         transform: translate(-50%, -50%); 
@@ -70,14 +70,14 @@
 /* Estilos específicos para telas maiores que 600px e menores que 1024px de largura */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
     
-    #green {
+    #green1 {
         max-width: 50vw;
     }
     
-    #yellow {
+    #yellow1 {
         max-width: 70vw;
     }
-    #black {
+    #black1 {
         max-width: 50vh;
     }
 

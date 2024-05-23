@@ -1,9 +1,9 @@
 .container-l{
-    margin: 15vh auto 0;
+    margin: 12vh auto 0;
 }
 
 .form-l{
-    height: 350px !important;
+    height: 370px !important;
 }
 
 .header-l{
@@ -16,6 +16,7 @@
 }
 
 .linha-ou{
+    margin-bottom: -15px;
     margin-top: 15px;
     height: 30px;
     display: flex;
@@ -37,6 +38,7 @@
     display: flex;
     align-items: center;
     top: -5px;
+    padding: 0;
     width: 20px;
 }
 
@@ -44,11 +46,13 @@
     background-color: #fff;
     padding: 0 2px;
     color: gray;
+    
 }
 
 .btn-clean {
     border: none;
     background-color: #0000;
+    text-align: center;
 }
 
 .btn-clean:hover {

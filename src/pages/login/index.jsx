@@ -119,7 +119,7 @@ function Login() {
               <p className='ou'><span>ou</span></p>
             </div>
             
-            <button onClick={() => navigate('/register')} className="btn-clean">Registrar</button>
+            <button onClick={() => navigate('/register')} className="btn-clean"> Registrar</button>
             </div>
         </div>
 

@@ -6,15 +6,19 @@
 /* Estilos específicos para telas menores que 600px de largura(mobile)*/
 @media only screen and (max-width: 600px) {
     .container-lr {
-        width: 90vw;
-        height: 50vh;
+        width: 90vw !important;
+        height: 50vh !important;
         
     }
+    .container-l{
+        margin: 10vh auto 0;
+    }
     .form-l{
-        height: 320px !important;
+
+        height: 370px !important;
     }
     .container-r {
-        margin: 7vh auto 0;
+        margin: 7vh auto 0 !important;
     }
     
     .logo{
@@ -22,10 +26,10 @@
     }
 
     .form-inputs {
-        height: 55vh;
-        max-height: 370px;
-        min-width: 320px;
-        padding: 15px 10px;
+        height: 60vh;
+        max-height: 400px;
+        max-width: 90vw;
+        padding: 14px 10px;
         border-radius: 2em; 
     }
 
@@ -45,7 +49,12 @@
     }
 
 
+    .input-field {
+        margin: 20px auto 0px;
 
+        width: 100%;
+
+    }
     
     #text-description {
         margin-top: 30px;
@@ -91,16 +100,3 @@ h1 {
 
 }
 
-
-@media only screen and (max-height: 700px) {
-
-    .register-container {
-        top: 45%;
-    }
-    
-    .logo img{
-        max-width: 140px;
-    }
-
-    
-}
