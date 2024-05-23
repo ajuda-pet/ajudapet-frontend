@@ -52,12 +52,14 @@ function Register() {
 
     const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
+        
         if (file) {
           const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
           if (!validImageTypes.includes(file.type)) {
             setError('Por favor, apenas imagens (JPEG, PNG, GIF).');
             return;
           }
+          setFile(file)
           const imageUrl = URL.createObjectURL(file);
           setImageUrl(imageUrl);
         }
