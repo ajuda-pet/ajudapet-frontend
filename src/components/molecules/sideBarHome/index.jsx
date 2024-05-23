@@ -13,7 +13,7 @@ const SideBarHome = () => {
 
     return (
         <>
-            <Row className='align-items-center'>
+            <Row className='align-items-center d-none d-sm-flex'>
                 <Col className={`sidebar ${showSidebar ? '' : 'hidden'}`}>
                     <a className='circle home' href='/'><img src='./images/home.png' width='40' alt='Ícone de home' title='Home' /></a>
                     <a className='circle' href='/addPet'><img src='./images/pet-icon-sidebar.png' width='40' alt='Ícone de animal de estimação' title='Adicionar Pet' /></a>

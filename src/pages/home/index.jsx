@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
-//import { useLocation, useNavigate } from 'react-router-dom';
-import './index.css';
+import { Container, Row, Col, Button, CardGroup } from 'react-bootstrap'
 import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
 import CardComponent from '../../components/molecules/cards';
 import petController from '../../controllers/pet.controller';
-
+import Form from 'react-bootstrap/Form';
+import './index.css';
 
 function Home() {
   const [pets, setPets] = useState([]);
 
   const dict = {
-    'BABY': ' Bebê 🎈',
-    'ADULT': 'Adulto 🎈',
-    'OLD': 'Idoso 🎈',
+    'BABY': ' Bebê',
+    'ADULT': 'Adulto',
+    'OLD': 'Idoso',
   }
   useEffect(() => {
     petController.get().then((response) => {
       setPets(response);
-      console.log(response)
     });
   }, []);
 
@@ -36,63 +35,68 @@ function Home() {
         {/* Header */}
 
         {/* Sidebar */}
-        <SideBarHome />
+        <SideBarHome/>
         {/* Container dos pets */}
-        <div className='container-pets'>
-          <div className='Filter'>
+        
 
+        <Container className='mt-5 ml-5 container-pets p-3'>
+          <Row>
+            <Col xs={12}>
+              <Form.Select aria-label="Default select example" className='select p-2'>
+                <option>🎂 Idade</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
+            </Col>
 
-            <h1 style={{ marginLeft: '3.3em' }}>Filtros</h1>
+            <Col xs={6}>
+              <Form.Select aria-label="Default select example" className='p-2'>
+                <option>📏 Tamanho</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
+            </Col>
 
-            <div className='filter-group'>
+            <Col xs={6}>
+              <Form.Select aria-label="Default select example" className='p-2'>
+                <option>📏 Cidade</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
+            </Col>
+          </Row>
 
+          <Row className='mx-3'>
+            <Button variant='secondary' className='d-flex align-items-center justify-content-center text-center px-5 mt-4 w-100'>
+              <span class="material-symbols-outlined">
+                filter_alt
+              </span>
+              <span>
+                Filtrar
+              </span>
+            </Button>
+          </Row>
+          
+          <hr class='my-4 bg-primary'/>
 
+          <CardGroup className='mt-5' style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+            <Row>
+                {pets && pets.map((pet) => (
+                  <>
+                  <Col md={3} sm={6}>
+                    <CardComponent key={pet.id} pet={pet} />
+                  </Col>
+                  </>
+                ))}
+            </Row>
+          </CardGroup>
 
-              <select name='age' id='age' style={{ marginRight: '2em' }}>
-
-                <option value='0' >Idade</option>
-
-                <option value='1'>Filhote</option>
-
-                <option value='2'>Adulto</option>
-
-                <option value='3'>Idoso</option>
-
-              </select>
-
-              <select name='size' id='size' >
-
-                <option value='0'>Porte</option>
-
-                <option value='1'>Pequeno</option>
-
-                <option value='2'>Médio</option>
-
-                <option value='3'>Grande</option>
-
-              </select>
-
-            </div>
-          </div>
-          <hr style={{ width: ' 100%' }} />
-
-          <div className="card-group">
-
-            {pets && pets.map((pet) => (
-              <>
-                <CardComponent key={pet.id} name={pet.name} age={
-                  dict[pet.age]
-                } image={pet.picture} />
-              </>
-            ))}
-            {/* aqui será automatizada a listagem de pets */}
-
-
-          </div>
-        </div>
+        </Container>
       </div >
     </>
-
   );
 }
 

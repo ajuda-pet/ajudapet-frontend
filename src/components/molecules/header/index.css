@@ -14,17 +14,6 @@ body {
     background-color: #212f3f;
 }
 
-.btn {
-    background-color: #f6ee7d !important;
-    border-color: #f6ee7d !important;
-    font-size: 20px !important;
-}
-
-.btn:hover {
-    background-color: #fdf252 !important;
-    border-color: #fdf252 !important;
-}
-
 .fade-in {
     opacity: 0;
     animation: fadeIn ease-in-out 1s forwards;

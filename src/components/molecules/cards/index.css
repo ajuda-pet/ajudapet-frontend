@@ -2,3 +2,22 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
     cursor: pointer;
 }
+
+.card {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+    opacity: 0.9;
+}
+
+.adopt-btn{
+    background-color: #8cb7f0 !important;
+    border-color: #70a5eb !important;
+}
+
+.adopt-btn:hover {
+    background-color: #4179c2 !important;
+    border-color: #76a6e6 !important;
+    scale: 1.02;
+}
