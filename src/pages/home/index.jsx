@@ -82,7 +82,7 @@ function Home() {
           
           <hr class='my-4 bg-primary'/>
 
-          <CardGroup className='mt-5' style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+          <CardGroup className='mt-5' style={{ maxHeight: '60vh', overflowY: 'auto' }}>
             <Row>
                 {pets && pets.map((pet) => (
                   <>
