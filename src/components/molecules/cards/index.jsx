@@ -16,13 +16,14 @@ const CardComponent = (content) => {
     const genderIcon = pet.gender == 'MALE' ? '♂️' : '♀️'
     
     return (
-        <Card className='mx-3 mt-3 card'>
+        <Card className='mx-3 mt-5 card'>
             <Card.Img variant="top" src='./images/pet-model.jpg' />
             <Card.Body>
                 <Card.Title>{petIcon} {pet.name}</Card.Title>
                 <ListGroup variant="flush" className='mt-4'>
                     <ListGroup.Item>📍 Rio Grande, RS</ListGroup.Item>
                     <ListGroup.Item>🎂 {ageHash[pet.age]} </ListGroup.Item>
+                    <ListGroup.Item>📏 {sizeHash[pet.size]} </ListGroup.Item>
                     <ListGroup.Item>{genderIcon} { genderHash[pet.gender]} </ListGroup.Item>
                 </ListGroup>
                 <Button variant='secondary' className='adopt-btn mt-5'><strong>Quero adotar</strong></Button>
