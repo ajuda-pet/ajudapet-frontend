@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+// Validadores
 import { validateEmail } from '../../components/validators/email';
 import { loginUser } from '../../controllers/login';
-import './index.css';
 
+// componentes
+import Background from '../../components/organism/background/Background';
+
+// Estilos
+import './index.css';
 
 
 
@@ -38,6 +44,7 @@ function Login() {
       setError('Email inválido!');
     }
   }
+
   useEffect(() => {
     document.title = 'Login';
 
@@ -56,48 +63,67 @@ function Login() {
 
   return (
 
+    <div className="body">
+    <Background/>
 
-    <div className="Login">
-      <h1>Login</h1>
-      {/* Mensagens de erro de autenticação */}
-      <p className="error">{error}</p>
-      <p className="error">{msg}</p>
-
+    <div className="container-lr container-l" >
+      <div className="logo">
+          <a href="/">
+              <img src="./images/logo.png" alt="logo" />
+          </a>
+      </div>
       <form onSubmit={handleSubmit} method='post'>
-        <div className="form-inputs">
-          <label for='email'>
-            Email:
-          </label>
+        
+        <div className="form-inputs form-l">
+          <div className="header-lr" >
+            <h1>Login</h1>
+           {error ? <p className="error">{error}</p> : <></>}
+           {msg? <p className="error">{msg}</p>: <></>}
+          </div>
+          <div className="main-rl">
+            <div className="input-form">
+              <input
+                required
+                name='email'
+                className="input-field"
+                type="email"
+                value={email}
+                placeholder='email'
+                onChange={(e) => setEmail(e.target.value)}
 
-          <input
-            required
-            name='email'
-            className="input-field"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          
+            <div className="input-form">
+              <input
+                required
+                placeholder='Senha'
+                name='password'
+                className="input-field"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
 
-          />
-          <label for='password'>
-            Senha:
-          </label>
+              />
+            </div>
+          </div>
+          
+          <div className='footer-l'>
+            <button type='submit' className="btn1">Entrar</button>
 
-          <input
-            required
-            name='password'
-            className="input-field"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <button type='submit' className="submit-button">Entrar</button>
+            <div className='linha-ou'>
+              <div className='linha'></div>
+              <p className='ou'><span>ou</span></p>
+            </div>
+            
+            <button onClick={() => navigate('/register')} className="btn-clean">Registrar</button>
+            </div>
         </div>
 
       </form>
-      <button onClick={() => navigate('/register')} className="register-b">Registrar</button>
+      
     </div>
-
+</div>
   );
 }
 
