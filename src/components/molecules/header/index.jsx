@@ -40,7 +40,7 @@ function Header() {
                         {!isLoggedIn && (
                             <Nav.Link href='/login'>
                                 <Button variant='warning' className="d-flex align-items-center btn-warning">
-                                    <span>🐾 Login&nbsp;&nbsp;</span>
+                                    <span>Login&nbsp;&nbsp;</span>
                                     <span className="material-symbols-outlined">login</span>
                                 </Button>
                             </Nav.Link>

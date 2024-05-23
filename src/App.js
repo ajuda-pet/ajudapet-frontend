@@ -19,12 +19,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
     //buscar a validação pela api e autorizar o acesso
-    // React.useEffect(() => {
-    //     let jwtToken = localStorage.getItem("validationToken");
-    //     if (jwtToken) {
-    //         setIsAuthenticated(true);
-    //     }
-    // }, []);
+    React.useEffect(() => {
+        let jwtToken = localStorage.getItem("token");
+        if (jwtToken) {
+            setIsAuthenticated(true);
+        }
+    }, []);
 
     return (
         <Router>
@@ -34,10 +34,10 @@ function App() {
                 <Route path="/gerenciarEstoque" element={isAuthenticated ? <GerenciarEstoque /> : <Navigate to="/" />} />
                 <Route path="/registrarOng" element={isAuthenticated ? <RegistrarOng /> : <Navigate to="/" />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/addPet" element={<AddPet />} />
+                <Route path="/addPet" element={isAuthenticated ? <AddPet /> : <Navigate to="/" />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/map" element={<Map />} />
-                <Route path="/addAdoptPoint" element={<AddAdoptPoint />} />
+                <Route path="/addAdoptPoint" element={isAuthenticated ? <AddAdoptPoint /> : <Navigate to="/" />} />
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFoundPage />} />
 

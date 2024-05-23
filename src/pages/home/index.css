@@ -1,49 +1,21 @@
 body {
     overflow: hidden;
-
 }
+
 
 .container-pets {
-    display: flex;
-
-    width: 80%;
-    /* ou qualquer outra porcentagem desejada */
-    height: 80vh;
-    /* 50% da altura da viewport */
-    margin-left: 10em;
-    margin-top: 3em;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    flex: 1;
-    flex-direction: column;
-    /* Para que os cards quebrem para a próxima linha quando não houver espaço suficiente */
-    background-color: rgb(255, 255, 255);
+    width: 80vw;
+    border-radius: 30px;
+    background-color: #5a5a5a11;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
 }
-
-
 
 .card-group {
     margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
-    /* Permite que os cards sejam dispostos em múltiplas linhas */
-    /* Espaçamento igual entre os cards */
-    max-width: calc(100% - 20px);
-    /* Ajusta a largura máxima do container */
-    overflow: hidden;
+    overflow-x: hidden;
 
-}
-
-
-
-
-.img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 180px;
-    height: 160px;
 }
 
 #green {
@@ -97,10 +69,6 @@ body {
 }
 
 select {
-    border-radius: 50px;
-    width: 170px;
-    padding: 15px;
-    text-align: center;
-    font-size: 20px;
-    border: 2px solid #000;
+    border-radius: 50px !important;
+    background-color: #fff !important;
 }
