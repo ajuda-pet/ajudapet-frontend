@@ -21,7 +21,7 @@ function Header() {
     }, []);
 
     return (
-        <Navbar className='p-2' style={{ borderRadius: '2px', backgroundColor: ' #212f3f'}} expand="lg" data-bs-theme='dark'>
+        <Navbar className='p-2' style={{ borderRadius: '2px', backgroundColor: ' #212f3f' }} expand="lg" data-bs-theme='dark'>
             <Container fluid>
                 <Navbar.Brand href="/"> <img src='./images/header-logo.png' width='210' /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -32,10 +32,9 @@ function Header() {
                         navbarScroll>
                     </Nav>
 
-                    <Nav className="d-flex" style={{ maxHeight: '100px',  marginLeft:'40px'}} navbarScroll>
-                        <Nav.Link href='https://www.instagram.com/ajudapet.rg/' target='_blank'>
-                            <img src='./images/instagram.png' width='40' class='fade-in'/>
-                            <span className='d-lg-none'>Instagram</span>
+                    <Nav className="d-flex" style={{ maxHeight: '100px', marginLeft: '40px' }} navbarScroll>
+                        <Nav.Link href='https://www.instagram.com/ajudapet.rg/' target='_blank' className="instagram-floating">
+                            <img src='./images/instagram.png' width='60' class='fade-in' />
                         </Nav.Link>
                         {!isLoggedIn && (
                             <Nav.Link href='/login'>
@@ -56,6 +55,9 @@ function Header() {
                     </Nav>
 
                 </Navbar.Collapse>
+                {/* <Nav.Link href='https://www.instagram.com/ajudapet.rg/' target='_blank' className="instagram-floating">
+                    <img src='./images/instagram.png' width='60' class='fade-in' />
+                </Nav.Link> */}
             </Container>
         </Navbar>
     );
