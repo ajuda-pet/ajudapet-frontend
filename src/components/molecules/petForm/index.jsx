@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import './form.css'; // Importação do arquivo CSS
 import pointsController from '../../../controllers/points.contorller.js';
 import petController from '../../../controllers/pet.controller.js';
+import './form.css'; // Importação do arquivo CSS
 
 
 const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
