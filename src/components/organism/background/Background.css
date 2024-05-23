@@ -1,0 +1,88 @@
+/* Destalhes das paginas */
+#green {
+    position: absolute; 
+    top: 10%; 
+    left: 100%; 
+    transform: translate(-50%, -50%); 
+    z-index: -1;
+}
+#pink {
+    width: 15vw;
+    position: absolute; 
+    top: 98%; 
+    left: 96%; 
+    transform: translate(-50%, -50%); 
+    z-index: -1;
+}
+
+#yellow {
+    position: absolute; 
+    top: 5%; 
+    left: 0%; 
+    transform: translate(-50%, -50%); 
+    z-index: -1;
+}
+#black {
+    position: absolute; 
+    top: 105%; 
+    left: 0%; 
+    transform: translate(-50%, -50%); 
+    z-index: -1;
+    width: 50vw;
+    max-width: 600px;
+}
+
+
+/* Responsive  */ 
+
+
+/* Estilos específicos para telas menores que 600px de largura(mobile)*/
+@media only screen and (max-width: 600px) {
+
+    #green {
+        width: 75%;
+        top: 100%; 
+        left: 20%;     
+    }
+
+    #pink {
+        width: 200px;
+        top: 200px; 
+        left: -20px; 
+    }
+    
+    #yellow {
+        width: 50%;
+        top: 80%; 
+        left: 100%; 
+    }
+    #black {
+        top: 0; 
+        left: 80%; 
+        transform: translate(-50%, -50%); 
+        z-index: -1;
+        width: 50%;
+    }
+
+    
+}
+
+/* Estilos específicos para telas maiores que 600px e menores que 1024px de largura */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    
+    #green {
+        max-width: 50vw;
+    }
+    
+    #yellow {
+        max-width: 70vw;
+    }
+    #black {
+        max-width: 50vh;
+    }
+
+
+
+}
+
+

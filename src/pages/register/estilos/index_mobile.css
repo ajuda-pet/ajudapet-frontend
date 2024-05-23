@@ -1,0 +1,106 @@
+
+/* Responsive  */ 
+
+
+
+/* Estilos específicos para telas menores que 600px de largura(mobile)*/
+@media only screen and (max-width: 600px) {
+    .container-lr {
+        width: 90vw;
+        height: 50vh;
+        
+    }
+    .form-l{
+        height: 320px !important;
+    }
+    .container-r {
+        margin: 7vh auto 0;
+    }
+    
+    .logo{
+        padding-bottom: 2vh;
+    }
+
+    .form-inputs {
+        height: 55vh;
+        max-height: 370px;
+        min-width: 320px;
+        padding: 15px 10px;
+        border-radius: 2em; 
+    }
+
+    .header-lr h1 {
+        margin-top: 10px;
+        font-size: 1.5em;
+    }
+        
+    .header-lr .error {
+        margin-top: 5px;
+        font-size: 13px;
+
+    }
+
+    .main-rl {
+        justify-content: start;
+    }
+
+
+
+    
+    #text-description {
+        margin-top: 30px;
+    }
+    
+
+    
+    .p-info{
+        margin: 10px 0 0 0;
+        font-size: 12px;
+    }
+
+    
+    
+    .btn1 {
+        padding: 17px 65px;
+    }
+    
+    .register-volta {
+        margin-top: 7px;
+    }
+        
+}
+
+
+/* Estilos específicos para telas maiores que 600px e menores que 1024px de largura */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    
+ 
+.logo{
+    padding-bottom: 2vh;
+}
+
+h1 {
+    font-size: 1.8em;
+}
+
+
+.form-inputs {
+    min-width: 350px;
+}
+
+
+}
+
+
+@media only screen and (max-height: 700px) {
+
+    .register-container {
+        top: 45%;
+    }
+    
+    .logo img{
+        max-width: 140px;
+    }
+
+    
+}
