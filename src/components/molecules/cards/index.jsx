@@ -26,8 +26,8 @@ const CardComponent = (content) => {
     
     return (
         <>
-            <Card className='mx-3 mt-5 card d-flex flex-column'>
-                <Card.Img variant="top" src='./images/pet-model.jpg' />
+            <Card className='mx-3 mb-5 card d-flex flex-column'>
+                <Card.Img variant="top" src={pet.picture} width='260' height='260/'/>
                 <Card.Body>
                     <Card.Title>{petIcon} {pet.name}</Card.Title>
                     
@@ -54,7 +54,7 @@ const CardComponent = (content) => {
                     
                 <Modal.Body>
                     <Container className='text-center'>
-                        <Image src="./images/pet-model.jpg" thumbnail width='500' className="mx-auto mb-3" />
+                        <Image src={pet.picture} thumbnail width='500' className="mx-auto mb-3" />
                         <Alert>🐾 {pet.description}</Alert>
                     </Container>
 
