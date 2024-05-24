@@ -17,7 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const [isAuthenticated, setIsAuthenticated] = React.useState(true);
     //buscar a validação pela api e autorizar o acesso
     React.useEffect(() => {
         let jwtToken = localStorage.getItem("token");

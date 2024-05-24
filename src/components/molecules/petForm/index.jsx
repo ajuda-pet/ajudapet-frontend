@@ -11,7 +11,7 @@ const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
     useEffect(() => {
         const groupId = localStorage.getItem('groupId');
         pointsController.getByGroup(groupId).then((response) => {
-            if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
+            if (response && response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
                 setPoints(response.info.adoptionPoints)
             }
         });

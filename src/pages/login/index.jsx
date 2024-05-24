@@ -11,8 +11,6 @@ import Background from '../../components/organism/background/Background';
 // Estilos
 import './index.css';
 
-
-
 function Login() {
   localStorage.removeItem("authenticated");
   const navigate = useNavigate();
@@ -80,6 +78,7 @@ function Login() {
         <div className="form-inputs form-l">
           <div className="header-lr" >
             <h1>Login</h1>
+            
            {error ? <p className="error">{error}</p> : <></>}
            {msg? <p className="error">{msg}</p>: <></>}
           </div>
@@ -111,15 +110,15 @@ function Login() {
             </div>
           </div>
           
-          <div className='footer-l'>
+          <div className='footer-l mt-4'>
             <button type='submit' className="btn1">Entrar</button>
 
-            <div className='linha-ou'>
+            <div className='linha-ou mt-4 mb-1'>
               <div className='linha'></div>
               <p className='ou'><span>ou</span></p>
             </div>
             
-            <button onClick={() => navigate('/register')} className="btn-clean"> Registrar</button>
+              <button onClick={() => navigate('/register')} className="btn-clean"> Registrar </button>
             </div>
         </div>
 
