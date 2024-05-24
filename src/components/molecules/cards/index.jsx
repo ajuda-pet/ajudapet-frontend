@@ -14,7 +14,7 @@ const CardComponent = (content) => {
     const genderIcon = pet.gender == 'MALE' ? '♂️' : '♀️'
 
     const date = new Date(pet.createdAt)
-    const formatDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+    const formatDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
 
 
     const [show, setShow] = useState(false);
@@ -70,7 +70,11 @@ const CardComponent = (content) => {
 
                     <h5 className='mt-5'> Ponto de adoção: </h5>
                     <ListGroup className='mt-4'>
-                        <ListGroup.Item> <Button className='alert-danger-button'>📍 Localização</Button>  {pet.adoptionPoint.addressNeighborhood}. {pet.adoptionPoint.addressCity}, {pet.adoptionPoint.addressState}</ListGroup.Item>
+                        <ListGroup.Item> <Button className='alert-danger-button'>📍 Localização</Button>  
+                        &nbsp;&nbsp;
+                        {pet.adoptionPoint.addressStreet}, {pet.adoptionPoint.addressNumber}. 
+                        &nbsp;{pet.adoptionPoint.addressNeighborhood}. {pet.adoptionPoint.addressCity}, {pet.adoptionPoint.addressState}
+                        </ListGroup.Item>
                     </ListGroup>
                     </Modal.Body>
                 <Modal.Footer>
