@@ -15,14 +15,12 @@ import AddAdoptPoint from './pages/addAdoptPoint/index.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = React.useState(true);
-    //buscar a validação pela api e autorizar o acesso
     React.useEffect(() => {
-        let jwtToken = localStorage.getItem("token");
-        if (jwtToken) {
-            setIsAuthenticated(true);
+
+        let jwtToken = localStorage.getItem('token')
+        if (!jwtToken && !['/login', '/register'].includes(window.location.pathname)) {
+            window.location.href = '/login'
         }
     }, []);
 
@@ -30,14 +28,14 @@ function App() {
         <Router>
 
             <Routes>
-                <Route path="/registrarVoluntario" element={isAuthenticated ? <RegistrarVoluntario /> : <Navigate to="/" />} />
-                <Route path="/gerenciarEstoque" element={isAuthenticated ? <GerenciarEstoque /> : <Navigate to="/" />} />
-                <Route path="/registrarOng" element={isAuthenticated ? <RegistrarOng /> : <Navigate to="/" />} />
+                <Route path="/registrarVoluntario" element={<RegistrarVoluntario />} />
+                <Route path="/gerenciarEstoque" element={<GerenciarEstoque />} />
+                <Route path="/registrarOng" element={<RegistrarOng />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/addPet" element={isAuthenticated ? <AddPet /> : <Navigate to="/" />} />
+                <Route path="/addPet" element={<AddPet />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/map" element={<Map />} />
-                <Route path="/addAdoptPoint" element={isAuthenticated ? <AddAdoptPoint /> : <Navigate to="/" />} />
+                <Route path="/addAdoptPoint" element={<AddAdoptPoint />} />
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFoundPage />} />
 

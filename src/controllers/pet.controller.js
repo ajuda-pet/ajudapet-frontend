@@ -46,17 +46,12 @@ const petController = {
                 }
             })
 
-            if (!response.data.success) {
-                return response.data.message
-            }
-
             return response.data
         }
 
         catch (error) {
             console.error(error)
         }
-
     },
 
     updated: async(petId, payload) => {

@@ -22,8 +22,6 @@ const CardComponent = (content) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log(pet)
-    
     return (
         <>
             <Card className='mx-3 mb-5 card d-flex flex-column'>
@@ -54,7 +52,7 @@ const CardComponent = (content) => {
                     
                 <Modal.Body>
                     <Container className='text-center'>
-                        <Image src={pet.picture} thumbnail width='500' className="mx-auto mb-3" />
+                        <Image src={pet.picture} thumbnail width='400' className="mx-auto mb-3" />
                         <Alert>🐾 {pet.description}</Alert>
                     </Container>
 
@@ -77,6 +75,8 @@ const CardComponent = (content) => {
                         </ListGroup.Item>
                     </ListGroup>
                     </Modal.Body>
+
+
                 <Modal.Footer>
                     <Button variant="danger" className='px-3 py-2' onClick={handleClose}>
                         Fechar
