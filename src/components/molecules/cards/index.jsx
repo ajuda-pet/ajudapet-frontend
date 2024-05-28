@@ -40,7 +40,10 @@ const CardComponent = (petContent) => {
             // agora falta achar o grupo pelo id do ponto de adoção onde o pet está, para contato
             var phoneNumber = pet.group.phone + '';
             console.log(pet.group.phone)
-            var whatsappUrl = "https://wa.me/" + phoneNumber + "?text=" + message;
+
+            // 55 é o código do Brasil
+            var whatsappUrl = "https://wa.me/55" + phoneNumber + "?text=" + message;
+
             window.open(whatsappUrl, '_blank');
 
         }
