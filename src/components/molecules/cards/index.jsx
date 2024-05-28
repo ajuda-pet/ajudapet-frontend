@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import Card from 'react-bootstrap/Card';
-import { Button, Container, ListGroup, Modal } from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom';
 import pointsController from '../../../controllers/points.contorller'
-import groupController from '../../../controllers/group.controller'
+import { Alert, Badge, Button, Container, Image, ListGroup, Modal } from 'react-bootstrap';
+
 const CardComponent = (petContent) => {
 
-    const navigate = useNavigate();
     const { pet } = petContent
     console.log(petContent);
     const [adoptPoints, setAdoptPoints] = useState();
@@ -51,20 +49,25 @@ const CardComponent = (petContent) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    console.log(pet)
+
     return (
         <>
-            <Card className='mx-3 mt-5 card'>
+            <Card className='mx-3 mt-5 card d-flex flex-column'>
                 <Card.Img variant="top" src='./images/pet-model.jpg' />
                 <Card.Body>
                     <Card.Title>{petIcon} {pet.name}</Card.Title>
-                    <ListGroup variant="flush" className='mt-4'>
-                        <ListGroup.Item>📍 Rio Grande, RS</ListGroup.Item>
-                        <ListGroup.Item>🎂 {ageHash[pet.age]} </ListGroup.Item>
-                        <ListGroup.Item>📏 {sizeHash[pet.size]} </ListGroup.Item>
-                        <ListGroup.Item>{genderIcon} {genderHash[pet.gender]} </ListGroup.Item>
+
+                    <ListGroup className='mt-4'>
+                        <ListGroup.Item> <Badge bg="secondary">🎂 Idade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Badge>&nbsp;&nbsp;{ageHash[pet.age]} </ListGroup.Item>
+                        <ListGroup.Item> <Badge bg="secondary">📏 Tamanho</Badge>&nbsp;&nbsp;{sizeHash[pet.size]} </ListGroup.Item>
+                        <ListGroup.Item> <Badge bg="secondary">{genderIcon} Gênero&nbsp;&nbsp;&nbsp;</Badge>&nbsp;&nbsp;{genderHash[pet.gender]} </ListGroup.Item>
+                        <ListGroup.Item> <Badge bg="secondary">🧬 Espécie &nbsp;&nbsp;</Badge>&nbsp;&nbsp;{pet.species == 'DOG' ? 'Cachorro' : 'Gato'} </ListGroup.Item>
                     </ListGroup>
-                    <Button variant='secondary' className='adopt-btn mt-5' onClick={handleShow}>
-                        <strong>Quero adotar</strong>
+
+                    <Button className='adopt-btn mt-3' style={{ width: '100%' }} onClick={handleShow}>
+                        Quero adotar
                     </Button>
                 </Card.Body>
                 <Card.Footer>
@@ -74,30 +77,37 @@ const CardComponent = (petContent) => {
 
             <Modal show={show} size="lg" aria-labelledby="contained-modal-title-vcenter" centered onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{petIcon} {pet.name} <Button variant='secondary'>ℹ️ Bicharada</Button></Modal.Title>
+                    <Modal.Title>{petIcon} {pet.name}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h3 className='mb-3'>🐾 Sobre</h3>
-                    <Container>
-                        <p className='ml-3'>{pet.description}</p>
+                    <Container className='text-center'>
+                        <Image src="./images/pet-model.jpg" thumbnail width='500' className="mx-auto mb-3" />
+                        <Alert>🐾 {pet.description}</Alert>
                     </Container>
 
+
+
                     <ListGroup className='mt-4'>
-                        <ListGroup.Item>📍 Rio Grande, RS</ListGroup.Item>
-                        <ListGroup.Item>🎂 {ageHash[pet.age]} </ListGroup.Item>
-                        <ListGroup.Item>📏 {sizeHash[pet.size]} </ListGroup.Item>
-                        <ListGroup.Item>{genderIcon} {genderHash[pet.gender]} </ListGroup.Item>
-                        <ListGroup.Item>🔗 @aaa</ListGroup.Item>
+                        <ListGroup.Item> <Badge bg="secondary">🎂 Idade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Badge>&nbsp;&nbsp;{ageHash[pet.age]} </ListGroup.Item>
+                        <ListGroup.Item> <Badge bg="secondary">📏 Tamanho</Badge>&nbsp;&nbsp;{sizeHash[pet.size]} </ListGroup.Item>
+                        <ListGroup.Item> <Badge bg="secondary">{genderIcon} Gênero&nbsp;&nbsp;&nbsp;</Badge>&nbsp;&nbsp;{genderHash[pet.gender]} </ListGroup.Item>
+                        <ListGroup.Item> <Badge bg="secondary">🧬 Espécie &nbsp;&nbsp;</Badge>&nbsp;&nbsp;{pet.species == 'DOG' ? 'Cachorro' : 'Gato'} </ListGroup.Item>
+                    </ListGroup>
+
+
+                    <h5 className='mt-5'> Ponto de adoção: </h5>
+                    <ListGroup className='mt-4'>
+                        <ListGroup.Item> <Button className='alert-danger-button'>📍 Localização</Button>  {pet.adoptionPoint.addressNeighborhood}. {pet.adoptionPoint.addressCity}, {pet.adoptionPoint.addressState}</ListGroup.Item>
                     </ListGroup>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="danger" className='px-3 py-2' onClick={handleClose}>
                         Fechar
                     </Button>
-
-                    <Button variant="success" className='adoption-btn' onClick={redirectToWhatsApp} >
-                        Contato
+                    <Button className='whatsapp-button adoption-btn' onClick={redirectToWhatsApp}>
+                        <img src='./images/whatsapp-icon.png' width='25'></img>
+                        <span> Adotar </span>
                     </Button>
 
                 </Modal.Footer>
