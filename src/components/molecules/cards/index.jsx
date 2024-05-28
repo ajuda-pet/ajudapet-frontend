@@ -31,7 +31,11 @@ const CardComponent = (petContent) => {
     const date = new Date(pet.createdAt)
     const formatDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
 
-
+    function formatPhoneNumber(phoneNumber) {
+        // Remove todos os caracteres não numéricos
+        const cleaned = phoneNumber.replace(/\D/g, '');
+        return cleaned;
+    }
     const redirectToWhatsApp = async () => {
 
         var petName = pet.name; // Substitua pelo nome do pet dinamicamente, se disponível
@@ -40,11 +44,13 @@ const CardComponent = (petContent) => {
             // agora falta achar o grupo pelo id do ponto de adoção onde o pet está, para contato
             var phoneNumber = pet.group.phone + '';
             console.log(pet.group.phone)
+            const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+            console.log(formattedPhoneNumber);
 
-            // 55 é o código do Brasil
-            var whatsappUrl = "https://wa.me/55" + phoneNumber + "?text=" + message;
-
-            window.open(whatsappUrl, '_blank');
+            // 55 é o código do BR
+            var whatsappUrl = "https://wa.me/55" + formattedPhoneNumber + "?text=" + message;
+            console.log(whatsappUrl)
+            // window.open(whatsappUrl, '_blank');
 
         }
     }
