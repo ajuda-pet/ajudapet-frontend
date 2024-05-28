@@ -4,16 +4,23 @@ import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
 import CardComponent from '../../components/molecules/cards';
 import petController from '../../controllers/pet.controller';
+// import groupController from '../../controllers/group.controller';
 import Form from 'react-bootstrap/Form';
 import './index.css';
 
 function Home() {
   const [pets, setPets] = useState([]);
+  // const [group, setGroup] = useState([]);
 
   useEffect(() => {
+
     petController.get().then((response) => {
       setPets(response);
     });
+
+    // groupController.get().then((response) => {
+    //   setGroup(response);
+    // });
   }, []);
 
 
@@ -30,20 +37,20 @@ function Home() {
         {/* Header */}
 
         {/* Sidebar */}
-        <SideBarHome/>
-        
+        <SideBarHome />
+
         {/* Container dos pets */}
         <Container className='mt-5 ml-5 container-pets p-3'>
 
-            {/*⚠️ Popular o endereço dos PETs */}
-            <Col xs={12} className='mt-2'>
-              <Form.Select aria-label="Default select example" className='p-2'>
-                <option>📍 Cidade</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
-            </Col>
+          {/*⚠️ Popular o endereço dos PETs */}
+          <Col xs={12} className='mt-2'>
+            <Form.Select aria-label="Default select example" className='p-2'>
+              <option>📍 Cidade</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </Form.Select>
+          </Col>
           <Row>
             <Col xs={4} className='mt-2'>
               <Form.Select aria-label="Default select example" className='select p-2'>
@@ -83,18 +90,18 @@ function Home() {
               </span>
             </Button>
           </Row>
-          
-          <hr class='my-4 bg-primary'/>
+
+          <hr class='my-4 bg-primary' />
 
           <CardGroup className='mt-5' style={{ maxHeight: '60vh', overflowY: 'auto' }}>
             <Row>
-                {pets && pets.map((pet) => (
-                  <>
+              {pets && pets.map((pet) => (
+                <>
                   <Col md={3} sm={6}>
                     <CardComponent key={pet.id} pet={pet} />
                   </Col>
-                  </>
-                ))}
+                </>
+              ))}
             </Row>
           </CardGroup>
 
