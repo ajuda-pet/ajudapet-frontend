@@ -9,13 +9,14 @@ import './index.css'
 import GroupCard from '../../components/molecules/GroupCard/GroupCard';
 
 const Home = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [groups, setGroups] = useState([])
 
   useEffect(() => {
     groupController.get().then(response => {
       if (response && response.success) {
         setGroups(response.info.groups)
+        setLoading(false)
       }
     })
   }, [])
