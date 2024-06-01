@@ -1,7 +1,6 @@
 body {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
-
 
 .container-pets {
     width: 80vw;

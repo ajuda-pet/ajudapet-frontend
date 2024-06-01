@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'; // Troque 'Switch' por 'Routes'
 import Login from './pages/login/index.jsx';
 import Register from './pages/register/index.jsx';
@@ -16,29 +16,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
-    React.useEffect(() => {
-
-        let jwtToken = localStorage.getItem('token')
-        if (!jwtToken && !['/login', '/register'].includes(window.location.pathname)) {
-            window.location.href = '/login'
+    useEffect(() => {
+        if (window.location.pathname == '/') {
+            window.location.href = 'pets'
         }
-    }, []);
+    }, [])
 
     return (
         <Router>
-
             <Routes>
-                <Route path="/registrarVoluntario" element={<RegistrarVoluntario />} />
-                <Route path="/gerenciarEstoque" element={<GerenciarEstoque />} />
-                <Route path="/registrarOng" element={<RegistrarOng />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/addPet" element={<AddPet />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/map" element={<Map />} />
-                <Route path="/addAdoptPoint" element={<AddAdoptPoint />} />
-                <Route path="/" element={<Home />} />
+                <Route path="/pets" element={<AddPet />} />
+                <Route path="/pontos" element={<AddAdoptPoint />} />
+                <Route path="/grupos" element={<Home />} />
                 <Route path="*" element={<NotFoundPage />} />
-
             </Routes>
         </Router>
     );

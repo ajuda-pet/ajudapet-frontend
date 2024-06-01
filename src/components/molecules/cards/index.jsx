@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import Card from 'react-bootstrap/Card';
 import { Alert, Badge, Button, Container, Image, ListGroup, Modal } from 'react-bootstrap';
@@ -37,7 +37,7 @@ const CardComponent = (content) => {
                     </ListGroup>
 
                     <Button className='adopt-btn mt-3' style={{width: '100%'}} onClick={handleShow}>
-                        Quero adotar    
+                        Saber mais
                     </Button>
                 </Card.Body>
                 <Card.Footer>
