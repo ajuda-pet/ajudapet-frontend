@@ -1,114 +1,68 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button, CardGroup } from 'react-bootstrap'
-import Header from '../../components/molecules/header';
-import SideBarHome from '../../components/molecules/sideBarHome';
-import CardComponent from '../../components/molecules/cards';
-import petController from '../../controllers/pet.controller';
-// import groupController from '../../controllers/group.controller';
-import Form from 'react-bootstrap/Form';
-import './index.css';
+import { Container, Row, Col, CardGroup } from 'react-bootstrap'
+import Header from '../../components/molecules/header'
+import SideBarHome from '../../components/molecules/sideBarHome'
+import groupController from '../../controllers/group.controller'
+import Load from '../../components/molecules/load/Load'
 
-function Home() {
-  const [pets, setPets] = useState([]);
-  // const [group, setGroup] = useState([]);
+import './index.css'
+import GroupCard from '../../components/molecules/GroupCard/GroupCard';
+
+const Home = () => {
+  const [loading, setLoading] = useState(false)
+  const [groups, setGroups] = useState([])
 
   useEffect(() => {
-
-    petController.get().then((response) => {
-      setPets(response);
-    });
-
-    // groupController.get().then((response) => {
-    //   setGroup(response);
-    // });
-  }, []);
-
+    groupController.get().then(response => {
+      if (response && response.success) {
+        setGroups(response.info.groups)
+      }
+    })
+  }, [])
 
   return (
     <>
-
-      <Header />
-
-      <div className='container'>
-        <img src="./images/green.png" id='green' alt='mancha verde' />
-        <img src="./images/yellow.png" id='yellow' alt='mancha amarela' />
-        <img src="./images/pink.png" id='pink' alt='mancha rosa' />
-        <img src="./images/black.png" id='black' alt='mancha preta' />
+      { !loading && <div>
         {/* Header */}
+        <Header />
+        <center>/
+          <img style={{ borderRadius: '40px' }} className='d-none d-sm-flex mt-1' src='./images/donation-banner.png' height='450' width='1700'></img>
+          </center>
 
-        {/* Sidebar */}
-        <SideBarHome />
-
-        {/* Container dos pets */}
-        <Container className='mt-5 ml-5 container-pets p-3'>
-
-          {/*⚠️ Popular o endereço dos PETs */}
-          <Col xs={12} className='mt-2'>
-            <Form.Select aria-label="Default select example" className='p-2'>
-              <option>📍 Cidade</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
-          </Col>
-          <Row>
-            <Col xs={4} className='mt-2'>
-              <Form.Select aria-label="Default select example" className='select p-2'>
-                <option>🎂 Idade</option>
-                <option value="1">Bebê</option>
-                <option value="2">Adulto</option>
-                <option value="3">Idoso</option>
-              </Form.Select>
-            </Col>
-
-            <Col xs={4} className='mt-2'>
-              <Form.Select aria-label="Default select example" className='p-2'>
-                <option>📏 Tamanho</option>
-                <option value="1">Pequeno</option>
-                <option value="2">Médio</option>
-                <option value="3">Idoso</option>
-              </Form.Select>
-            </Col>
+        <div className='container'>
+          <img src="./images/green.png" id='green' alt='mancha verde' />
+          <img src="./images/yellow.png" id='yellow' alt='mancha amarela' />
+          <img src="./images/pink.png" id='pink' alt='mancha rosa' />
+          <img src="./images/black.png" id='black' alt='mancha preta' />
 
 
-            <Col xs={4} className='mt-2'>
-              <Form.Select aria-label="Default select example" className='select p-2'>
-                <option>🐾 Espécie</option>
-                <option value="1">Cachorro</option>
-                <option value="2">Gato</option>
-              </Form.Select>
-            </Col>
-          </Row>
+          {/* Sidebar */}
+          <SideBarHome page={'/'}/>
+        </div >
 
-          <Row className='mx-3'>
-            <Button variant='secondary' className='d-flex align-items-center justify-content-center text-center px-5 mt-4 w-100'>
-              <span class="material-symbols-outlined">
-                filter_alt
-              </span>
-              <span>
-                Filtrar
-              </span>
-            </Button>
-          </Row>
+        <div className='px-3'>
+            <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
+              <h2> Grupos Cadastrados</h2>
+              <hr className='my-4 bg-primary' /> 
 
-          <hr class='my-4 bg-primary' />
+              <CardGroup className='mt-5' >
+                <Row style={{ minWidth: '100%' }}>
+                  {groups && groups.map((group) => (
+                    <Col md={4} sm={6}>
+                      <GroupCard key={group.id} group={group} />
+                    </Col>
+                  ))}
+                </Row>
+              </CardGroup>
 
-          <CardGroup className='mt-5' style={{ maxHeight: '60vh', overflowY: 'auto' }}>
-            <Row>
-              {pets && pets.map((pet) => (
-                <>
-                  <Col md={3} sm={6}>
-                    <CardComponent key={pet.id} pet={pet} />
-                  </Col>
-                </>
-              ))}
-            </Row>
-          </CardGroup>
+            </Container>
 
-        </Container>
-      </div >
+        </div>
+      </div> }
+
+      { loading && <Load></Load> }
     </>
-  );
+  )
 }
 
 export default Home;

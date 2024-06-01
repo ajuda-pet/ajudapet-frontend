@@ -1,213 +1,173 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import pointsController from '../../../controllers/points.contorller.js';
+import pointsController from '../../../controllers/points.controller.js';
 import petController from '../../../controllers/pet.controller.js';
 import './form.css'; // Importação do arquivo CSS
+import { Alert, Card, Col, Form, InputGroup, Row, Container } from 'react-bootstrap';
+import groupController from '../../../controllers/group.controller.js';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../../controllers/resgisterImg.js'
+const Step1 = ({ points, register }) => {
+    return (
+        <>
+            <Card className='form-container'>
+                <Card.Body>
+                    <Row className='mb-3'>
+                        <Col>
+                            <h5 className='mt-3'>📍 Selecione Ponto de Adoção</h5>
+                            <InputGroup className='mb-3'>
+                                <Form.Select aria-label="Default select example" {...register('adoptionPointId')}>
+                                    <option></option>
+                                    {points.map((point) => {
+                                        return <option key={point.id} value={point.id}>{point.name}</option>
+                                    })}
+                                </Form.Select>
+                            </InputGroup>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
 
+        </>
+    )
+}
 
-const SelectPointAdoption = ({ register, errors, setSelectedPoint }) => {
+const Step2 = ({ register, onPictureUploaded }) => {
+
+    const [picture, setPicture] = useState('');
+    const [pictureURL, setPictureURL] = useState('');
+
+    const handlePicture = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        register('picture', {value: file})
+        setPicture(URL.createObjectURL(file))
+
+    }
+
+    return (
+        <>
+            <Card className='form-container'>
+                <Card.Body>
+                    <Row className='mb-3'>
+                        <Col>
+                            <h5>Animal</h5>
+                            <InputGroup className='mb-3'>
+                                <Form.Select aria-label="Default select example" {...register('species')}>
+                                    <option></option>
+                                    <option value="DOG">Cachorro</option>
+                                    <option value="CAT">Gato</option>
+                                </Form.Select>
+                            </InputGroup>
+                        </Col>
+
+                        <Col>
+                            <h5>Gênero</h5>
+                            <InputGroup className='mb-3'>
+                                <Form.Select aria-label="Default select example" {...register('gender')}>
+                                    <option></option>
+                                    <option value="MALE">Macho</option>
+                                    <option value="FEMALE">Femea</option>
+                                </Form.Select>
+                            </InputGroup>
+                        </Col>
+
+                        <Col>
+                            <h5>Tamanho</h5>
+                            <InputGroup className='mb-3'>
+                                <Form.Select aria-label="Default select example" {...register('size')}>
+                                    <option></option>
+                                    <option value="SMALL">Pequeno</option>
+                                    <option value="MEDIUM">Médio</option>
+                                    <option value="LARGE">Grande</option>
+                                </Form.Select>
+                            </InputGroup>
+                        </Col>
+                        <Col>
+                            <h5>Idade</h5>
+                            <InputGroup className='mb-3'>
+                                <Form.Select aria-label="Default select example" {...register('age')}>
+                                    <option></option>
+                                    <option value="BABY">Filhote</option>
+                                    <option value="ADULT">Adulto</option>
+                                    <option value="OLD">Idoso</option>
+                                </Form.Select>
+                            </InputGroup>
+                        </Col>
+                    </Row>
+
+                    <Row className='mb-1'>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Foto</Form.Label>
+                            <Form.Control type="file" accept='image/*' onChange={handlePicture} />
+                        </Form.Group>
+                    </Row>
+
+                    {picture && <Row className='mb-5'>
+                        <img src={picture} alt='preview' height='300'></img>
+                    </Row>}
+
+                    <Row>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1">Nome</InputGroup.Text>
+                            <Form.Control
+                                placeholder="Escreva o nome do seu pet"
+                                aria-label="Username"
+                                aria-describedby="basic-addon1"
+                                {...register('name')}
+                            />
+                        </InputGroup>
+                    </Row>
+
+                    <Row>
+                        <InputGroup>
+                            <InputGroup.Text>Descrição</InputGroup.Text>
+                            <Form.Control as="textarea" aria-label="With textarea" placeholder='Escreva uma descrição fofa para seu pet' {...register('description')} />
+                        </InputGroup>
+                    </Row>
+                </Card.Body>
+            </Card>
+        </>
+    );
+};
+
+const PetForm = ({ step, register }) => {
     const [points, setPoints] = useState([]);
+    const [pictureURL, setPictureURL] = useState('');
+    const handlePictureUploaded = (url) => {
+        setPictureURL(url);
+    };
 
     useEffect(() => {
-        const groupId = localStorage.getItem('groupId');
-        pointsController.getByGroup(groupId).then((response) => {
-            if (response.info.adoptionPoints && response.info.adoptionPoints.length > 0) {
+        if (pictureURL) {
+            register('picture', { value: pictureURL });
+        }
+    }, [pictureURL, register])
+
+
+    useEffect(() => {
+        groupController.getAdoptionPoints().then(response => {
+            if (response.success) {
                 setPoints(response.info.adoptionPoints)
             }
-        });
-
-    }, []);
-
+        })
+    }, [])
 
 
     return (
-        <div className="form-group">
-            <label htmlFor="select">Ponto de Adoção</label>
-            <select id="adoptionPointId" {...register('adoptionPointId', { required: 'Este campo é obrigatório' })} onChange={(e) => setSelectedPoint(e.target.value)}>
-                <option value="">Selecione o Ponto de Adoção</option>
-                {points && points.map((point) => (
-                    <option key={point.id} value={point.id}>{point.name}</option>
-                ))}
-            </select>
-        </div>
-    );
-};
+        <FormProvider>
+            <Container>
 
+                {step == 1 && <Alert>Para cadastrar um pet, o seu grupo precisar ter necessariamente um <strong>Ponto de adoção</strong>.</Alert>}
+                {step == 2 && <Alert variant='warning'>Não esqueça de caprichar na <strong>foto e descrição</strong> do seu pet.</Alert>}
 
-const Step1 = ({ register, errors }) => (
+                <Form className='p-2'>
+                    {step == 1 && <Step1 points={points} register={register}> </Step1>}
+                    {step == 2 && <Step2 register={register} onPictureUploaded={handlePictureUploaded}></Step2>}
+                </Form>
+            </Container>
+        </FormProvider>
+    )
+}
 
-    <div>
-
-        <div className="form-group">
-            <label htmlFor="species">Espécie</label>
-            <select id="species" {...register('species', { required: 'Este campo é obrigatório' })}>
-                <option value="">Selecione espécie</option>
-                <option value="DOG">Cachorro</option>
-                <option value="CAT">Gato</option>
-            </select>
-            {errors.species && <p className="error-message">{errors.species.message}</p>}
-        </div>
-
-        <div className="form-group">
-            <label htmlFor="name">Nome</label>
-            <input
-                placeholder='Ex: Rex, Bob, etc...'
-                id="name"
-                type="text"
-                {...register('name', { required: 'Este campo é obrigatório' })}
-            />
-            {errors.name && <p className="error-message">{errors.name.message}</p>}
-        </div>
-
-
-        <div className="form-group">
-            <label htmlFor="sizeGroup">Tamanho</label>
-            <select id="sizeGroup" {...register('size', { required: 'Este campo é obrigatório' })}>
-                <option value="">Selecione o Tamanho</option>
-                <option value="SMALL">PEQUENO</option>
-                <option value="MEDIUM">MÉDIO</option>
-                <option value="LARGE">GRANDE</option>
-            </select>
-            {errors.sizeGroup && <p className="error-message">{errors.sizeGroup.message}</p>}
-        </div>
-
-        <div className="form-group">
-            <label htmlFor="gender">Gênero</label>
-            <select id="gender" {...register('gender', { required: 'Este campo é obrigatório' })}>
-                <option value="">Selecione o Gênero</option>
-                <option value="MALE">MACHO</option>
-                <option value="FEMALE">FÊMEA</option>
-            </select>
-            {errors.gender && <p className="error-message">{errors.gender.message}</p>}
-        </div>
-    </div>
-);
-
-const Step2 = ({ register, errors }) => {
-    const [selectedImage, setSelectedImage] = useState(null);
-
-    const handleImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setSelectedImage(URL.createObjectURL(e.target.files[0]));
-        }
-    };
-    return (
-        <div>
-            <div className="form-group">
-                <label htmlFor="ageGroup">Faixa Etária</label>
-                <select id="ageGroup" {...register('age', { required: 'Este campo é obrigatório' })}>
-                    <option value="">Selecione a Faixa Etária</option>
-                    <option value="BABY">BEBÊ</option>
-                    <option value="ADULT">ADULTO</option>
-                    <option value="OLD">IDOSO</option>
-                </select>
-                {errors.ageGroup && <p className="error-message">{errors.ageGroup.message}</p>}
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="description">Descrição</label>
-                <textarea
-                    placeholder='Descreva o pet...'
-                    id="description"
-                    rows="4"
-                    {...register('description', { required: 'Este campo é obrigatório' })}
-                ></textarea>
-                {errors.description && <p className="error-message">{errors.description.message}</p>}
-            </div>
-            <div className="form-group">
-                <label htmlFor="picture">Enviar Foto</label>
-                <input
-                    id="picture"
-                    type="file"
-                    {...register('picture', { required: 'Este campo é obrigatório' })}
-                    onChange={handleImageChange}
-                />
-                {errors.picture && <p className="error-message">{errors.picture.message}</p>}
-                {selectedImage && <img src={selectedImage} alt="Selected" style={{ width: '100px', height: '100px' }} />}
-            </div>
-
-        </div>
-    );
-};
-const PetForm = () => {
-    const methods = useForm();
-    const { getValues } = methods;
-    const [step, setStep] = useState(1);
-    const [selectedPoint, setSelectedPoint] = useState(null);
-
-    const nextStep = () => setStep(step + 1);
-    const prevStep = () => setStep(step - 1);
-
-    // aqui é a função que vai ser chamada quando o formulario for enviado
-
-    const onSubmit = async data => {
-
-        const payload = {
-            ...data,
-            adoptionPointId: parseInt(data.adoptionPointId),
-            picture: data.picture[0]['name']
-        }
-
-        const pet = await petController.create(payload)
-
-    };
-
-    const [allFieldsFilled, setAllFieldsFilled] = useState(false);
-
-    const checkAllFieldsFilled = () => {
-        const values = getValues();
-        setAllFieldsFilled(Object.values(values).every(value => value !== null && value !== undefined && value !== ''));
-    };
-
-
-
-    return (
-        <div className="form-container">
-            <div style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-
-
-                <h2>Cadastro de Pet</h2>
-
-            </div>
-            <FormProvider {...methods}>
-
-                <form onSubmit={methods.handleSubmit(onSubmit)} onChange={checkAllFieldsFilled}>
-                    {step === 1 && (
-                        <SelectPointAdoption register={methods.register} errors={methods.formState.errors} setSelectedPoint={setSelectedPoint} />
-                    )}
-                    {step === 1 && <Step1 register={methods.register} errors={methods.formState.errors} />}
-                    {step === 2 && <Step2 register={methods.register} errors={methods.formState.errors} />}
-
-                    <div className="form-navigation">
-
-                        {step > 1 && <button type="button" onClick={prevStep}>Anterior</button>}
-
-                        {/* verifica se os campos foram preenchidos e desabilita o btao caso nao */}
-
-                        {selectedPoint && step < 2 && allFieldsFilled ? (
-
-                            <button type="button" onClick={nextStep}>Próximo</button>)
-                            : (
-                                <>
-
-                                    {step < 2 && (
-                                        <>
-                                            <button type="button" disabled style={{ backgroundColor: '#3d68f781' }}>Próximo</button>
-
-                                            <p style={{ color: 'red' }}>Obs: Preencha todos os campos para continuar!</p>
-                                        </>
-                                    )}
-                                </>
-                            )}
-
-
-
-                        {step === 2 && <button type="submit">Enviar</button>}
-                    </div>
-                </form>
-            </FormProvider>
-        </div>
-    );
-};
-
-export default PetForm;
+export default PetForm

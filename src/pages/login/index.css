@@ -1,55 +1,62 @@
-.Login {
+.container-l{
+    margin: 12vh auto 0;
+}
+
+.form-l{
+    height: 370px !important;
+}
+
+.header-l{
+    border: 1px solid black;
+}
+
+.footer-l{
+    display: flex;
+    flex-direction: column;
+}
+
+.linha-ou{
+    margin-bottom: -15px;
+    margin-top: 15px;
+    height: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #f0f0f0;
+    
 }
 
-h1 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.error {
-    color: red;
-    margin-bottom: 10px;
-}
-
-.form-inputs {
-    display: flex;
-    flex-direction: column;
+.linha{
+    position: relative;
+    top: 7px;
     width: 100%;
-    max-width: 300px;
+    border-bottom: .5px solid gray;
 }
 
-.form-inputs label {
-    margin-bottom: 5px;
+.ou{
+    position: relative;
+    display: flex;
+    align-items: center;
+    top: -5px;
+    padding: 0;
+    width: 20px;
 }
 
-.input-field {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.ou span {
+    background-color: #fff;
+    padding: 0 2px;
+    color: gray;
+    
 }
 
-.submit-button,
-.register-b {
-    padding: 10px 20px;
+.btn-clean {
     border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
+    background-color: #0000;
+    text-align: center;
+}
+
+.btn-clean:hover {
+    color: rgb(0, 0, 153);
     cursor: pointer;
 }
 
-.submit-button:hover,
-.register-b:hover {
-    background-color: #0056b3;
-}
-
-.register-b {
-    margin-top: 10px;
-}
