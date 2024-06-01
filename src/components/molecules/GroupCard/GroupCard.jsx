@@ -40,7 +40,7 @@ const GroupCard = ({ group }) => {
 
     return (
         <>
-            <Card className='p-4'>
+            <Card className='p-4 mt-5'>
                 <Card.Img variant='top' src={group.picture || './images/ong-profile.jpg'} width='260' height='260'/>
                 
                 <Card.Title className='d-flex align-items-center'>
