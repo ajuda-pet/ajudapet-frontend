@@ -41,11 +41,13 @@ const GroupCard = ({ group }) => {
     return (
         <>
             <Card className='p-4'>
-                <Card.Img variant='top' src={group.picture || './images/ong-profile.jpg'} width='286' height='180'/>
+                <Card.Img variant='top' src={group.picture || './images/ong-profile.jpg'} width='260' height='260'/>
                 
                 <Card.Title className='d-flex align-items-center'>
                     <img src='./images/group-icon.png' width='35'></img> &nbsp;
-                    <span>{group.name}</span>
+                    <span>
+                        <Badge bg='secondary' className='mt-3'>{group.name}</Badge>
+                    </span>
                 </Card.Title>
 
                 <Card.Body>

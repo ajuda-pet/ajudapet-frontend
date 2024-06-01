@@ -4,7 +4,7 @@ import './index.css';
 import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
 import PetForm from '../../components/molecules/petForm';
-import { Col, Form, Row, Button, Container, CardGroup, Modal, Toast } from 'react-bootstrap';
+import { Col, Form, Row, Button, Container, CardGroup, Modal, Toast, Carousel } from 'react-bootstrap';
 import CardComponent from '../../components/molecules/cards';
 import petController from '../../controllers/pet.controller';
 import { useForm } from 'react-hook-form';
@@ -139,6 +139,8 @@ function AddPet() {
 
     return (
         <>
+
+
             {!loading && <> 
             <Header />
             <img src="./images/green.png" id='green' alt='mancha verde' />
@@ -147,6 +149,10 @@ function AddPet() {
             <img src="./images/black.png" id='black' alt='mancha preta' />
             {/* Sidebar */}
             <SideBarHome page='/addPet' />
+
+            <center>
+                    <img className='d-none d-sm-flex mt-3' style={{borderRadius: '40px'}} src='./images/banner.jpg' height='400' width='1700'></img>
+            </center>
 
             {/* <div className='petForm'>
                 <PetForm />

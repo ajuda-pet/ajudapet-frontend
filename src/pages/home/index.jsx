@@ -9,13 +9,14 @@ import './index.css'
 import GroupCard from '../../components/molecules/GroupCard/GroupCard';
 
 const Home = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [groups, setGroups] = useState([])
 
   useEffect(() => {
     groupController.get().then(response => {
       if (response && response.success) {
         setGroups(response.info.groups)
+        setLoading(false)
       }
     })
   }, [])
@@ -25,12 +26,16 @@ const Home = () => {
       { !loading && <div>
         {/* Header */}
         <Header />
+        <center>/
+          <img style={{ borderRadius: '40px' }} className='d-none d-sm-flex mt-1' src='./images/donation-banner.png' height='450' width='1700'></img>
+          </center>
 
         <div className='container'>
           <img src="./images/green.png" id='green' alt='mancha verde' />
           <img src="./images/yellow.png" id='yellow' alt='mancha amarela' />
           <img src="./images/pink.png" id='pink' alt='mancha rosa' />
           <img src="./images/black.png" id='black' alt='mancha preta' />
+
 
           {/* Sidebar */}
           <SideBarHome page={'/'}/>
