@@ -13,6 +13,7 @@ import NotFoundPage from './pages/notFoundPage/index.jsx';
 import AddPet from './pages/addPet/index.jsx';
 import AddAdoptPoint from './pages/addAdoptPoint/index.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PointsMap from './pages/pointsMap/index.jsx';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
                 <Route path="/pets" element={<AddPet />} />
                 <Route path="/pontos" element={<AddAdoptPoint />} />
                 <Route path="/grupos" element={<Home />} />
+                <Route path="/mapa" element={<PointsMap />} />
+
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Router>
