@@ -31,7 +31,7 @@ const PointsMap = ({ points}) => {
 
                                 <ListGroup.Item>
                                     <strong>Σ Pets: </strong>
-                                    <span>{point.pets ? point.pet.length : 0}</span>
+                                    <span>{point.pets ? point.pets.length : 0}</span>
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>

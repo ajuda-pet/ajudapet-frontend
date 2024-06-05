@@ -15,8 +15,7 @@ import AddAdoptPoint from './pages/addAdoptPoint/index.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PointsMap from './pages/pointsMap/index.jsx';
 
-
-function App() {
+const App = () => {
     useEffect(() => {
         if (window.location.pathname == '/') {
             window.location.href = 'pets'
@@ -37,4 +36,4 @@ function App() {
     );
 }
 
-export default App;
+export default App
