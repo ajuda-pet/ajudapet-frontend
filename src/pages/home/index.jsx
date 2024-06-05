@@ -48,11 +48,15 @@ const Home = () => {
 
               <CardGroup className='mt-5' >
                 <Row style={{ minWidth: '100%' }}>
-                  {groups && groups.map((group) => (
-                    <Col md={4} sm={6}>
-                      <GroupCard key={group.id} group={group} />
-                    </Col>
-                  ))}
+                  {groups && groups.map((group) => {
+                    if (group.pix) {
+                      return (
+                      <Col md={4} sm={6}>
+                        <GroupCard key={group.id} group={group} />
+                      </Col>
+                      )
+                    }
+                  })}
                 </Row>
               </CardGroup>
 
