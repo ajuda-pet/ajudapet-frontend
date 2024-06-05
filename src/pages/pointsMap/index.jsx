@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import pointsController from '../../controllers/points.controller';
+import { Alert, Badge, Card, ListGroup } from 'react-bootstrap';
 
-function PointsMap() {
-    const [points, setPoints] = useState([]);
-
-    useEffect(() => {
-        pointsController.get().then((response) => {
-            console.log(response.info.adoptionPoints)
-            setPoints(response.info.adoptionPoints);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, []);
-
+const PointsMap = ({ points}) => {
     return (
         <div className="Home">
-            <MapContainer center={[-32.0372, -52.0986]} zoom={13} style={{ height: '100vh', width: '100%' }} worldCopyJump={true}>
+            <MapContainer center={[-32.0372, -52.0986]} zoom={14} style={{ height: '60vh', width: '100%' }} worldCopyJump={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -32,7 +20,26 @@ function PointsMap() {
                         shadowSize: [41, 41]
                     })}>
                         <Popup>
-                            <span>{`Lat: ${point.lat}, Lon: ${point.lon}`}</span>
+                            <ListGroup>
+                                <ListGroup.Item>
+                                    <h5>{point.name}</h5>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <Alert variant='secondary'><strong>🐾 Razão Social: </strong>{point.description}</Alert>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <strong>Σ Pets: </strong>
+                                    <span>{point.pets ? point.pet.length : 0}</span>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <Badge bg='danger'> Endereço</Badge>&nbsp;&nbsp;
+                                    {point.addressStreet}, {point.addressNumber}. &nbsp;{point.addressNeighborhood}. {point.addressCity}, {point.addressState}
+                                </ListGroup.Item>
+                            </ListGroup>
+
                         </Popup>
                     </Marker>
                 ))}

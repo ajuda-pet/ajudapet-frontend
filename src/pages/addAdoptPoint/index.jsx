@@ -1,15 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
 import './index.css';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Button, Container, Modal, Toast } from 'react-bootstrap';
 import Header from '../../components/molecules/header';
 import SideBarHome from '../../components/molecules/sideBarHome';
-import PointForm from '../../components/molecules/pointForm';
 import PointTable from '../../components/molecules/pointTable/PointTable';
 import pointsController from '../../controllers/points.controller';
-import groupController from '../../controllers/group.controller';
 import Load from '../../components/molecules/load/Load';
+import PointsMap from '../pointsMap';
 
 
 const AddAdoptPoint = () => {
@@ -42,29 +41,12 @@ const AddAdoptPoint = () => {
 
     const [showToastSuccess, setShowToastSuccess] = useState(false)
     const [showToast, setShowToast] = useState(false);
-    const [step, setStep] = useState(1)
     const [show, setShow] = useState(false)
 
     const handleShow = () => setShow(true)
-    const handleNextStep = () => { 
-        
-        if (step == 1) {
-            const payload =  methods.getValues()
-            
-            if (!payload.name || !payload.description) {
-                setShowToast(true);
-                return        
-            }
-        }
-
-        setStep(step + 1)
-    }
-
-    const handleBackStep = () => setStep(step - 1)
 
     const handleClose = () => {
         setShow(false)
-        setStep(1)
     }
 
     const handleSubmit = (payload) => {
@@ -93,8 +75,6 @@ const AddAdoptPoint = () => {
 
 
         pointsController.create(payload).then(response => {
-            setLoading(true)
-
             if (response && response.success) {
                 const point = response.info.adoptionPoint
                 const date = new Date(point.createdAt)
@@ -105,9 +85,6 @@ const AddAdoptPoint = () => {
                 setShowToastSuccess(false)
                 handleClose()
             }
-            
-            
-            setLoading(false)
         })
     }
 
@@ -127,18 +104,17 @@ const AddAdoptPoint = () => {
     const [points, setPoint] = useState([])
 
     useEffect(() => {
-        groupController.getAdoptionPoints().then(response => {
+
+        pointsController.get().then(response => {
             if (response && response.success) {
                 const points = response.info.adoptionPoints
 
                 points.forEach(point => {
                     const date = new Date(point.createdAt)
                     point.createdAt = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
-                    setLoading(false)
 
                 })
-
-                setPoint(response.info.adoptionPoints)
+                setPoint(points)
                 setLoading(false)
             }
         })
@@ -166,19 +142,19 @@ const AddAdoptPoint = () => {
                 
                 
                     <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
-                        <h2> Pontos de Adoção </h2>
+                        <h2>📍 Pontos de Adoção </h2>
                         <hr class='my-4 bg-primary' />
 
+                        {/* Tabela de pontos de adoção */}
+                        <PointsMap points={points}></PointsMap>
+                        
                         <Button className='d-flex align-items-center justify-content-center text-center px-5 w-100 my-4 adopt-btn' onClick={handleShow}>
                             <span className="material-symbols-outlined" >
-                                cottage
+                                location_on
                             </span> &nbsp;&nbsp;
-                            <span>Cadastrar Ponto de Adoção</span>
+                            <span>Ver tabela de Pontos de Adoção</span>
                         </Button>
 
-
-                        {/* Tabela de pontos de adoção */}
-                        <PointTable points={points}/>
 
                     </Container>
                 </>
@@ -186,47 +162,20 @@ const AddAdoptPoint = () => {
 
             { loading &&
                 <Load condition={loading}></Load>
-
+                
             }
 
             <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>🐾 Cadastro de Ponto de Adoção</Modal.Title>
+                    <Modal.Title>📍 Tabela de Pontos de Adoção</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {step == 1 &&
-                        <Container className='PointForm mb-5'>
-                            <PointForm step={1} register={methods.register} />
-                        </Container>
-                    }
-
-                    {
-                        step == 2 &&
-                        <Container className='PointForm mb-5'>
-                            <PointForm step={2} register={methods.register} />
-                        </Container>
-                    }
-
+                    <PointTable points={points}/>
                 </Modal.Body>
                 <Modal.Footer>
-
-                    {step < 2 && <>
-                        <Button variant="secondary" onClick={handleClose}>Fechar</Button>
-                        <Button variant="primary" onClick={handleNextStep}>Próximo</Button>
-
-                    </>
-                    }
-
-                    {step == 2 && <>
-                        <Button variant="secondary" onClick={handleBackStep}>Voltar</Button>
-                        <Button onClick={methods.handleSubmit(handleSubmit)}>Cadastrar</Button>
-                    </>
-                    }
+                        <Button variant='danger' onClick={handleClose}>Fechar</Button>
                 </Modal.Footer>
             </Modal>
-
-            <ToastError message={'Preencha todos os campos'}></ToastError>
-            <ToastSuccess message={'Ponto de adoção cadastrado com sucesso.'}></ToastSuccess>
         </>
 
         

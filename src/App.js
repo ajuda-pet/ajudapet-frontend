@@ -29,7 +29,7 @@ function App() {
                 <Route path="/pets" element={<AddPet />} />
                 <Route path="/pontos" element={<AddAdoptPoint />} />
                 <Route path="/grupos" element={<Home />} />
-                <Route path="/mapa" element={<PointsMap />} />
+               {/*  <Route path="/mapa" element={<PointsMap />} /> */}
 
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>

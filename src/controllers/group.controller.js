@@ -32,7 +32,7 @@ const groupController = {
 
     getAdoptionPoints: async () => {
         try {
-            const response = await axios.get(`${authGroupsEndpoint}/adoption-points`, {
+            const response = await axios.get(`${noAuthEndpoint}/adoption-points`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': window.localStorage.getItem('token')
