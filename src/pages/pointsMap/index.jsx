@@ -66,7 +66,7 @@ const PointsMap = () => {
 
                                     <ListGroup.Item>
                                         <strong>🏠 Nome do ponto: </strong>
-                                        <span> teste</span>
+                                        <span> {point.name}</span>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <strong>ℹ️ Razão Social: </strong><br />
