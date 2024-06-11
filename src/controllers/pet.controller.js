@@ -23,13 +23,22 @@ const petController = {
     },
 
 
-    get: async () => {
+    get: async (params) => {
         try {
-            const response = await axios.get(noAuthEndpoint)
+            let queryParams = ``
+
+            if (params && params.addressCity) queryParams += `&addressCity=${params.addressCity}`
+            if (params && params.age)         queryParams += `&age=${params.age}` 
+            if (params && params.size)        queryParams += `&size=${params.size}`
+            if (params && params.species)     queryParams += `&species=${params.species}`
+
+            const response = await axios.get(`${noAuthEndpoint}?${params ? queryParams : ''}`)
 
             if (!response.data.success) {
                 return response.data.message
             }
+
+
 
             return response.data.info.pets
         }
