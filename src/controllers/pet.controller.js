@@ -32,7 +32,7 @@ const petController = {
             if (params && params.size)        queryParams += `&size=${params.size}`
             if (params && params.species)     queryParams += `&species=${params.species}`
 
-            const response = await axios.get(`${noAuthEndpoint}?${params ? queryParams : ''}`)
+            const response = await axios.get(`${noAuthEndpoint}?${queryParams}`)
 
             if (!response.data.success) {
                 return response.data.message
