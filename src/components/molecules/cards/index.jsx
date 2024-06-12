@@ -72,7 +72,7 @@ const CardComponent = (petContent) => {
                     </ListGroup>
 
                     <Button className='adopt-btn mt-3' style={{width: '100%'}} onClick={handleShow}>
-                        Saber mais
+                        Saiba mais
                     </Button>
                 </Card.Body>
                 <Card.Footer>
