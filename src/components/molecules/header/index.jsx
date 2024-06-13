@@ -30,7 +30,7 @@ function Header() {
         <>
             <Navbar className='p-2' style={{ borderRadius: '2px', backgroundColor: ' #212f3f'}} expand="lg" data-bs-theme='dark'>
                 <Container fluid>
-                    <Navbar.Brand href="/"> <img src='./images/header-logo.png' width='210' /></Navbar.Brand>
+                    <Navbar.Brand href="/grupos"> <img src='./images/header-logo.png' width='210' /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="" onClick={handleOpenOffCanva} />
                 </Container>
             </Navbar>
