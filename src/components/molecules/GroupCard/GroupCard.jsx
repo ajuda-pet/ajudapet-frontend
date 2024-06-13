@@ -61,7 +61,9 @@ const GroupCard = ({ group }) => {
 
                     { group.pix && 
                         <Row className='p-4 justify-content-center' onClick={handleCopy}>
-                            <Badge bg='secondary' className='mb-1'>{group.pix.type}</Badge>
+                            <Badge bg='secondary' className='mb-1'>
+                                {group.pix.type == 'PHONE' ? 'TELEFONE' : group.pix.type}
+                            </Badge>
                             <Button className='mb-3 d-flex justify-content-between align-items-center adopt-btn' style={{color: 'white'}}>
                                 <strong style={{fontSize: '13px'}}>{group.pix.key}</strong> &nbsp;
                                 <img src='./images/copy-icon.png' width='25' alt='Copy Icon' />
