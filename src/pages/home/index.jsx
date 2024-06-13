@@ -36,7 +36,7 @@ const Home = () => {
             <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
               <h2> 
                 <img src='./images/group-icon.png' width='50'></img> &nbsp;
-                <span>Grpos Cadastrados</span>
+                <span>Grupos Cadastrados</span>
               </h2>
               <hr className='my-4 bg-primary' /> 
 

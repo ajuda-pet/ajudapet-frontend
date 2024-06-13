@@ -46,7 +46,7 @@ const GroupCard = ({ group }) => {
                 <Card.Title className='d-flex align-items-center'>
                     <img src='./images/group-icon.png' width='35'></img> &nbsp;
                     <span>
-                        <Badge bg='secondary' className='mt-3'>{group.name}</Badge>
+                        <Badge bg='dark'>{group.name}</Badge>
                     </span>
                 </Card.Title>
 
@@ -61,8 +61,9 @@ const GroupCard = ({ group }) => {
 
                     { group.pix && 
                         <Row className='p-4 justify-content-center' onClick={handleCopy}>
+                            <Badge bg='secondary' className='mb-1'>{group.pix.type}</Badge>
                             <Button className='mb-3 d-flex justify-content-between align-items-center adopt-btn' style={{color: 'white'}}>
-                                <strong>{group.pix.type}: {group.pix.key}</strong> &nbsp;
+                                <strong style={{fontSize: '13px'}}>{group.pix.key}</strong> &nbsp;
                                 <img src='./images/copy-icon.png' width='25' alt='Copy Icon' />
                             </Button>
                         </Row>
