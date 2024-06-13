@@ -26,10 +26,6 @@ const Home = () => {
       { !loading && <div>
         {/* Header */}
         <Header />
-        <center>/
-          <img style={{ borderRadius: '40px' }} className='d-none d-sm-flex mt-1' src='./images/donation-banner.png' height='450' width='1700'></img>
-          </center>
-
         <div className='container'>
 
           {/* Sidebar */}
@@ -38,7 +34,10 @@ const Home = () => {
 
         <div className='px-3'>
             <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
-              <h2> Grupos Cadastrados</h2>
+              <h2> 
+                <img src='./images/group-icon.png' width='50'></img> &nbsp;
+                <span>Grpos Cadastrados</span>
+              </h2>
               <hr className='my-4 bg-primary' /> 
 
               <CardGroup className='mt-5' >

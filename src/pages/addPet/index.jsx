@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 import Load from '../../components/molecules/load/Load';
 import { gerarNomeImagem } from '../../components/validators/arquivo';
 import { storage } from '../../controllers/resgisterImg';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 
@@ -169,21 +169,10 @@ function AddPet() {
             <Header />
            
             {/* Sidebar */}
-            <SideBarHome page='/addPet' />
-
-            <center>
-                    <img className='d-none d-sm-flex mt-3' style={{borderRadius: '40px'}} src='./images/banner.jpg' height='400' width='1700'></img>
-            </center>
-
-            {/* <div className='petForm'>
-                <PetForm />
-            </div> */}
+            <SideBarHome page='/addPet'/>
 
                 <div className='px-3'>
                     <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
-                        {/* <ToastComponent variant={'warning'}></ToastComponent> */}
-
-                        {/*⚠️ Popular o endereço dos PETs */}
                         <Col xs={12} className='mt-2'>
                             <Form.Select aria-label="Default select example" className='p-2' {...filterMethods.register('addressCity')}>
                                 <option value=''>📍 Cidade</option>
