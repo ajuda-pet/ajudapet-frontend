@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, CardGroup } from 'react-bootstrap'
+import { Container, Row, Col, CardGroup, Alert } from 'react-bootstrap'
 import Header from '../../components/molecules/header'
 import SideBarHome from '../../components/molecules/sideBarHome'
 import groupController from '../../controllers/group.controller'
@@ -39,6 +39,13 @@ const Home = () => {
                 <span>Grupos Cadastrados</span>
               </h2>
               <hr className='my-4 bg-primary' /> 
+
+              <Alert variant='success'>
+                <center>
+                  <span>O <strong>Ajudapets</strong> tem como objetivo facilitar a conexão entre os grupos e você. 
+                  <strong> Conheça os grupos antes de fazer sua doação!</strong></span>                
+                </center>  
+              </Alert>
 
               <CardGroup className='mt-5' >
                 <Row style={{ minWidth: '100%' }}>

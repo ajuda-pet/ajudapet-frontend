@@ -149,7 +149,7 @@ const AddAdoptPoint = () => {
                             <span className="material-symbols-outlined" >
                                 location_on
                             </span> &nbsp;&nbsp;
-                            <span>Ver tabela de Pontos de Adoção</span>
+                            <span>Saiba mais</span>
                         </Button>
 
 
