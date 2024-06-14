@@ -36,7 +36,7 @@ const Home = () => {
             </div >
 
             <div className='px-3'>
-                <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
+                <Container className='mt-4 ml-5 container-pets p-3 mb-5'>
                   <h2> 
                     <img src='./images/group-icon.png' width='50'></img> &nbsp;
                     <span>Grupos Cadastrados</span>
@@ -45,11 +45,11 @@ const Home = () => {
 
                   { groups && !groups.length && 
                     <>
-                      <NoContent message='Ops! Ainda não temos Grupos Cadastrados.'></NoContent>
+                      <NoContent message='Logo teremos Grupos cadastrados.'></NoContent>
                     </>
                   }
                   
-                  { groups && groups.length && 
+                  { groups && groups.length > 0 && 
                     <>
                       <Alert variant='success'>
                         <center>

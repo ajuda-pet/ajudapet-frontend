@@ -9,17 +9,12 @@ import AddAdoptPoint from './pages/addAdoptPoint/index.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const App = () => {
-    useEffect(() => {
-        if (window.location.pathname == '/') {
-            window.location.href = 'pets'
-        }
-    }, [])
-
     return (
         <Router>
             <Routes>
                 <Route path="/pets" element={<AddPet />} />
                 <Route path="/pontos" element={<AddAdoptPoint />} />
+                <Route path='/' element={<Home></Home>}></Route>
                 <Route path="/grupos" element={<Home />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
