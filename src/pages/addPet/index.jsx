@@ -238,7 +238,7 @@ function AddPet() {
 
                             { pets && !pets.length && 
                                 <>
-                                    <NoContent message='Ainda não temos pets cadastrados.'></NoContent>
+                                    <NoContent message='Ops! Ainda não temos pets cadastrados.'></NoContent>
                                 </>
                             }
 
