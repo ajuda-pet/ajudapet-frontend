@@ -1,11 +1,12 @@
 import { Alert, Table } from 'react-bootstrap'
 import './PointTable.css'
 import pointsController from '../../../controllers/points.controller'
+import NoContent from '../../organism/NoContent/NoContent'
 
 const PointTable = ({ points }) => {
     return (
         <>
-            {!points.length && <Alert>Cadastre seu ponto de adoção!</Alert>}
+            {!points.length && <NoContent message='Ops! Ainda não temos pontos de adoções cadastrados.'></NoContent>}
 
             {points.length && <Table striped bordered hover size="sm">
                 <thead className='p-5'>
