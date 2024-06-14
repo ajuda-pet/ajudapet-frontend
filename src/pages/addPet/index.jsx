@@ -12,6 +12,7 @@ import Load from '../../components/molecules/load/Load';
 import { gerarNomeImagem } from '../../components/validators/arquivo';
 import { storage } from '../../controllers/resgisterImg';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import NoContent from '../../components/organism/NoContent/NoContent';
 
 
 
@@ -234,15 +235,26 @@ function AddPet() {
 
                         <hr class='my-4 bg-primary' />
 
-                        <CardGroup className='mt-5' >
-                            <Row style={{minWidth: '100%'}}>
-                                {pets && pets.map((pet) => (
-                                    <Col md={4} sm={6}>
-                                        <CardComponent key={pet.id} pet={pet} />
-                                    </Col>
-                                ))}
-                            </Row>
-                        </CardGroup>
+
+                            { pets && !pets.length && 
+                                <>
+                                    <NoContent message='Ainda não temos pets cadastrados.'></NoContent>
+                                </>
+                            }
+
+                            {
+                                pets && pets.length && 
+                                    <CardGroup className='mt-5' >
+                                        <Row style={{minWidth: '100%'}}>
+                                            {pets && pets.map((pet) => (
+                                                <Col md={4} sm={6}>
+                                                    <CardComponent key={pet.id} pet={pet} />
+                                                </Col>
+                                            ))}
+                                        </Row>
+                                    </CardGroup>
+                            }
+
                     </Container>
 
                 </div>
