@@ -22,6 +22,17 @@
     scale: 1.01;
 }
 
+.adopt-btn-login{
+    background-color: #2f3e50 !important;
+    border-color: #101924 !important;
+}
+
+.adopt-btn-login:hover {
+    background-color: #253344 !important;
+    border-color: #101924 !important;
+    scale: 1.01;
+}
+
 .alert-button {
     background-color: #ced4da !important;
     border-color: #a09e9e !important;
