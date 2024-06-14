@@ -5,9 +5,9 @@ const NoContent = ({ message }) => {
         <>
             <center>
                 <img src='./images/no-content.png' width='350' className='mb-2'></img>
-                <h5>
-                    🐾  &nbsp; {message}
-                </h5>
+            </center>
+            <center>
+                <strong style={{fontSize: '19.5px'}} className='px-1'>🐾  &nbsp; {message}</strong>
             </center>
         </>
     )

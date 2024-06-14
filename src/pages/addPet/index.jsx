@@ -173,7 +173,7 @@ function AddPet() {
             <SideBarHome page='/addPet'/>
 
                 <div className='px-3'>
-                    <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
+                    <Container className='mt-4 ml-5 container-pets p-3 mb-5'>
                         <h2>
                             <img src='./images/pets-icon.png' width='50'></img> &nbsp;
                             <span>Pets Cadastrados</span>
@@ -258,7 +258,7 @@ function AddPet() {
 
                             { pets && !pets.length && 
                                 <>
-                                    <NoContent message='Ops! Ainda não temos pets cadastrados.'></NoContent>
+                                    <NoContent message='Logo teremos pets para adoção.'></NoContent>
                                 </>
                             }
 
