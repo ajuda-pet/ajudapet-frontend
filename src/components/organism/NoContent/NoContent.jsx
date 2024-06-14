@@ -7,7 +7,7 @@ const NoContent = ({ message }) => {
                 <img src='./images/no-content.png' width='350' className='mb-2'></img>
             </center>
             <center>
-                <strong style={{fontSize: '19px'}} className='px-1'>🐾  &nbsp; {message}</strong>
+                <strong style={{fontSize: '17.7px'}} className='px-1'>🐾  &nbsp; {message}</strong>
             </center>
         </>
     )
