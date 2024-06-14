@@ -34,8 +34,8 @@ const PointsMap = () => {
     }, [])
 
     return (
-        <div className="Home">
-            <MapContainer center={[-32.0372, -52.0986]} zoom={3} style={{ height: '60vh', width: '100%' }} worldCopyJump={true}>
+        <center>
+            <MapContainer center={[-32.0372, -52.0986]} zoom={3} style={{ height: '50vh', width: '95%' }} worldCopyJump={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -90,7 +90,7 @@ const PointsMap = () => {
                 ))}
 
             </MapContainer>
-        </div>
+        </center> 
     );
 }
 

@@ -135,7 +135,7 @@ const AddAdoptPoint = () => {
 
                 {/* Container dos pets */}
                 
-                    <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
+                    <Container className='mt-4 ml-5 container-pets p-3 mb-5'>
                         <h2>📍 Pontos de Adoção </h2>
                         <hr class='my-4 bg-primary' />
 
