@@ -49,7 +49,7 @@ const Home = () => {
                     </>
                   }
                   
-                  { groups && groups.length && 
+                  { groups && groups.length > 0 && 
                     <>
                       <Alert variant='success'>
                         <center>

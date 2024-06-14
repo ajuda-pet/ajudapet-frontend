@@ -174,63 +174,83 @@ function AddPet() {
 
                 <div className='px-3'>
                     <Container className='mt-5 ml-5 container-pets p-3 mb-5'>
-                        <Col xs={12} className='mt-2'>
-                            <Form.Select aria-label="Default select example" className='p-2' {...filterMethods.register('addressCity')}>
-                                <option value=''>📍 Cidade</option>
+                        <h2>
+                            <img src='./images/pets-icon.png' width='50'></img> &nbsp;
+                            <span>Pets Cadastrados</span>
+                        </h2>
 
-                                {addressCities.map(city => (
-                                    <option key={city} value={city}>📍 {city}</option>
-                                ))}
+                        { pets && pets.length > 0 &&
+                            <>
+                            
+                                <Col xs={12} className='mt-2'>
+                                    <Form.Select aria-label="Default select example" className='p-2' {...filterMethods.register('addressCity')}>
+                                        <option value=''>📍 Cidade</option>
 
-                            </Form.Select>
-                        </Col>
-                        <Row>
-                            <Col xs={4} className='mt-2'>
-                                <Form.Select aria-label="Default select example" className='select p-2' {...filterMethods.register('age')}>
-                                    <option value=''>🎂 Idade</option>
-                                    <option value="BABY">🎂 Bebê</option>
-                                    <option value="ADULT">🎂 Adulto</option>
-                                    <option value="OLD">🎂 Idoso</option>
-                                </Form.Select>
-                            </Col>
+                                        {addressCities.map(city => (
+                                            <option key={city} value={city}>📍 {city}</option>
+                                        ))}
 
-                            <Col xs={4} className='mt-2'>
-                                <Form.Select aria-label="Default select example" className='p-2' {...filterMethods.register('size')}>
-                                    <option value=''>📏 Tamanho</option>
-                                    <option value="SMALL">📏 Pequeno</option>
-                                    <option value="MEDIUM">📏 Médio</option>
-                                    <option value="LARGE">📏 Grande</option>
-                                </Form.Select>
-                            </Col>
+                                    </Form.Select>
+                                </Col>
+                                <Row>
+                                    <Col xs={4} className='mt-2'>
+                                        <Form.Select aria-label="Default select example" className='select p-2' {...filterMethods.register('age')}>
+                                            <option value=''>🎂 Idade</option>
+                                            <option value="BABY">🎂 Bebê</option>
+                                            <option value="ADULT">🎂 Adulto</option>
+                                            <option value="OLD">🎂 Idoso</option>
+                                        </Form.Select>
+                                    </Col>
+
+                                    <Col xs={4} className='mt-2'>
+                                        <Form.Select aria-label="Default select example" className='p-2' {...filterMethods.register('size')}>
+                                            <option value=''>📏 Tamanho</option>
+                                            <option value="SMALL">📏 Pequeno</option>
+                                            <option value="MEDIUM">📏 Médio</option>
+                                            <option value="LARGE">📏 Grande</option>
+                                        </Form.Select>
+                                    </Col>
 
 
-                            <Col xs={4} className='mt-2'>
-                                <Form.Select aria-label="Default select example" className='select p-2' {...filterMethods.register('species')}>
-                                    <option value=''>🐾 Espécie</option>
-                                    <option value="DOG">🐾 Cachorro</option>
-                                    <option value="CAT">🐾  Gato</option>
-                                </Form.Select>
-                            </Col>
-                        </Row>
+                                    <Col xs={4} className='mt-2'>
+                                        <Form.Select aria-label="Default select example" className='select p-2' {...filterMethods.register('species')}>
+                                            <option value=''>🐾 Espécie</option>
+                                            <option value="DOG">🐾 Cachorro</option>
+                                            <option value="CAT">🐾  Gato</option>
+                                        </Form.Select>
+                                    </Col>
+                                </Row>
 
-                        <Row className='mx-3 mt-2'>
-                            <Button className='d-flex align-items-center justify-content-center text-center px-5 w-100 adopt-btn' onClick={filterMethods.handleSubmit(handleSubmitFilter)}>
-                                <span class="material-symbols-outlined">
-                                    filter_alt
-                                </span>
-                                <span>
-                                    Filtrar
-                                </span>
-                            </Button>
-                            <Button variant='secondary' className='d-flex align-items-center justify-content-center text-center px-5 w-100 mt-2' onClick={() =>filterMethods.handleSubmit(handleSubmitFilter(''))}>
-                                <span class="material-symbols-outlined">
-                                    ink_eraser
-                                </span>
-                                <span>
-                                    Limpar
-                                </span>
-                            </Button>
-                        </Row>
+                                <Row className='mx-3 mt-2'>
+                                    <Button className='d-flex align-items-center justify-content-center text-center px-5 w-100 adopt-btn' onClick={filterMethods.handleSubmit(handleSubmitFilter)}>
+                                        <span class="material-symbols-outlined">
+                                            filter_alt
+                                        </span>
+                                        <span>
+                                            Filtrar
+                                        </span>
+                                    </Button>
+                                    <Button variant='secondary' className='d-flex align-items-center justify-content-center text-center px-5 w-100 mt-2' onClick={() =>filterMethods.handleSubmit(handleSubmitFilter(''))}>
+                                        <span class="material-symbols-outlined">
+                                            ink_eraser
+                                        </span>
+                                        <span>
+                                            Limpar
+                                        </span>
+                                    </Button>
+                                </Row>
+
+                                <CardGroup className='mt-5' >
+                                    <Row style={{minWidth: '100%'}}>
+                                        {pets && pets.map((pet) => (
+                                            <Col md={4} sm={6}>
+                                                <CardComponent key={pet.id} pet={pet} />
+                                            </Col>
+                                        ))}
+                                    </Row>
+                                </CardGroup>
+                            </>
+                        }
 
 
                         <hr class='my-4 bg-primary' />
@@ -242,18 +262,6 @@ function AddPet() {
                                 </>
                             }
 
-                            {
-                                pets && pets.length && 
-                                    <CardGroup className='mt-5' >
-                                        <Row style={{minWidth: '100%'}}>
-                                            {pets && pets.map((pet) => (
-                                                <Col md={4} sm={6}>
-                                                    <CardComponent key={pet.id} pet={pet} />
-                                                </Col>
-                                            ))}
-                                        </Row>
-                                    </CardGroup>
-                            }
 
                     </Container>
 

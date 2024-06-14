@@ -6,9 +6,9 @@ import NoContent from '../../organism/NoContent/NoContent'
 const PointTable = ({ points }) => {
     return (
         <>
-            {!points.length && <NoContent message='Ops! Ainda não temos pontos de adoções cadastrados.'></NoContent>}
+            {!points.length && <NoContent message='Ops! Ainda não temos pontos de adoções'></NoContent>}
 
-            {points.length && <Table striped bordered hover size="sm">
+            {points.length > 0 && <Table striped bordered hover size="sm">
                 <thead className='p-5'>
                     <tr>
                         <th>🏡 Ponto de Adoção</th>
