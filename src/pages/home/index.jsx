@@ -17,7 +17,10 @@ const Home = () => {
     groupController.get().then(response => {
       if (response && response.success) {
         setGroups(response.info.groups)
-        setLoading(false)
+
+        setTimeout(() => {
+          setLoading(false)
+        }, 1000)
       }
     })
   }, [])
