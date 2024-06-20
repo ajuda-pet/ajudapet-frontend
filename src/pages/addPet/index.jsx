@@ -137,14 +137,16 @@ function AddPet() {
 
         petController.get(params).then(response => {
             setPets(response)
-            setLoading(false)
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000)
         })
 
         .catch(error =>  {
             console.error(error)
             setLoading(false)
         })
-
     }
 
     useEffect(() => {
@@ -154,7 +156,10 @@ function AddPet() {
 
             setPets(pets)
             setAddressCities(cities)
-            setLoading(false)
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000)
         })
     }, [])
 

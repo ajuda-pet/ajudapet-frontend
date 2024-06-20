@@ -115,7 +115,10 @@ const AddAdoptPoint = () => {
 
                 })
                 setPoint(points)
-                setLoading(false)
+
+                setTimeout(() => {
+                    setLoading(false)
+                }, 1000)
             }
         })
     }, [])
