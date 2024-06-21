@@ -5,7 +5,7 @@ import { Button, Col, ListGroup, Row } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import groupController from '../../controllers/group.controller'
 
-const PointsMap = () => {
+const PointsMap = ({ group }) => {
     const [groups, setGroups] = useState([])
 
     const handleWhatsapp = (whatsapp) => {
@@ -16,20 +16,27 @@ const PointsMap = () => {
     }
 
     useEffect(() => {
-        groupController.get().then(response => {
-            if (response && response.success) {
-                const groups = response.info.groups
 
-                groups.forEach(group => {
-                    group.socialMedia.forEach(socialMedia => {
-                        if (socialMedia.plataform == 'WHATSAPP') {
-                            group.whatsapp = socialMedia.account
-                        }
+        if (group) {
+            setGroups([group])
+        }
+
+        if (!group) {
+            groupController.get().then(response => {
+                if (response && response.success) {
+                    const groups = response.info.groups
+    
+                    groups.forEach(group => {
+                        group.socialMedia.forEach(socialMedia => {
+                            if (socialMedia.plataform == 'WHATSAPP') {
+                                group.whatsapp = socialMedia.account
+                            }
+                        })
                     })
-                })
-                setGroups(groups)
-            }
-        })
+                    setGroups(groups)
+                }
+            })
+        }
 
     }, [])
 
@@ -40,6 +47,9 @@ const PointsMap = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+
+
+                
 
                 {groups.map((group) => (
                     group.adoptionPoints.map((point, index) => (

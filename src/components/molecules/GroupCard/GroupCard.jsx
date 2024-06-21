@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Badge, Button, Card, Col, Row, Toast } from "react-bootstrap"
+import { GroupModal } from "../../Modals/GroupModal"
 
 const GroupCard = ({ group }) => {
 
@@ -16,10 +17,14 @@ const GroupCard = ({ group }) => {
 
     const [showCopyToast, setShowCopyToast] = useState(false)
     const [instagram, setInstagram] = useState()
+    const [groupModal, setGroupModal] = useState(false)
+
+    const openGroupModal = () => setGroupModal(true)
 
     useEffect(() => {
         group.socialMedia.forEach(media => {
             if (media.plataform == 'INSTAGRAM') {
+                media.url = `http://instagram.com/${media.account}`
                 setInstagram(media)
             }
         })
@@ -40,48 +45,27 @@ const GroupCard = ({ group }) => {
 
     return (
         <>
+            <GroupModal show={groupModal} setShow={setGroupModal} group={group}></GroupModal>
+
             <Card className='p-4 mt-5'>
                 <Card.Img variant='top' src={group.picture || './images/ong-profile.jpg'} width='260' height='260'/>
                 
-                <Card.Title className='d-flex align-items-center'>
-                    <img src='./images/group-icon.png' width='35'></img> &nbsp;
+                <Card.Title className='d-flex align-items-center my-2'>
                     <span>
-                        <Badge bg='dark'>{group.name}</Badge>
+                        {/* <Badge bg='dark'>{group.name}</Badge> */}
+                        &nbsp; {group.name}
                     </span>
                 </Card.Title>
 
                 <Card.Body>
-
-                    <Row>
-                        <Col>
-                            <img src='./images/pix-icon.png's width='30'></img> &nbsp;
-                            <strong className='mt-1'>Faça uma doação pix</strong>
-                        </Col>
-                    </Row>
-
-                    { group.pix && 
-                        <Row className='p-4 justify-content-center' onClick={handleCopy}>
-                            <Badge bg='secondary' className='mb-1'>
-                                {group.pix.type == 'PHONE' ? 'TELEFONE' : group.pix.type}
-                            </Badge>
-                            <Button className='mb-3 d-flex justify-content-between align-items-center adopt-btn' style={{color: 'white'}}>
-                                <strong style={{fontSize: '13px'}}>{group.pix.key}</strong> &nbsp;
-                                <img src='./images/copy-icon.png' width='25' alt='Copy Icon' />
-                            </Button>
-                        </Row>
-                    
-                    }
+                    <Button onClick={openGroupModal} className='my-3 adopt-btn' style={{width: '100%'}}>Saiba mais</Button>
                 </Card.Body>
 
                 <Card.Footer className='text-end'>
                     { instagram &&
-                        <small className='text-muted'>
+                        <small className='text-muted' style={{cursor: 'pointer'}}>
                             <a className='anchor' href={instagram.url} target='_blank'>
-                                <Badge bg='dark'>
-                                    <img src='./images/instagram-footer-icon.png' width='25'></img>
-                                    &nbsp;
-                                    @{instagram.account}
-                                </Badge>
+                                @{instagram.account}
                             </a>
                         </small>
                     }
