@@ -16,10 +16,10 @@ import { useNavigate } from 'react-router-dom'
     
     const handleLogin = () => {
         const { href: environment } = window.location
-        let url = 'https://staging-ajudapet-admin-frontend.onrender.com/login'
+        let url = 'https://ajudapet-admin-frontend.onrender.com'
 
-        if (environment.includes('prod') || true ) {
-            //url = 'https://ajudapet-admin-frontend.onrender.com'
+        if (environment.includes('staging') || environment.includes('localhost') ) {
+            url = 'https://staging-ajudapet-admin-frontend.onrender.com/login'
         }
 
         window.location.assign(url)
