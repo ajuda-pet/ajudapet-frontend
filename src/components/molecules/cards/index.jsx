@@ -64,18 +64,16 @@ const CardComponent = (petContent) => {
                 <Card.Body>
                     <Card.Title>{petIcon} {pet.name}</Card.Title>
 
-                    <ListGroup className='mt-4'>
-                        <ListGroup.Item> <Badge bg="secondary">🎂 Idade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Badge>&nbsp;&nbsp;{ageHash[pet.age]} </ListGroup.Item>
-                        <ListGroup.Item> <Badge bg="secondary">📏 Tamanho</Badge>&nbsp;&nbsp;{sizeHash[pet.size]} </ListGroup.Item>
-                        <ListGroup.Item> <Badge bg="secondary">{genderIcon} Gênero&nbsp;&nbsp;&nbsp;</Badge>&nbsp;&nbsp;{genderHash[pet.gender]} </ListGroup.Item>
-                    </ListGroup>
-
                     <Button className='adopt-btn mt-3' style={{width: '100%'}} onClick={handleShow}>
                         Saiba mais
                     </Button>
                 </Card.Body>
                 <Card.Footer>
-                    <small className="text-muted"><strong>Publicado em: </strong>{formatDate}</small>
+                    <small className="text-muted">
+                        <strong>Localização: </strong>
+                        &nbsp;&nbsp;
+                        &nbsp;{pet.adoptionPoint.addressNeighborhood}. {pet.adoptionPoint.addressCity}, {pet.adoptionPoint.addressState}
+                    </small>
                 </Card.Footer>
             </Card>
 

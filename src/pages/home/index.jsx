@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, CardGroup, Alert } from 'react-bootstrap'
+import { Container, Row, Col, CardGroup, Alert, Button } from 'react-bootstrap'
 import Header from '../../components/molecules/header'
 import SideBarHome from '../../components/molecules/sideBarHome'
 import groupController from '../../controllers/group.controller'
@@ -8,10 +8,15 @@ import Load from '../../components/molecules/load/Load'
 import './index.css'
 import GroupCard from '../../components/molecules/GroupCard/GroupCard';
 import NoContent from '../../components/organism/NoContent/NoContent';
+import { GroupModal } from '../../components/Modals/GroupModal';
 
 const Home = () => {
   const [loading, setLoading] = useState(true)
   const [groups, setGroups] = useState([])
+  const [showGroupModal, setShowGroupModal] = useState(false)
+
+
+
 
   useEffect(() => {
     groupController.get().then(response => {
@@ -29,6 +34,8 @@ const Home = () => {
     <>
       { !loading && 
         <>
+          <GroupModal show={showGroupModal} setShow={setShowGroupModal}> </GroupModal>
+
           <div>
             {/* Header */}
             <Header />
@@ -44,6 +51,7 @@ const Home = () => {
                     <img src='./images/group-icon.png' width='50'></img> &nbsp;
                     <span>Grupos Cadastrados</span>
                   </h2>
+                  
                   <hr className='my-4 bg-primary' />
 
                   { groups && !groups.length && 
@@ -76,16 +84,11 @@ const Home = () => {
                       </CardGroup>
                     </>
                   }
-
-
-
                 </Container>
-
             </div>
           </div> 
         </>
       }
-
       { loading && <Load></Load> }
     </>
   )
