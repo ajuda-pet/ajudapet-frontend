@@ -58,7 +58,7 @@ const GroupCard = ({ group }) => {
                 </Card.Title>
 
                 <Card.Body>
-                    <Button onClick={openGroupModal} className='my-3 adopt-btn' style={{width: '100%'}}>Saiba mais</Button>
+                    <Button onClick={openGroupModal} className='my-3 adopt-btn' style={{width: '100%'}}>Doe</Button>
                 </Card.Body>
 
                 <Card.Footer className='text-end'>

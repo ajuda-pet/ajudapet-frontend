@@ -71,8 +71,7 @@ const CardComponent = (petContent) => {
                 <Card.Footer>
                     <small className="text-muted">
                         <strong>Localização: </strong>
-                        &nbsp;&nbsp;
-                        &nbsp;{pet.adoptionPoint.addressNeighborhood}. {pet.adoptionPoint.addressCity}, {pet.adoptionPoint.addressState}
+                        {pet.adoptionPoint.addressNeighborhood}. {pet.adoptionPoint.addressCity}, {pet.adoptionPoint.addressState}
                     </small>
                 </Card.Footer>
             </Card>

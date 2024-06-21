@@ -63,8 +63,8 @@ const GroupModal = ({ group, show, setShow }) => {
                             <ListGroupItem>
                                     <img src='./images/pix-icon.png' width='30'></img> &nbsp;
                                     <span>
-                                        <Badge bg='info' className='p-2'> {group.pix.type} </Badge> &nbsp;
-                                        {group.pix.key}
+                                        <Badge bg='info' className='p-2'><strong>Pix</strong> ({group.pix.type}) </Badge> &nbsp;
+                                        <span className='text-muted'>{group.pix.key}</span>
                                     </span>
                             </ListGroupItem>
 
