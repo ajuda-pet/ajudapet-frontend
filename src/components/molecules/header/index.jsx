@@ -4,9 +4,11 @@ import Navbar from 'react-bootstrap/Navbar'
 import { useState } from 'react'
 import { Button, Col, Offcanvas, Row } from 'react-bootstrap'
 import './index.css'
+import { useNavigate } from 'react-router-dom'
 
 
  function Header()  {
+    const navigate = useNavigate()
     const [showOffCanva, setOffCanva] = useState(false)
 
     const handleOpenOffCanva = () => setOffCanva(true)
@@ -24,11 +26,16 @@ import './index.css'
     }
 
 
+    const handleGroupsPage = () => navigate('/grupos')
+    const handlePetsPage = () => navigate('/pets')
+    const handlePointsPage = () => navigate('/pontos')
+
+
     return (
         <> 
             <Navbar className='p-2' style={{ borderRadius: '2px', backgroundColor: ' #212f3f'}} expand="lg" data-bs-theme='dark'>
                 <Container fluid>
-                    <Navbar.Brand href="/grupos"> <img src='./images/header-logo.png' width='210' /></Navbar.Brand>
+                    <Navbar.Brand onClick={handleGroupsPage}> <img src='./images/header-logo.png' width='210' /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="" onClick={handleOpenOffCanva} />
 
                     <Nav.Link onClick={handleLogin} className='d-none d-lg-block'>
@@ -48,8 +55,8 @@ import './index.css'
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                         
-                        <a href='/grupos' className='anchor'>
-                            <Row className={`p-2 ${window.location.pathname == '/grupos' ? 'off-canva-item-target' : 'off-canva-item'}`}>
+                        <a onClick={handleGroupsPage} className='anchor'>
+                            <Row className={`p-2 ${window.location.pathname == '/grupos' || window.location.pathname == '/' ? 'off-canva-item-target' : 'off-canva-item'}`}>
                                 <Col xs={12}> 
                                     <img src='./images/home.png' width='30'></img> &nbsp;
                                     <span>Home</span>
@@ -57,7 +64,7 @@ import './index.css'
                             </Row>
                         </a>
 
-                        <a href='/pets' className='anchor'>
+                        <a onClick={handlePetsPage} className='anchor'>
                         <Row className={`p-2 ${window.location.pathname == '/pets' ? 'off-canva-item-target' : 'off-canva-item'}`}>
                                 <Col xs={12}> 
                                     <img src='./images/pets.png' width='30'></img> &nbsp;
@@ -66,7 +73,7 @@ import './index.css'
                             </Row>
                         </a>
 
-                        <a href='/pontos' className='anchor'>
+                        <a onClick={handlePointsPage} className='anchor'>
                         <Row className={`p-2 ${window.location.pathname == '/pontos' ? 'off-canva-item-target' : 'off-canva-item'}`}>
                                 <Col xs={12}> 
                                     <img src='./images/location.png' width='30'></img> &nbsp;
